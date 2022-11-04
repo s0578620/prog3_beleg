@@ -18,7 +18,7 @@ public class console {
     public void run(){
         final String topic = "Prog 3 Beleg - Kuchenautomat - Henrik Jeschkowski 578620\n" +
                                 "********************************************************";
-        final String help = "*Help Menu* \n :c - Create mode\n :d - Delete mode\n :r - Remove mode";
+        final String help = "*Help Menu* \n :c - Create mode\n :d - Delete mode\n :r - Show mode";
         try (Scanner s = new Scanner(System.in)){
             do{
                 write(topic);
@@ -79,7 +79,7 @@ public class console {
         switch (inputList.length){
             case 1:
                 return new AddHerstellerEvent(input,input);
-            case 7:
+            case 7,8:
                 LinkedList<Allergen> list = new LinkedList<>();
                 String[] allergenList = inputList[5].split(",");
                 for(String s : allergenList){
@@ -90,9 +90,13 @@ public class console {
                     }
                 }
                 BigDecimal preis = BigDecimal.valueOf(Double.parseDouble(inputList[2].replace(",",".")));
-                return new AddKuchenEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6]);
-//            case 8:                   // TODO implement Torte (add -> addKuchenEvent)
-//                return null;
+                if(inputList.length > 7){
+                    return new AddTorteEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6],inputList[7]);
+
+                }else {
+                    return new AddKuchenEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6]);
+                }
+
             default:
                 write("Invalid Command");
                 return null;
@@ -104,7 +108,7 @@ public class console {
 //        if(inputList[0].matches(".*[a-z].*")){
 //            return new removeHerstellerEvent();
 //        }else{
-            return new removeKuchenEvent(input,Integer.parseInt(input));
+            return new RemoveKuchenEvent(input,Integer.parseInt(input));
 //      }
     }
 
@@ -114,6 +118,12 @@ public class console {
         switch (inputList[0]){
             case "hersteller":
                 return new ShowHerstellerEvent(input,input);
+            case "kuchen":
+                if(inputList.length > 1){
+                    return new ShowKuchenTypEvent(inputList[0],inputList[0],inputList[1]);
+                }else {
+                    return new ShowKuchenEvent(input,input);
+                }
             default:
                 write("Invalid Command");
                 return null;

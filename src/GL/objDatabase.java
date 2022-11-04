@@ -1,26 +1,32 @@
 package GL;
+import CLI.Observable;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-public class objDatabase extends Observable {
+public class objDatabase implements Observable {
+
+    public int getCapacityMax() {
+        return capacityMax;
+    }
 
     private int capacityMax = 10;
     private int capacityAct;
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
     private LinkedList<obj> objList = new LinkedList<>();
     private LinkedList<Allergen> allergenList = new LinkedList<>();
-    private LinkedList<Observer> observerList = new LinkedList<Observer>();
+    private LinkedList<CLI.Observer> observerList = new LinkedList<>();
 
-    public void attachObserver(Observer o) { this.observerList.add( o ); }
-    public void detachObserver(Observer o) { this.observerList.remove( o ); }
-    public void notifyObserver(int capacity) {
-        if(capacityAct == (capacityMax*0.9)) {          // TODO change conditions to Observer Class (not GL)
-            for (Observer o : observerList) {
-                o.update(this, capacity);
-            }
+    public void attachObserver(CLI.Observer o) { this.observerList.add( o ); }
+    public void detachObserver(CLI.Observer o) { this.observerList.remove( o ); }
+
+    @Override
+    public void notifyObservers(int capacity) {
+        for (CLI.Observer o : observerList) {
+            o.update(capacity);
         }
     }
+
 
     public boolean addHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);
@@ -59,7 +65,7 @@ public class objDatabase extends Observable {
                         objList.add(setFachnummer(a));      // TODO add -> help method for all cakes
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObserver(capacityAct);
+                        notifyObservers(capacityAct);
                         return true;
                     }
                     if (Kuchentyp.equals("Obstkuchen")) {
@@ -67,7 +73,7 @@ public class objDatabase extends Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObserver(capacityAct);
+                        notifyObservers(capacityAct);
                         return true;
                     }
                 }
@@ -87,7 +93,7 @@ public class objDatabase extends Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObserver(capacityAct);
+                        notifyObservers(capacityAct);
                         return true;
                     }
                 }
@@ -107,7 +113,7 @@ public class objDatabase extends Observable {
 
     // TODO remove ALLERGENE  bzw aktualisiert ausgeben ||  oder duplicates abspeichern und remove ausführen
     public boolean removeObj(int Fachnummer){
-        if((!objList.isEmpty()) && (objList.get(Fachnummer) != null)) {
+        if((!objList.isEmpty()) && (objList.size() > Fachnummer)) {
                 objList.remove(Fachnummer);
                 objList.stream().filter(obj -> obj.getFachnummer() > Fachnummer).forEach(o -> o.setFachnummer(o.getFachnummer() - 1));
                 capacityAct -= 1;
