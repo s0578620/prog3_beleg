@@ -13,6 +13,5 @@ public class main {
         handler.add(new ODBEventListener(db));
         cli c = new cli(handler);
         c.start();
-
     }
 }

@@ -1,6 +1,7 @@
 package CLI;
 
 import GL.objDatabase;
+import util.Observer;
 
 public class objDatabaseObserver implements Observer {
 
@@ -13,7 +14,7 @@ public class objDatabaseObserver implements Observer {
 
     @Override
     public void update(int counter) {
-        if((oDB.getCapacityMax()*0.9) == counter){
+        if((oDB.getCapacityMax()*0.9) <= counter){
             System.out.println("90% capacity reached");
         }
     }

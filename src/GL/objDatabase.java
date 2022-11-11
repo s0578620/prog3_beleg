@@ -1,5 +1,6 @@
 package GL;
-import CLI.Observable;
+import util.Observable;
+import util.Observer;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.*;
@@ -15,18 +16,17 @@ public class objDatabase implements Observable {
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
     private LinkedList<obj> objList = new LinkedList<>();
     private LinkedList<Allergen> allergenList = new LinkedList<>();
-    private LinkedList<CLI.Observer> observerList = new LinkedList<>();
+    private LinkedList<Observer> observerList = new LinkedList<>();
 
-    public void attachObserver(CLI.Observer o) { this.observerList.add( o ); }
-    public void detachObserver(CLI.Observer o) { this.observerList.remove( o ); }
+    public void attachObserver(Observer o) { this.observerList.add(o); }
+    public void detachObserver(Observer o) { this.observerList.remove(o); }
 
     @Override
     public void notifyObservers(int capacity) {
-        for (CLI.Observer o : observerList) {
+        for (Observer o : observerList) {
             o.update(capacity);
         }
     }
-
 
     public boolean addHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);

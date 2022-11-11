@@ -1,4 +1,4 @@
-package CLI;
+package util;
 
 public interface Observer {
 

@@ -7,6 +7,9 @@ import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+
+
+
 public class console {
 
     private EventHandler handler;
@@ -23,7 +26,6 @@ public class console {
             do{
                 write(topic);
                 String input = s.nextLine();
-
                 if(input.startsWith(":")){
                     switch (input){
                         case ":c": this.mode = 'c'; // create mode
@@ -44,10 +46,10 @@ public class console {
                     }
                 } else {
                     try {
-                        EventObject event = this.parseToEvent(input);
+                        EventObject event = this.getCorrectEO(input);
                         if (event != null){
                             this.handler.handle(event);
-                            write("after handler action");  // TODO add -> better feedback
+                            //write("§");  // TODO add -> better feedback
                         }
                     } catch (IllegalArgumentException e) {
                         write(e.toString());
@@ -57,7 +59,7 @@ public class console {
         }
     }
 
-    private EventObject parseToEvent(String input){
+    private EventObject getCorrectEO(String input){
         switch ( this.mode ) {
             case 'c':
                 return createEO(input);
