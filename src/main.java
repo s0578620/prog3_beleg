@@ -7,7 +7,7 @@ import GL.objDatabase;
 public class main {
     public static void main(String[] args) {
 
-        objDatabase db = new objDatabase();
+        objDatabase db = new objDatabase(10);
         db.attachObserver(new objDatabaseObserver(db));
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(db));

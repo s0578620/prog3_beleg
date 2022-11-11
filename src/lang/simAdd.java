@@ -9,41 +9,49 @@ import static java.lang.Thread.sleep;
 
 public class simAdd implements Runnable{
 
-    private Condition removing;
-    private Condition full;
+
     private Lock lock;
     private objDatabase oDB;
 
-    public simAdd(objDatabase oDB, Lock lock, Condition full, Condition removing){
+    public simAdd(objDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
-        this.full = full;
-        this.removing = removing;
+
     }
 
     @Override
     public void run() {
-        while (true){
-            try {
 
-
-
-//                lock.lock();
-//                System.out.println("Adding Thread");
-//
-//                full.signal();
-//                removing.await();
-
-            }catch (IllegalArgumentException e ){
-
-            } catch (InterruptedException e) {
-
-            } finally {
-                lock.unlock();
-                System.out.println("UNLOCK");
-            }
-
+        synchronized (lock) {
+            do {
+                System.out.println("ADDING THREAD");
+                lock.notify();
+                try {
+                    lock.wait();
+                } catch (InterruptedException ex) { }
+            } while (true);
         }
-
-    }
+//        while (true){
+//            try {
+//
+//
+//
+////                lock.lock();
+////                System.out.println("Adding Thread");
+////
+////                full.signal();
+////                removing.await();
+//
+//            }catch (IllegalArgumentException e ){
+//
+//            } catch (InterruptedException e) {
+//
+//            } finally {
+//                lock.unlock();
+//                System.out.println("UNLOCK");
+//            }
+//
+//        }
+//
+      }
 }

@@ -28,7 +28,7 @@ class objDatabaseTest {
 
     @BeforeEach
     void setup(){
-        this.o = new objDatabase();
+        this.o = new objDatabase(10);
         this.Kuchentyp = "Kremkuchen";
         this.Kuchentyp1 = "Obstkuchen";
         this.Hersteller = "NESTLE";

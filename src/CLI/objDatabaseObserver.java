@@ -13,8 +13,8 @@ public class objDatabaseObserver implements Observer {
     }
 
     @Override
-    public void update(int counter) {
-        if((oDB.getCapacityMax()*0.9) <= counter){
+    public void update() {
+        if((oDB.getCapacityMax()*0.9) <= oDB.getObjList().size()){
             System.out.println("90% capacity reached");
         }
     }

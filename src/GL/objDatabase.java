@@ -7,11 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 public class objDatabase implements Observable {
 
-    public int getCapacityMax() {
-        return capacityMax;
-    }
-
-    private int capacityMax = 10;
+    private int capacityMax;
     private int capacityAct;
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
     private LinkedList<obj> objList = new LinkedList<>();
@@ -22,10 +18,18 @@ public class objDatabase implements Observable {
     public void detachObserver(Observer o) { this.observerList.remove(o); }
 
     @Override
-    public void notifyObservers(int capacity) {
+    public void notifyObservers() {
         for (Observer o : observerList) {
-            o.update(capacity);
+            o.update();
         }
+    }
+
+    public  objDatabase(int capacity){
+        this.capacityMax = capacity;
+    }
+
+    public int getCapacityMax() {
+        return capacityMax;
     }
 
     public boolean addHersteller(String hersteller){
@@ -65,7 +69,7 @@ public class objDatabase implements Observable {
                         objList.add(setFachnummer(a));      // TODO add -> help method for all cakes
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObservers(capacityAct);
+                        notifyObservers();
                         return true;
                     }
                     if (Kuchentyp.equals("Obstkuchen")) {
@@ -73,7 +77,7 @@ public class objDatabase implements Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObservers(capacityAct);
+                        notifyObservers();
                         return true;
                     }
                 }
@@ -93,7 +97,7 @@ public class objDatabase implements Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
-                        notifyObservers(capacityAct);
+                        notifyObservers();
                         return true;
                     }
                 }
