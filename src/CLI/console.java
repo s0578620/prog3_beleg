@@ -7,11 +7,7 @@ import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
-
-
 public class console {
-
     private EventHandler handler;
     private char mode;
     public console(EventHandler handler){
@@ -49,7 +45,6 @@ public class console {
                         EventObject event = this.getCorrectEO(input);
                         if (event != null){
                             this.handler.handle(event);
-                            //write("§");  // TODO add -> better feedback
                         }
                     } catch (IllegalArgumentException e) {
                         write(e.toString());

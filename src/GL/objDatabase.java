@@ -38,6 +38,7 @@ public class objDatabase implements Observable {
             return false;
         }else {
             herstellerList.add(a);
+            notifyObservers();
             return true;
         }
     }
@@ -49,6 +50,7 @@ public class objDatabase implements Observable {
                 for(obj o : objList){
                     if(o.getHersteller().getName().equals(h.getName())){
                         removeObj(o.getFachnummer());
+                        notifyObservers();
                     }
                 }
                 herstellerList.remove(h);
@@ -121,6 +123,7 @@ public class objDatabase implements Observable {
                 objList.remove(Fachnummer);
                 objList.stream().filter(obj -> obj.getFachnummer() > Fachnummer).forEach(o -> o.setFachnummer(o.getFachnummer() - 1));
                 capacityAct -= 1;
+                notifyObservers();
                 return true;
         }else{
             return false;
