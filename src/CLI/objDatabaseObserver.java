@@ -9,12 +9,12 @@ public class objDatabaseObserver implements Observer {
 
     private int counterHersteller = 0;
     private int counterObj = 0;
-
-
     public objDatabaseObserver(objDatabase oDB){
         this.oDB = oDB;
     }
 
+
+    // TODO split oberserver / sim and gl etc
     @Override
     public void update() {
 

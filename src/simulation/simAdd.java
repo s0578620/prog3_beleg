@@ -36,14 +36,18 @@ public class simAdd implements Runnable{
 
     @Override
     public void run() {
-        synchronized (lock) {
+
             do {
-                oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
-                lock.notify();
-                try {
-                    lock.wait();
-                } catch (InterruptedException ex) { }
+                //oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
+              synchronized (lock) {
+                  try {
+                      // lock.wait();
+                      oDB.addObj(Kuchentyp, Hersteller, Preis, Nahrwert, Haltbarkeit, list, Topping);
+                  } catch (Exception e) {
+
+                  }
+              }
             } while (true);
-        }
+
       }
 }

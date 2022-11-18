@@ -1,8 +1,5 @@
-# Übung 3
-Erstellen Sie die Simulationen für den Beleg. Jede Simulation soll eine eigene main-Methode haben.
-
-Für die zufällig zu erzeugenden Kuchen kann auch eine Liste mit verschiedenen Instanzen bzw. Eigenschaften erzeugt werden aus der zufällig ausgewählt wird.
-
+# Übung 4
+Erstellen Sie die graphische Oberfläche für die Geschäftslogik.
 ## Abgabeanforderungen
 Die Abgabe hat als zip-Datei zu erfolgen, die ein lauffähiges IntelliJ-IDEA-Projekt enthält. Sie sollte die befüllte Checkliste im root des Projektes (neben der iml-Datei) enthalten in der der erreichte Stand bezüglich des Bewertungsschemas vermerkt ist.
 
@@ -22,17 +19,13 @@ Zulässige Quellen sind suchmaschinen-indizierte Internetseiten. Werden mehr als
 - [x] Trennung zwischen Test- und Produktiv-Code
 - [x] main-Methoden nur im default package
 - [x] ausführbar
-- [x] Simulation 1
-- [x] Trennung zwischen GL und Simulationslogik
-- [x] Aktionen der threads produzieren Ausgaben auf der Konsole
+- [ ] CRUD für Kuchen in der GUI
+- [ ] Geschäfts- und Darstellungslogik getrennt
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
-- [ ] keine Verwendung von Thread.sleep o.Ä. bzw. nur mit 0-Werten
-- [ ] Änderungen an der Geschäftslogik produzieren Ausgaben auf der Konsole
-- [ ] deterministische Funktionalität testbar
-- [ ] Simulation 2
-- [ ] mindestens je ein Test für alle in der Simulation verwendeten Methoden die auf die Geschäftslogik zugreifen
-- [ ] Simulation 3
-- [ ] alle Tests sind deterministisch
-
-
+- [ ] Auflistungen sind immer sichtbar und werden automatisch aktualisiert
+- [ ] sortierbare Darstellung der Kuchen mit Fachnummer, Hersteller, Inspektionsdatum und verbleibender Haltbarkeit
+- [ ] skalierbare Darstellung
+- [ ] FXML & data binding verwendet
+- [ ] Benutzeroberfläche wird nicht gesperrt
+- [ ] Änderung der Fachnummer mittels drag&drop

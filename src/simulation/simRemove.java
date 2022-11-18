@@ -22,14 +22,18 @@ public class simRemove implements Runnable{
 
     @Override
     public void run() {
-        synchronized (lock) {
+
             do {
-                lock.notify();
-                oDB.removeObj(rnd.nextInt(oDB.getObjList().size()));
-                try {
-                    lock.wait();
-                } catch (InterruptedException e){}
+                synchronized (lock) {
+                    oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1));
+                    try {
+                        // lock.wait();
+                        oDB.removeObj(rnd.nextInt(oDB.getObjList().size()));
+                    } catch (Exception e) {
+
+                    }
+                }
             } while (true);
         }
-    }
+
 }
