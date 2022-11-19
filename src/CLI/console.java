@@ -54,6 +54,39 @@ public class console {
         }
     }
 
+    public void execController(String input){
+        if(input.startsWith(":")) {
+            switch (input) {
+                case ":c":
+                    this.mode = 'c'; // create mode
+                    write("entered create mode");
+                    break;
+                case ":d":
+                    this.mode = 'd'; // delete mode
+                    write("entered delete mode");
+                    break;
+                case ":r":
+                    this.mode = 'r'; // show mode
+                    write("entered show mode");
+                    break;
+//                        case ":u": this.mode = 'u'; // update mode
+//                            write("entered update mode");
+//                            break;
+                default:
+                    break;
+            }
+        }else {
+            try {
+                EventObject event = this.getCorrectEO(input);
+                if (event != null){
+                    this.handler.handle(event);
+                }
+            } catch (IllegalArgumentException e) {
+                write(e.toString());
+            }
+        }
+    }
+
     private EventObject getCorrectEO(String input){
         switch ( this.mode ) {
             case 'c':
