@@ -102,8 +102,6 @@ public class console {
         }
     }
 
-
-
     public EventObject createEO(String input ){
         String[] inputList = input.split( " " );
         switch (inputList.length){

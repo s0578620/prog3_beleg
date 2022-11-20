@@ -1,14 +1,14 @@
 package Events;
 
-import GL.objDatabase;
+import GL.ObjDatabase;
 import java.util.EventObject;
 import java.util.List;
 
 public class ODBEventListener implements EventListener{
 
-    private objDatabase oDB;
+    private ObjDatabase oDB;
 
-    public ODBEventListener(objDatabase oDB){
+    public ODBEventListener(ObjDatabase oDB){
         this.oDB = oDB;
     }
 

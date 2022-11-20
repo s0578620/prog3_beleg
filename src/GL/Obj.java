@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.util.Collection;
 import java.util.Date;
 
-public class obj implements Kuchen,Verkaufsobjekt {
+public class Obj implements Kuchen,Verkaufsobjekt {
 
     private final String kuchentyp;
     private final Hersteller hersteller;
@@ -18,7 +18,7 @@ public class obj implements Kuchen,Verkaufsobjekt {
     private Date insertDate;
     private int fachnummer;
 
-    public obj(String Kuchentyp,Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, Date insertDate){
+    public Obj(String Kuchentyp, Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, Date insertDate){
         this.kuchentyp = Kuchentyp;
         this.hersteller = Hersteller;
         this.allergene = Allergens;

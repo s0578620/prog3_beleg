@@ -1,14 +1,14 @@
 package util;
 
-import GL.objDatabase;
+import GL.ObjDatabase;
 
-public class objDatabaseObserverSimOne implements Observer{
+public class ObjDatabaseObserverSimOne implements Observer{
 
-    private objDatabase oDB;
+    private ObjDatabase oDB;
     private int counterHersteller = 0;
     private int counterObj = 0;
 
-    public objDatabaseObserverSimOne(objDatabase oDB){
+    public ObjDatabaseObserverSimOne(ObjDatabase oDB){
         this.oDB = oDB;
     }
     @Override

@@ -1,14 +1,14 @@
 import CLI.cli;
-import util.objDatabaseObserver;
+import util.ObjDatabaseObserver;
 import Events.EventHandler;
 import Events.ODBEventListener;
-import GL.objDatabase;
+import GL.ObjDatabase;
 
 public class main {
     public static void main(String[] args) {
 
-        objDatabase db = new objDatabase(10);
-        db.attachObserver(new objDatabaseObserver(db));
+        ObjDatabase db = new ObjDatabase(10);
+        db.attachObserver(new ObjDatabaseObserver(db));
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(db));
         cli c = new cli(handler);

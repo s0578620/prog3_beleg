@@ -3,7 +3,7 @@ package Gui;
 import CLI.console;
 import Events.EventHandler;
 import Events.ODBEventListener;
-import GL.objDatabase;
+import GL.ObjDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,12 +20,12 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/App.fxml"));
         Parent root = loader.load();
-        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("App.fxml")));
         Scene scene = new Scene(root, 600, 400);
 
-        objDatabase oDB = new objDatabase(10);  // TODO CAPACITY HARDCODED
+        ObjDatabase oDB = new ObjDatabase(10);  // TODO CAPACITY HARDCODED
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(oDB));
         Controller controller = loader.getController();

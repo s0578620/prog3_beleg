@@ -5,12 +5,12 @@ import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-public class objDatabase implements Observable {
+public class ObjDatabase implements Observable {
 
     private int capacityMax;
     private int capacityAct;
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
-    private LinkedList<obj> objList = new LinkedList<>();
+    private LinkedList<Obj> objList = new LinkedList<>();
     private LinkedList<Allergen> allergenList = new LinkedList<>();
     private LinkedList<Observer> observerList = new LinkedList<>();
 
@@ -24,7 +24,7 @@ public class objDatabase implements Observable {
         }
     }
 
-    public  objDatabase(int capacity){
+    public ObjDatabase(int capacity){
         this.capacityMax = capacity;
     }
 
@@ -47,7 +47,7 @@ public class objDatabase implements Observable {
         Hersteller a = new Hersteller(hersteller);
         for(Hersteller h : herstellerList){
             if(h.getName().equals(a.getName())){
-                for(obj o : objList){
+                for(Obj o : objList){
                     if(o.getHersteller().getName().equals(h.getName())){
                         removeObj(o.getFachnummer());
                         notifyObservers();
@@ -67,7 +67,7 @@ public class objDatabase implements Observable {
                     Hersteller her = new Hersteller(hersteller);
                     Date y = new Date();
                     if (Kuchentyp.equals("Kremkuchen")) {
-                        obj a = new Kremkuchen(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Topping, y);
+                        Obj a = new Kremkuchen(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Topping, y);
                         objList.add(setFachnummer(a));      // TODO add -> help method for all cakes
                         readInAllergens(Allergene);
                         capacityAct += 1;
@@ -75,7 +75,7 @@ public class objDatabase implements Observable {
                         return true;
                     }
                     if (Kuchentyp.equals("Obstkuchen")) {
-                        obj a = new Obstkuchen(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Topping, y);
+                        Obj a = new Obstkuchen(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Topping, y);
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
@@ -95,7 +95,7 @@ public class objDatabase implements Observable {
                     if (Kuchentyp.equals("Obsttorte")) {
                         Hersteller her = new Hersteller(hersteller);
                         Date y = new Date();
-                        obj a = new Obsttorte(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Kremsorte, Obstsorte, y);
+                        Obj a = new Obsttorte(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Kremsorte, Obstsorte, y);
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
@@ -178,7 +178,7 @@ public class objDatabase implements Observable {
         return String.format("["+s+"]");
     }
 
-    public obj setFachnummer(obj o){
+    public Obj setFachnummer(Obj o){
         if (objList.isEmpty()) {
             o.setFachnummer(0);
         } else {
@@ -197,7 +197,7 @@ public class objDatabase implements Observable {
         }
     }
 
-    public String stringForShowKuchen(obj o){
+    public String stringForShowKuchen(Obj o){
         return "Typ: " + o.getKuchentyp()
                 + "| Hersteller: " + o.getHersteller().getName()
                 + "| Allergene: " + format(o.getAllergene())
@@ -209,7 +209,7 @@ public class objDatabase implements Observable {
         return herstellerList;
     }
 
-    public LinkedList<obj> getObjList() {
+    public LinkedList<Obj> getObjList() {
         return objList;
     }
 

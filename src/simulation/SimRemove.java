@@ -1,18 +1,18 @@
 package simulation;
 
-import GL.objDatabase;
+import GL.ObjDatabase;
 
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-public class simRemove implements Runnable{
+public class SimRemove implements Runnable{
 
     private Random rnd;
     private final Lock lock;
-    private final objDatabase oDB;
+    private final ObjDatabase oDB;
 
 
-    public simRemove(objDatabase oDB, Lock lock){
+    public SimRemove(ObjDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
         this.rnd = new Random();

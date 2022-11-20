@@ -1,16 +1,16 @@
 package simulation;
 
-import GL.objDatabase;
+import GL.ObjDatabase;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-public class simAdd implements Runnable{
+public class SimAdd implements Runnable{
 
     private final Lock lock;
-    private final objDatabase oDB;
+    private final ObjDatabase oDB;
     private final String[] typ = new String[]{"Kremkuchen","Obstkuchen"};
     private final String Hersteller = "Hersteller1";
     private final BigDecimal Preis = new BigDecimal(200);
@@ -20,7 +20,7 @@ public class simAdd implements Runnable{
     private final String Topping = "Sahne";
 
 
-    public simAdd(objDatabase oDB, Lock lock){
+    public SimAdd(ObjDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
         oDB.addHersteller(Hersteller);

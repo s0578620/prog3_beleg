@@ -5,13 +5,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import vertrag.Allergen;
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.LinkedList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class objDatabaseTest {
-    private objDatabase o;
+    private ObjDatabase o;
     private String Kuchentyp;
     private String Kuchentyp1;
     private String Hersteller;
@@ -28,7 +27,7 @@ class objDatabaseTest {
 
     @BeforeEach
     void setup(){
-        this.o = new objDatabase(10);
+        this.o = new ObjDatabase(10);
         this.Kuchentyp = "Kremkuchen";
         this.Kuchentyp1 = "Obstkuchen";
         this.Hersteller = "NESTLE";

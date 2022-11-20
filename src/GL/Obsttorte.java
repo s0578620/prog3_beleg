@@ -6,11 +6,10 @@ import vertrag.Kremkuchen;
 import vertrag.Obstkuchen;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.Collection;
 import java.util.Date;
 
-public class Obsttorte extends obj implements Obstkuchen, Kremkuchen {
+public class Obsttorte extends Obj implements Obstkuchen, Kremkuchen {
 
     private final String obstsorte;
     private final String kremsorte;

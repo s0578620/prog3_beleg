@@ -1,13 +1,12 @@
 package util;
+import GL.ObjDatabase;
 
-import GL.objDatabase;
-import util.Observer;
 
-public class objDatabaseObserver implements Observer {
+public class ObjDatabaseObserver implements Observer {
 
-    private objDatabase oDB;
+    private ObjDatabase oDB;
 
-    public objDatabaseObserver(objDatabase oDB){
+    public ObjDatabaseObserver(ObjDatabase oDB){
         this.oDB = oDB;
     }
 
