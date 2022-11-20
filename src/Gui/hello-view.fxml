@@ -25,11 +25,11 @@
       </MenuBar>
    </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableObj" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="C3" />
+          <TableColumn fx:id="fach" prefWidth="75.0" text="Fach" />
+          <TableColumn fx:id="typ" prefWidth="75.0" text="Typ" />
+            <TableColumn fx:id="hersteller" prefWidth="75.0" text="Hersteller" />
         </columns>
       </TableView>
    </center>
@@ -45,9 +45,9 @@
       </ButtonBar>
    </bottom>
    <left>
-      <TableView prefHeight="335.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableHersteller" prefHeight="335.0" prefWidth="100.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="herstellerList" prefWidth="98.66666662693024" text="HerstellerList" />
         </columns>
       </TableView>
    </left>

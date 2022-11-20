@@ -32,8 +32,6 @@ public class Gui extends Application {
         controller.setConsole(new console(handler));
 
 
-
-
         stage.setTitle("Kuchenautomat");
         stage.setScene(scene);
         stage.isResizable();

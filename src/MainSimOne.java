@@ -2,7 +2,6 @@ import CLI.objDatabaseObserver;
 import GL.objDatabase;
 import simulation.simAdd;
 import simulation.simRemove;
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 

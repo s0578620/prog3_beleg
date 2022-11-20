@@ -20,7 +20,7 @@ Zulässige Quellen sind suchmaschinen-indizierte Internetseiten. Werden mehr als
 - [x] main-Methoden nur im default package
 - [x] ausführbar
 - [ ] CRUD für Kuchen in der GUI
-- [ ] Geschäfts- und Darstellungslogik getrennt
+- [x] Geschäfts- und Darstellungslogik getrennt
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
 - [ ] Auflistungen sind immer sichtbar und werden automatisch aktualisiert

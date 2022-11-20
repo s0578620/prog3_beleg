@@ -5,13 +5,11 @@ import GL.objDatabase;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-import static java.lang.Thread.sleep;
-
 public class simRemove implements Runnable{
 
     private Random rnd;
-    private Lock lock;
-    private objDatabase oDB;
+    private final Lock lock;
+    private final objDatabase oDB;
 
 
     public simRemove(objDatabase oDB, Lock lock){
@@ -22,18 +20,13 @@ public class simRemove implements Runnable{
 
     @Override
     public void run() {
-
             do {
                 synchronized (lock) {
                     oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1));
                     try {
-                        // lock.wait();
                         oDB.removeObj(rnd.nextInt(oDB.getObjList().size()));
-                    } catch (Exception e) {
-
-                    }
+                    } catch (Exception e) {}
                 }
             } while (true);
         }
-
 }

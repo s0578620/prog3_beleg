@@ -2,52 +2,39 @@ package simulation;
 
 import GL.objDatabase;
 import vertrag.Allergen;
-
 import java.math.BigDecimal;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
-
-import static java.lang.Thread.sleep;
 
 public class simAdd implements Runnable{
 
-
-    private Lock lock;
-    private objDatabase oDB;
-
-    private String Kuchentyp = "Kremkuchen";
-    private String Hersteller = "Hersteller1";
-
-    private BigDecimal Preis = new BigDecimal(200);
-    private int Nahrwert = 1000;
-    private int Haltbarkeit = 20;
-    private LinkedList<Allergen> list = new LinkedList<>();
-    private String Topping = "Sahne";
+    private final Lock lock;
+    private final objDatabase oDB;
+    private final String[] typ = new String[]{"Kremkuchen","Obstkuchen"};
+    private final String Hersteller = "Hersteller1";
+    private final BigDecimal Preis = new BigDecimal(200);
+    private final int[] naehrwert = {150,500,700,1000};
+    private final int Haltbarkeit = 20;
+    private final LinkedList<Allergen> list = new LinkedList<>();
+    private final String Topping = "Sahne";
 
 
     public simAdd(objDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
         oDB.addHersteller(Hersteller);
-        oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
-        oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
-        oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
     }
 
     @Override
     public void run() {
-
+        Random rnd = new Random();
             do {
-                //oDB.addObj(Kuchentyp,Hersteller,Preis,Nahrwert,Haltbarkeit,list,Topping);
               synchronized (lock) {
                   try {
-                      // lock.wait();
-                      oDB.addObj(Kuchentyp, Hersteller, Preis, Nahrwert, Haltbarkeit, list, Topping);
-                  } catch (Exception e) {
-
-                  }
+                      oDB.addObj(typ[rnd.nextInt(typ.length)], Hersteller, Preis, naehrwert[rnd.nextInt(naehrwert.length)], Haltbarkeit, list, Topping);
+                  } catch (Exception e) {}
               }
             } while (true);
-
       }
 }
