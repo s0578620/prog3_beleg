@@ -1,5 +1,5 @@
 import CLI.cli;
-import CLI.objDatabaseObserver;
+import util.objDatabaseObserver;
 import Events.EventHandler;
 import Events.ODBEventListener;
 import GL.objDatabase;

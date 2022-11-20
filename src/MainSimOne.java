@@ -1,7 +1,9 @@
-import CLI.objDatabaseObserver;
+import util.objDatabaseObserver;
 import GL.objDatabase;
 import simulation.simAdd;
 import simulation.simRemove;
+import util.objDatabaseObserverSimOne;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,7 +12,7 @@ public class MainSimOne {
     public static void main(String[] args) {
 
         objDatabase o = new objDatabase(10);
-        o.attachObserver(new objDatabaseObserver(o));
+        o.attachObserver(new objDatabaseObserverSimOne(o));
         Lock lock = new ReentrantLock();
 
 

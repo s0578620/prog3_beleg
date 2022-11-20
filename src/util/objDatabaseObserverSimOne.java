@@ -1,20 +1,16 @@
-package CLI;
+package util;
 
 import GL.objDatabase;
-import util.Observer;
 
-public class objDatabaseObserver implements Observer {
+public class objDatabaseObserverSimOne implements Observer{
 
     private objDatabase oDB;
-
     private int counterHersteller = 0;
     private int counterObj = 0;
-    public objDatabaseObserver(objDatabase oDB){
+
+    public objDatabaseObserverSimOne(objDatabase oDB){
         this.oDB = oDB;
     }
-
-
-    // TODO split oberserver / sim and gl etc
     @Override
     public void update() {
 
@@ -25,9 +21,6 @@ public class objDatabaseObserver implements Observer {
         if(oDB.getObjList().size() != counterObj){
             this.counterObj = oDB.getObjList().size();
             System.out.println("Kuchen gesamt: " + counterObj);
-        }
-        if((oDB.getCapacityMax()*0.9) <= oDB.getObjList().size()){
-            System.out.println("90% capacity reached");
         }
     }
 }
