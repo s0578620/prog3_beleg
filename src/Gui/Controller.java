@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 public class Controller implements Initializable {
     private CLI.console console;
     private String input;
@@ -66,7 +65,6 @@ public class Controller implements Initializable {
         System.out.println(input);
         console.execController(input);
         commandField.clear();
-
     }
 
     public void handleCommandField(KeyEvent keyEvent) {

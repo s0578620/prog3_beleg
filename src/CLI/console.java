@@ -120,7 +120,6 @@ public class console {
                 BigDecimal preis = BigDecimal.valueOf(Double.parseDouble(inputList[2].replace(",",".")));
                 if(inputList.length > 7){
                     return new AddTorteEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6],inputList[7]);
-
                 }else {
                     return new AddKuchenEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6]);
                 }
