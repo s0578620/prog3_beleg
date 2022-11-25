@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import util.ObjDatabaseObserverGui;
 
 
 public class Gui extends Application {
@@ -25,10 +26,12 @@ public class Gui extends Application {
         Scene scene = new Scene(root, 600, 400);
 
         ObjDatabase oDB = new ObjDatabase(10);  // TODO CAPACITY HARDCODED
+
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(oDB));
         Controller controller = loader.getController();
         controller.setConsole(new console(handler));
+        oDB.attachObserver(new ObjDatabaseObserverGui(oDB,controller));
 
 
         stage.setTitle("Kuchenautomat");

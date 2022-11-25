@@ -10,9 +10,14 @@ public class Obj implements Kuchen,Verkaufsobjekt {
 
     private final String kuchentyp;
     private final Hersteller hersteller;
+    private final String herstellerString;
     private final Collection<Allergen> allergene;
     private final int naehrwert;
     private final int haltbarkeit;
+    public int getHaltbarkeitActual() {
+        return haltbarkeitActual;
+    }
+    private int haltbarkeitActual;  // TODO HOW
     private final BigDecimal preis;
     private Date inspektionsdatum;
     private Date insertDate;
@@ -27,8 +32,9 @@ public class Obj implements Kuchen,Verkaufsobjekt {
         this.preis = Preis;
         this.inspektionsdatum = Inspektionsdatum;
         this.insertDate = insertDate;
-
+        this.herstellerString = Hersteller.getName();
     }
+
 
     public String getKuchentyp() {
         return kuchentyp;
@@ -51,10 +57,21 @@ public class Obj implements Kuchen,Verkaufsobjekt {
 
     @Override
     public Duration getHaltbarkeit() {
-        Date actualDate = new Date();
-        Duration d = Duration.between(insertDate.toInstant(), actualDate.toInstant());
-        //System.out.println(haltbarkeit-(d.toMinutes()));
-        return d;
+        Date actualDate = new Date();   // TODO HALTBARKEIT UMWANDELN UND RECHNEN
+
+        Duration tmp = Duration.ofMinutes(Duration.between(insertDate.toInstant(),actualDate.toInstant()).toMinutes());
+        int res = (int) tmp.toMinutes();
+        int test = haltbarkeit - res;
+        Duration tryhard = Duration.ofMinutes(test);
+
+        return tryhard;
+
+        /*
+            int Haltbarkeit -> 36
+            Duration -> 36 minuten definieren
+
+            Result Duration -> Duration - (Duration between actual and insetdate)
+         */
     }
 
     @Override
@@ -82,6 +99,10 @@ public class Obj implements Kuchen,Verkaufsobjekt {
 
     public Date getInsertDate() {
         return insertDate;
+    }
+
+    public String getHerstellerString() {
+        return herstellerString;
     }
 }
 

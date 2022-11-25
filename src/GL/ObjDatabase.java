@@ -202,7 +202,7 @@ public class ObjDatabase implements Observable {
                 + "| Hersteller: " + o.getHersteller().getName()
                 + "| Allergene: " + format(o.getAllergene())
                 + "| Nährwert: " + o.getNaehrwert()
-                + "| Haltbarkeit: " + o.getHaltbarkeit();
+                + "| Haltbarkeit: " + o.getHaltbarkeit().toMinutes();       // TODO CHECKPOINT HALTBARKEIT DARSTELLUNG
     }
 
     public LinkedList<Hersteller> getHerstellerList() {
