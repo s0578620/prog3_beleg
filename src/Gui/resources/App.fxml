@@ -42,7 +42,7 @@
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mode:" wrappingWidth="41.52277755737305" />
-            <Label maxWidth="45.0" minWidth="40.0" prefHeight="17.0" text="None" />
+            <Label fx:id="mode" maxWidth="45.0" minWidth="40.0" prefHeight="17.0" text="None" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Command" wrappingWidth="60.42901563644409" />
             <TextField fx:id="commandField" minWidth="57.0" onKeyPressed="#handleCommandField" prefHeight="25.0" prefWidth="240.0" />
             <Button fx:id="buttonSubmit" mnemonicParsing="false" onAction="#onSubmit" text="Submit" />

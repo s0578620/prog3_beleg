@@ -33,9 +33,10 @@ public class console {
                         case ":r": this.mode = 'r'; // show mode
                             write("entered show mode");
                             break;
-//                        case ":u": this.mode = 'u'; // update mode
-//                            write("entered update mode");
-//                            break;
+                        case ":u":
+                            this.mode = 'u';        // update mode
+                            write("entered update mode");
+                            break;
                         default:
                             write(help);
                             break;
@@ -59,19 +60,15 @@ public class console {
             switch (input) {
                 case ":c":
                     this.mode = 'c'; // create mode
-                    write("entered create mode");
                     break;
                 case ":d":
                     this.mode = 'd'; // delete mode
-                    write("entered delete mode");
                     break;
                 case ":r":
                     this.mode = 'r'; // show mode
-                    write("entered show mode");
+                case ":u":
+                    this.mode = 'u';
                     break;
-//                        case ":u": this.mode = 'u'; // update mode
-//                            write("entered update mode");
-//                            break;
                 default:
                     break;
             }
@@ -95,8 +92,8 @@ public class console {
                 return deleteEO(input);
             case 'r':
                 return showEO(input);
-//            case 'u':                             // TODO add -> case updateEO
-//                return updateEO(input);
+            case 'u':
+                return updateEO(input);
             default:
                 return null;
         }
@@ -157,6 +154,9 @@ public class console {
         }
     }
 
+    public EventObject updateEO(String input){
+        return new UpdateInspEvent(input,Integer.parseInt(input));
+    }
 
     public void write(String text){
         System.out.println(text);

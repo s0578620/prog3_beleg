@@ -68,7 +68,7 @@ public class ObjDatabase implements Observable {
                     Date y = new Date();
                     if (Kuchentyp.equals("Kremkuchen")) {
                         Obj a = new Kremkuchen(Kuchentyp, her, Preis, Naehrwert, Haltbarkeit, y, Allergene, Topping, y);
-                        objList.add(setFachnummer(a));      // TODO add -> help method for all cakes
+                        objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
                         notifyObservers();
@@ -111,23 +111,29 @@ public class ObjDatabase implements Observable {
     public boolean updateInsp(int Fachnummer){
         try {
             objList.get(Fachnummer).setInspektionsdatum(new Date());
+            notifyObservers();
             return true;
         }catch (Exception e){
             return false;
         }
     }
 
-    // TODO remove ALLERGENE  bzw aktualisiert ausgeben ||  oder duplicates abspeichern und remove ausführen
     public boolean removeObj(int Fachnummer){
         if((!objList.isEmpty()) && (objList.size() > Fachnummer)) {
                 objList.remove(Fachnummer);
                 objList.stream().filter(obj -> obj.getFachnummer() > Fachnummer).forEach(o -> o.setFachnummer(o.getFachnummer() - 1));
                 capacityAct -= 1;
+                refreshAllergeneList();
                 notifyObservers();
                 return true;
         }else{
             return false;
         }
+    }
+
+    public void refreshAllergeneList(){
+        allergenList.clear();
+        objList.stream().forEach(obj -> readInAllergens(obj.getAllergene()));
     }
 
     public List<String> showAllCakesSortedByHersteller(){

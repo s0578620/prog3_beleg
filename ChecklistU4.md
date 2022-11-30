@@ -19,13 +19,13 @@ Zulässige Quellen sind suchmaschinen-indizierte Internetseiten. Werden mehr als
 - [x] Trennung zwischen Test- und Produktiv-Code
 - [x] main-Methoden nur im default package
 - [x] ausführbar
-- [ ] CRUD für Kuchen in der GUI
+- [x] CRUD für Kuchen in der GUI
 - [x] Geschäfts- und Darstellungslogik getrennt
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
-- [ ] Auflistungen sind immer sichtbar und werden automatisch aktualisiert
-- [ ] sortierbare Darstellung der Kuchen mit Fachnummer, Hersteller, Inspektionsdatum und verbleibender Haltbarkeit
-- [ ] skalierbare Darstellung
+- [x] Auflistungen sind immer sichtbar und werden automatisch aktualisiert
+- [x] sortierbare Darstellung der Kuchen mit Fachnummer, Hersteller, Inspektionsdatum und verbleibender Haltbarkeit
+- [x] skalierbare Darstellung
 - [ ] FXML & data binding verwendet
 - [ ] Benutzeroberfläche wird nicht gesperrt
 - [ ] Änderung der Fachnummer mittels drag&drop

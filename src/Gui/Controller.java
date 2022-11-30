@@ -3,7 +3,6 @@ package Gui;
 import CLI.console;
 import GL.Hersteller;
 import GL.Obj;
-import GL.ObjDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import vertrag.Allergen;
-import java.math.BigDecimal;
+
 import java.net.URL;
+import java.time.Duration;
 import java.util.*;
 
 public class Controller implements Initializable {
@@ -22,10 +23,11 @@ public class Controller implements Initializable {
     private String input;
     @FXML private TextField commandField;
     @FXML private Button buttonSubmit;
+    @FXML private Label mode;
     @FXML private TableColumn<Obj, Integer> fach;
     @FXML private TableColumn<Obj, Date> inspektionsdatum;
     @FXML private TableColumn<Obj, String> hersteller;
-    @FXML private TableColumn<Obj, Integer> haltbarkeit;
+    @FXML private TableColumn<Obj, Duration> haltbarkeit;
     @FXML private TableColumn<Hersteller, String> herstellerList;
     @FXML private TableView<Hersteller> tableHersteller;
     @FXML private ListView<Allergen> tableAllergene;
@@ -38,32 +40,33 @@ public class Controller implements Initializable {
     private ObservableList<Obj> objObservableList;
     private ObservableList<Allergen> allergenObservableList;
 
-    public void updateObsList(List<Hersteller> herstellerList, List<Obj> objList, List<Allergen> allergenList){      // TODO updateObserverList
+    public void updateObsList(List<Hersteller> herstellerList, List<Obj> objList, List<Allergen> allergenList){
         this.herstellerObservableList = FXCollections.observableList(herstellerList);
         this.objObservableList = FXCollections.observableList(objList);
         this.allergenObservableList = FXCollections.observableList(allergenList);
         tableHersteller.setItems(herstellerObservableList);
         tableObj.setItems(objObservableList);
         tableAllergene.setItems(allergenObservableList);
+        tableObj.refresh();
+        tableAllergene.refresh();
+        tableHersteller.refresh();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         herstellerList.setCellValueFactory(new PropertyValueFactory<Hersteller,String>("name"));
-        tableHersteller.setItems(herstellerObservableList); // TODO INSERT HERSTELLER ???
+        tableHersteller.setItems(herstellerObservableList);
         inspektionsdatum.setCellValueFactory(new PropertyValueFactory<Obj,Date>("inspektionsdatum"));
-        //haltbarkeit.setCellValueFactory(new PropertyValueFactory<Obj,Integer>("haltbarkeitActual"));
-
+        haltbarkeit.setCellValueFactory(new PropertyValueFactory<Obj, Duration>("haltbarkeit"));    // TODO INT AUSGEBEN WÜRDE FUNKTIONIEREN -> Nachfragen
 
         fach.setCellValueFactory(new PropertyValueFactory<Obj,Integer>("fachnummer"));
         typ.setCellValueFactory(new PropertyValueFactory<Obj,String>("kuchentyp"));
-        hersteller.setCellValueFactory(new PropertyValueFactory<Obj,String>("herstellerString")); // TODO Richtig oder Hersteller Objekt?
+        hersteller.setCellValueFactory(new PropertyValueFactory<Obj,String>("herstellerString"));
         tableObj.setItems(objObservableList);
     }
 
     public void onSubmit(javafx.event.ActionEvent actionEvent) {
         this.input = commandField.getText();
-        System.out.println(input);
         console.execController(input);
         commandField.clear();
     }
@@ -71,9 +74,22 @@ public class Controller implements Initializable {
     public void handleCommandField(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER){
             this.input = commandField.getText();
-            System.out.println(input);
             console.execController(input);
             commandField.clear();
+            if(input.startsWith(":")) {
+                switch (input) {
+                    case ":c": mode.setText("C");
+                        break;
+                    case ":d": mode.setText("D");
+                        break;
+                    case ":r": mode.setText("R");
+                        break;
+                    case ":u": mode.setText("U");
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 

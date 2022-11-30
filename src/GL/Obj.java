@@ -63,7 +63,7 @@ public class Obj implements Kuchen,Verkaufsobjekt {
         int res = (int) tmp.toMinutes();
         int test = haltbarkeit - res;
         Duration tryhard = Duration.ofMinutes(test);
-
+       // this.haltbarkeitActual = (int) tryhard.toMinutes();
         return tryhard;
 
         /*
