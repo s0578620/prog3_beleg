@@ -64,8 +64,6 @@ public class console {
                 case ":d":
                     this.mode = 'd'; // delete mode
                     break;
-                case ":r":
-                    this.mode = 'r'; // show mode
                 case ":u":
                     this.mode = 'u';
                     break;
@@ -129,11 +127,11 @@ public class console {
 
     public EventObject deleteEO(String input ) {
         String[] inputList = input.split(" ");          // TODO add -> RemoveHerstellerEvent && activate lever
-//        if(inputList[0].matches(".*[a-z].*")){
-//            return new removeHerstellerEvent();
-//        }else{
+        if(inputList[0].matches(".*[a-z].*")){
+            return new RemoveHerstellerEvent(input,input);
+        }else{
             return new RemoveKuchenEvent(input,Integer.parseInt(input));
-//      }
+      }
     }
 
     public EventObject showEO(String input){

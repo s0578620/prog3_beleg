@@ -55,6 +55,8 @@ public class ODBEventListener implements EventListener{
             case "update Inspektionsdatum":
                 this.oDB.updateInsp(((UpdateInspEvent)event).getFachnummer());
                 break;
+            case "remove Hersteller":
+                this.oDB.removeHersteller(((RemoveHerstellerEvent)event).getHersteller());
         }
     }
 }

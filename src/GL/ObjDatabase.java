@@ -43,21 +43,19 @@ public class ObjDatabase implements Observable {
         }
     }
 
-    public boolean removeHersteller(String hersteller){
+    public void removeHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);
         for(Hersteller h : herstellerList){
-            if(h.getName().equals(a.getName())){
-                for(Obj o : objList){
-                    if(o.getHersteller().getName().equals(h.getName())){
-                        removeObj(o.getFachnummer());
-                        notifyObservers();
-                    }
-                }
+            if(h.getName().equals(a.getName())){    // TODO Wie Kuchen löschen
+//                for(Obj o : objList){
+//                    if(o.getHersteller().getName().equals(h.getName())){
+//                        removeObj(o.getFachnummer());
+//                    }
+//                }
                 herstellerList.remove(h);
-                return true;
             }
         }
-        return false;
+        notifyObservers();
     }
 
     public boolean addObj(String Kuchentyp, String hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Collection<Allergen> Allergene, String Topping) {

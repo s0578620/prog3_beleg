@@ -11,9 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
 import vertrag.Allergen;
-
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
@@ -33,8 +31,6 @@ public class Controller implements Initializable {
     @FXML private ListView<Allergen> tableAllergene;
     @FXML private TableView<Obj> tableObj;
     @FXML private TableColumn<Obj, String> typ;
-
-
 
     private ObservableList<Hersteller> herstellerObservableList ;
     private ObservableList<Obj> objObservableList;
@@ -82,8 +78,6 @@ public class Controller implements Initializable {
                         break;
                     case ":d": mode.setText("D");
                         break;
-                    case ":r": mode.setText("R");
-                        break;
                     case ":u": mode.setText("U");
                         break;
                     default:
@@ -96,5 +90,4 @@ public class Controller implements Initializable {
     public void setConsole(console console) {
         this.console = console;
     }
-
 }
