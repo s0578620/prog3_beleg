@@ -3,6 +3,9 @@ package Gui;
 import CLI.console;
 import GL.Hersteller;
 import GL.Obj;
+import Gui.Beans.AllergenBean;
+import Gui.Beans.HerstellerBean;
+import Gui.Beans.ObjBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,42 +25,55 @@ public class Controller implements Initializable {
     @FXML private TextField commandField;
     @FXML private Button buttonSubmit;
     @FXML private Label mode;
-    @FXML private TableColumn<Obj, Integer> fach;
-    @FXML private TableColumn<Obj, Date> inspektionsdatum;
-    @FXML private TableColumn<Obj, String> hersteller;
-    @FXML private TableColumn<Obj, Duration> haltbarkeit;
-    @FXML private TableColumn<Hersteller, String> herstellerList;
-    @FXML private TableView<Hersteller> tableHersteller;
-    @FXML private ListView<Allergen> tableAllergene;
-    @FXML private TableView<Obj> tableObj;
-    @FXML private TableColumn<Obj, String> typ;
+    @FXML private TableColumn<ObjBean, Integer> fach;
+    @FXML private TableColumn<ObjBean, Date> inspektionsdatum;
+    @FXML private TableColumn<ObjBean, String> hersteller;
+    @FXML private TableColumn<ObjBean, Duration> haltbarkeit;
+    @FXML private TableColumn<HerstellerBean, String> herstellerList;
+    @FXML private TableView<HerstellerBean> tableHersteller;
+    @FXML private TableView<AllergenBean> tableAllergene;
+    @FXML private TableColumn<AllergenBean, String> allergeneList;
+    @FXML private TableView<ObjBean> tableObj;
+    @FXML private TableColumn<ObjBean, String> typ;
 
-    private ObservableList<Hersteller> herstellerObservableList;
-    private ObservableList<Obj> objObservableList;
-    private ObservableList<Allergen> allergenObservableList;
+    private ObservableList<AllergenBean> content = FXCollections.observableArrayList(AllergenBean.extractor());
+    private ObservableList<ObjBean> objObservableList = FXCollections.observableArrayList(ObjBean.extractor());
+    private ObservableList<HerstellerBean> herstellerObservableList = FXCollections.observableArrayList(HerstellerBean.extractor());
+
 
     public void updateObsList(List<Hersteller> herstellerList, List<Obj> objList, List<Allergen> allergenList){
-        this.herstellerObservableList = FXCollections.observableList(herstellerList);
-        this.objObservableList = FXCollections.observableList(objList);
-        this.allergenObservableList = FXCollections.observableList(allergenList);
-        tableHersteller.setItems(herstellerObservableList);
-        tableObj.setItems(objObservableList);
-        tableAllergene.setItems(allergenObservableList);
-        tableObj.refresh();
-        tableAllergene.refresh();
-        tableHersteller.refresh();
+        herstellerObservableList.clear();
+        for (Hersteller h : herstellerList){
+            herstellerObservableList.add(new HerstellerBean(h));
+        }
+        objObservableList.clear();
+        for (Obj o : objList){
+            objObservableList.add(new ObjBean(o));
+        }
+        content.clear();
+        for (Allergen a : allergenList){
+            content.add(new AllergenBean(a));
+        }
+        //this.allergenObservableList = FXCollections.observableList(allergenList);
+        //tableAllergene.setItems(allergenObservableList);
+        //tableAllergene.refresh();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        herstellerList.setCellValueFactory(new PropertyValueFactory<Hersteller,String>("name"));
-        inspektionsdatum.setCellValueFactory(new PropertyValueFactory<Obj,Date>("inspektionsdatum"));
-        haltbarkeit.setCellValueFactory(new PropertyValueFactory<Obj, Duration>("haltbarkeit"));
-        fach.setCellValueFactory(new PropertyValueFactory<Obj,Integer>("fachnummer"));
-        typ.setCellValueFactory(new PropertyValueFactory<Obj,String>("kuchentyp"));
-        hersteller.setCellValueFactory(new PropertyValueFactory<Obj,String>("herstellerString"));
 
+        tableHersteller.setItems(herstellerObservableList);
+        this.herstellerList.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        tableObj.setItems(objObservableList);
+        this.fach.setCellValueFactory(new PropertyValueFactory<>("fach"));
+        this.typ.setCellValueFactory(new PropertyValueFactory<>("kuchentyp"));
+        this.hersteller.setCellValueFactory(new PropertyValueFactory<>("hersteller"));
+        this.inspektionsdatum.setCellValueFactory(new PropertyValueFactory<>("inspDate"));
+        this.haltbarkeit.setCellValueFactory(new PropertyValueFactory<>("haltbarkeit"));
+
+        tableAllergene.setItems(content);
+        this.allergeneList.setCellValueFactory(new PropertyValueFactory<>("allergenString"));
     }
 
     public void onSubmit(javafx.event.ActionEvent actionEvent) {

@@ -59,15 +59,6 @@ class objDatabaseTest {
         assertEquals(0,o.getHerstellerList().size());
     }
 
-    @Test
-    void removeHerstellerLogic(){   // Überprüft ob auch die Objekte mit dem gelöschten Hersteller entfernt werden
-        o.addHersteller(Hersteller1);
-        o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
-        o.addObj(Kuchentyp,Hersteller1,Preis,Naehrwert,Haltbarkeit,list, Topping);
-
-        o.removeHersteller(Hersteller);
-        assertEquals(1,o.getObjList().size());
-    }
 
     @Test
     void addHerstellerDuplicat() {
