@@ -32,7 +32,7 @@ public class Controller implements Initializable {
     @FXML private TableView<Obj> tableObj;
     @FXML private TableColumn<Obj, String> typ;
 
-    private ObservableList<Hersteller> herstellerObservableList ;
+    private ObservableList<Hersteller> herstellerObservableList;
     private ObservableList<Obj> objObservableList;
     private ObservableList<Allergen> allergenObservableList;
 
@@ -51,14 +51,13 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         herstellerList.setCellValueFactory(new PropertyValueFactory<Hersteller,String>("name"));
-        tableHersteller.setItems(herstellerObservableList);
         inspektionsdatum.setCellValueFactory(new PropertyValueFactory<Obj,Date>("inspektionsdatum"));
-        haltbarkeit.setCellValueFactory(new PropertyValueFactory<Obj, Duration>("haltbarkeit"));    // TODO INT AUSGEBEN WÜRDE FUNKTIONIEREN -> Nachfragen
-
+        haltbarkeit.setCellValueFactory(new PropertyValueFactory<Obj, Duration>("haltbarkeit"));
         fach.setCellValueFactory(new PropertyValueFactory<Obj,Integer>("fachnummer"));
         typ.setCellValueFactory(new PropertyValueFactory<Obj,String>("kuchentyp"));
         hersteller.setCellValueFactory(new PropertyValueFactory<Obj,String>("herstellerString"));
-        tableObj.setItems(objObservableList);
+
+
     }
 
     public void onSubmit(javafx.event.ActionEvent actionEvent) {

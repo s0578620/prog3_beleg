@@ -14,10 +14,6 @@ public class Obj implements Kuchen,Verkaufsobjekt {
     private final Collection<Allergen> allergene;
     private final int naehrwert;
     private final int haltbarkeit;
-    public int getHaltbarkeitActual() {
-        return haltbarkeitActual;
-    }
-    private int haltbarkeitActual;  // TODO HOW
     private final BigDecimal preis;
     private Date inspektionsdatum;
     private Date insertDate;
@@ -57,7 +53,7 @@ public class Obj implements Kuchen,Verkaufsobjekt {
 
     @Override
     public Duration getHaltbarkeit() {
-        Date actualDate = new Date();   // TODO HALTBARKEIT UMWANDELN UND RECHNEN
+        Date actualDate = new Date();
 
         Duration tmp = Duration.ofMinutes(Duration.between(insertDate.toInstant(),actualDate.toInstant()).toMinutes());
         int res = (int) tmp.toMinutes();

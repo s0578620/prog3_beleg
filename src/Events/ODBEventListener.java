@@ -4,7 +4,7 @@ import GL.ObjDatabase;
 import java.util.EventObject;
 import java.util.List;
 
-public class ODBEventListener implements EventListener{
+public class ODBEventListener implements EventListener{ // TODO -> Refactor to 100% Event System ... :/
 
     private ObjDatabase oDB;
 
@@ -42,7 +42,7 @@ public class ODBEventListener implements EventListener{
                 break;
             case "show Hersteller":
                 List<String> showlist = this.oDB.showAllCakesSortedByHersteller();
-                showlist.forEach(System.out::println);      // TODO add -> better show (write) method
+                showlist.forEach(System.out::println);
                 break;
             case "show Kuchen":
                 List<String> showlist1 = this.oDB.showKuchenAll();

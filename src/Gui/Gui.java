@@ -25,7 +25,7 @@ public class Gui extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
 
-        ObjDatabase oDB = new ObjDatabase(10);  // TODO CAPACITY HARDCODED
+        ObjDatabase oDB = new ObjDatabase(10);  // TODO Capacity still hardcoded :/
 
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(oDB));

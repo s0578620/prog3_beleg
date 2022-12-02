@@ -59,10 +59,10 @@ public class console {
         if(input.startsWith(":")) {
             switch (input) {
                 case ":c":
-                    this.mode = 'c'; // create mode
+                    this.mode = 'c';
                     break;
                 case ":d":
-                    this.mode = 'd'; // delete mode
+                    this.mode = 'd';
                     break;
                 case ":u":
                     this.mode = 'u';
@@ -126,7 +126,7 @@ public class console {
     }
 
     public EventObject deleteEO(String input ) {
-        String[] inputList = input.split(" ");          // TODO add -> RemoveHerstellerEvent && activate lever
+        String[] inputList = input.split(" ");
         if(inputList[0].matches(".*[a-z].*")){
             return new RemoveHerstellerEvent(input,input);
         }else{

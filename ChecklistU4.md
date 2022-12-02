@@ -26,6 +26,6 @@ werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfo
 - [x] Auflistungen sind immer sichtbar und werden automatisch aktualisiert
 - [x] sortierbare Darstellung der Kuchen mit Fachnummer, Hersteller, Inspektionsdatum und verbleibender Haltbarkeit
 - [x] skalierbare Darstellung
-- [ ] FXML & data binding verwendet
-- [ ] Benutzeroberfläche wird nicht gesperrt
+- [x] FXML & data binding verwendet
+- [x] Benutzeroberfläche wird nicht gesperrt
 - [ ] Änderung der Fachnummer mittels drag&drop
