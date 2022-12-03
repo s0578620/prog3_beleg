@@ -153,8 +153,6 @@ class objDatabaseTest {
 
         // Expected:5 weil +1 pro Hersteller an Listeneinträgen (Hersteller Gesamtaus)
         assertEquals(5, (long) o.showAllCakesSortedByHersteller().size());
-        System.out.println("--------------TEST--------------showAllCakesSortedByHerrsteller");
-        System.out.println();
     }
 
     @Test
@@ -165,8 +163,6 @@ class objDatabaseTest {
         o.addObj(Obsttorte,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping,Toppin2);
 
         assertEquals(3,o.showKuchenAll().size());
-        System.out.println("--------------TEST--------------showKuchenAll");
-        System.out.println();
     }
 
     @Test
@@ -176,8 +172,6 @@ class objDatabaseTest {
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         assertEquals(1,o.showKuchen(Kuchentyp).size());
-        System.out.println("--------------TEST--------------showKuchen");
-        System.out.println();
     }
 
     @Test

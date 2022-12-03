@@ -3,7 +3,11 @@ package util;
 import GL.ObjDatabase;
 import Gui.Controller;
 
-public class ObjDatabaseObserverGui implements Observer{
+
+import java.util.Observable;
+import java.util.Observer;
+
+public class ObjDatabaseObserverGui implements Observer {
 
     private ObjDatabase oDB;
     private Controller controller;
@@ -16,7 +20,7 @@ public class ObjDatabaseObserverGui implements Observer{
     }
 
     @Override
-    public void update() {
+    public void update(Observable o, Object arg) {
         controller.updateObsList(oDB.getHerstellerList(),oDB.getObjList(),oDB.getAllergenList());
     }
 }

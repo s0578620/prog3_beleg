@@ -5,6 +5,7 @@ import vertrag.Hersteller;
 import vertrag.Kremkuchen;
 import vertrag.Obstkuchen;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;

@@ -2,7 +2,10 @@ package util;
 
 import GL.ObjDatabase;
 
-public class ObjDatabaseObserverSimOne implements Observer{
+import java.util.Observable;
+import java.util.Observer;
+
+public class ObjDatabaseObserverSimOne implements Observer {
 
     private ObjDatabase oDB;
     private int counterHersteller = 0;
@@ -11,9 +14,9 @@ public class ObjDatabaseObserverSimOne implements Observer{
     public ObjDatabaseObserverSimOne(ObjDatabase oDB){
         this.oDB = oDB;
     }
-    @Override
-    public void update() {
 
+    @Override
+    public void update(Observable o, Object arg) {
         if(oDB.getHerstellerList().size() != counterHersteller){
             this.counterHersteller = oDB.getHerstellerList().size();
             System.out.println("Hersteller gesamt: " + counterHersteller);

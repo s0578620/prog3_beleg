@@ -1,6 +1,8 @@
 package GL;
 
-public class Hersteller implements vertrag.Hersteller {
+import java.io.Serializable;
+
+public class Hersteller implements vertrag.Hersteller, Serializable {
 
     private String name;
 

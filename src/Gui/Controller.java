@@ -1,6 +1,9 @@
 package Gui;
 
 import CLI.console;
+import Events.EventHandler;
+import Events.LoadFileEvent;
+import Events.SaveFileEvent;
 import GL.Hersteller;
 import GL.Obj;
 import Gui.Beans.AllergenBean;
@@ -15,28 +18,31 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import vertrag.Allergen;
+
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 
 public class Controller implements Initializable {
-    private CLI.console console;
-    private String input;
+
     @FXML private TextField commandField;
-    @FXML private Button buttonSubmit;
     @FXML private Label mode;
+    @FXML private TableView<ObjBean> tableObj;
     @FXML private TableColumn<ObjBean, Integer> fach;
-    @FXML private TableColumn<ObjBean, Date> inspektionsdatum;
+    @FXML private TableColumn<ObjBean, String> typ;
     @FXML private TableColumn<ObjBean, String> hersteller;
+    @FXML private TableColumn<ObjBean, Date> inspektionsdatum;
     @FXML private TableColumn<ObjBean, Duration> haltbarkeit;
-    @FXML private TableColumn<HerstellerBean, String> herstellerList;
     @FXML private TableView<HerstellerBean> tableHersteller;
+    @FXML private TableColumn<HerstellerBean, String> herstellerList;
     @FXML private TableView<AllergenBean> tableAllergene;
     @FXML private TableColumn<AllergenBean, String> allergeneList;
-    @FXML private TableView<ObjBean> tableObj;
-    @FXML private TableColumn<ObjBean, String> typ;
 
-    private ObservableList<AllergenBean> content = FXCollections.observableArrayList(AllergenBean.extractor());
+    private CLI.console console;
+    private String input;
+    private EventHandler handler;
+
+    private ObservableList<AllergenBean> allergenObservableList = FXCollections.observableArrayList(AllergenBean.extractor());
     private ObservableList<ObjBean> objObservableList = FXCollections.observableArrayList(ObjBean.extractor());
     private ObservableList<HerstellerBean> herstellerObservableList = FXCollections.observableArrayList(HerstellerBean.extractor());
 
@@ -50,18 +56,14 @@ public class Controller implements Initializable {
         for (Obj o : objList){
             objObservableList.add(new ObjBean(o));
         }
-        content.clear();
+        allergenObservableList.clear();
         for (Allergen a : allergenList){
-            content.add(new AllergenBean(a));
+            allergenObservableList.add(new AllergenBean(a));
         }
-        //this.allergenObservableList = FXCollections.observableList(allergenList);
-        //tableAllergene.setItems(allergenObservableList);
-        //tableAllergene.refresh();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         tableHersteller.setItems(herstellerObservableList);
         this.herstellerList.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -72,7 +74,7 @@ public class Controller implements Initializable {
         this.inspektionsdatum.setCellValueFactory(new PropertyValueFactory<>("inspDate"));
         this.haltbarkeit.setCellValueFactory(new PropertyValueFactory<>("haltbarkeit"));
 
-        tableAllergene.setItems(content);
+        tableAllergene.setItems(allergenObservableList);
         this.allergeneList.setCellValueFactory(new PropertyValueFactory<>("allergenString"));
     }
 
@@ -82,6 +84,7 @@ public class Controller implements Initializable {
         commandField.clear();
     }
 
+
     public void handleCommandField(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER){
             this.input = commandField.getText();
@@ -89,12 +92,13 @@ public class Controller implements Initializable {
             commandField.clear();
             if(input.startsWith(":")) {
                 switch (input) {
-                    case ":c": mode.setText("C");
+                    case ":c": mode.setText("Create");
                         break;
-                    case ":d": mode.setText("D");
+                    case ":d": mode.setText("Delete");
                         break;
-                    case ":u": mode.setText("U");
+                    case ":u": mode.setText("Update");
                         break;
+                    case ":p": mode.setText("Persi");
                     default:
                         break;
                 }
@@ -102,7 +106,23 @@ public class Controller implements Initializable {
         }
     }
 
+    @FXML
+    void handleLoadJOS(javafx.event.ActionEvent actionEvent) {
+        LoadFileEvent event = new LoadFileEvent( "", "jos" );
+        this.handler.handle(event);
+    }
+
+    @FXML
+    void handleSaveJOS(javafx.event.ActionEvent actionEvent) {
+        SaveFileEvent event = new SaveFileEvent( "", "jos" );
+        this.handler.handle(event);
+    }
+
     public void setConsole(console console) {
         this.console = console;
+    }
+
+    public void setHandler(EventHandler handler) {
+        this.handler = handler;
     }
 }

@@ -2,6 +2,7 @@ package Gui;
 
 import CLI.console;
 import Events.EventHandler;
+import Events.IOEventListener;
 import Events.ODBEventListener;
 import GL.ObjDatabase;
 import javafx.application.Application;
@@ -29,9 +30,11 @@ public class Gui extends Application {
 
         EventHandler handler = new EventHandler();
         handler.add(new ODBEventListener(oDB));
+        handler.add(new IOEventListener(oDB));
         Controller controller = loader.getController();
+        controller.setHandler(handler);
         controller.setConsole(new console(handler));
-        oDB.attachObserver(new ObjDatabaseObserverGui(oDB,controller));
+        oDB.addObserver(new ObjDatabaseObserverGui(oDB,controller));
 
 
         stage.setTitle("Kuchenautomat");

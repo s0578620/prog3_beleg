@@ -14,7 +14,6 @@ public class AllergenBean {
     public AllergenBean(Allergen allergen){
         this.allergen = allergen;
         this.allergenString = new SimpleStringProperty(allergen.toString());
-
     }
 
     public static Callback<AllergenBean, Observable[]> extractor() {

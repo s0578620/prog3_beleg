@@ -1,28 +1,17 @@
 package GL;
-import util.Observable;
-import util.Observer;
 import vertrag.Allergen;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-public class ObjDatabase implements Observable {
+public class ObjDatabase extends Observable implements Serializable {
 
     private int capacityMax;
     private int capacityAct;
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
     private LinkedList<Obj> objList = new LinkedList<>();
     private LinkedList<Allergen> allergenList = new LinkedList<>();
-    private LinkedList<Observer> observerList = new LinkedList<>();
 
-    public void attachObserver(Observer o) { this.observerList.add(o); }
-    public void detachObserver(Observer o) { this.observerList.remove(o); }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer o : observerList) {
-            o.update();
-        }
-    }
 
     public ObjDatabase(int capacity){
         this.capacityMax = capacity;
@@ -38,6 +27,7 @@ public class ObjDatabase implements Observable {
             return false;
         }else {
             herstellerList.add(a);
+            setChanged();
             notifyObservers();
             return true;
         }
@@ -55,6 +45,7 @@ public class ObjDatabase implements Observable {
                 herstellerList.remove(h);
             }
         }
+        setChanged();
         notifyObservers();
     }
 
@@ -69,6 +60,7 @@ public class ObjDatabase implements Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
+                        setChanged();
                         notifyObservers();
                         return true;
                     }
@@ -77,6 +69,7 @@ public class ObjDatabase implements Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
+                        setChanged();
                         notifyObservers();
                         return true;
                     }
@@ -97,6 +90,7 @@ public class ObjDatabase implements Observable {
                         objList.add(setFachnummer(a));
                         readInAllergens(Allergene);
                         capacityAct += 1;
+                        setChanged();
                         notifyObservers();
                         return true;
                     }
@@ -109,6 +103,7 @@ public class ObjDatabase implements Observable {
     public boolean updateInsp(int Fachnummer){
         try {
             objList.get(Fachnummer).setInspektionsdatum(new Date());
+            setChanged();
             notifyObservers();
             return true;
         }catch (Exception e){
@@ -122,6 +117,7 @@ public class ObjDatabase implements Observable {
                 objList.stream().filter(obj -> obj.getFachnummer() > Fachnummer).forEach(o -> o.setFachnummer(o.getFachnummer() - 1));
                 capacityAct -= 1;
                 refreshAllergeneList();
+                setChanged();
                 notifyObservers();
                 return true;
         }else{
@@ -206,7 +202,7 @@ public class ObjDatabase implements Observable {
                 + "| Hersteller: " + o.getHersteller().getName()
                 + "| Allergene: " + format(o.getAllergene())
                 + "| Nährwert: " + o.getNaehrwert()
-                + "| Haltbarkeit: " + o.getHaltbarkeit().toMinutes();       // TODO CHECKPOINT HALTBARKEIT DARSTELLUNG
+                + "| Haltbarkeit: " + o.getHaltbarkeit().toMinutes();
     }
 
     public LinkedList<Hersteller> getHerstellerList() {
@@ -219,5 +215,18 @@ public class ObjDatabase implements Observable {
 
     public LinkedList<Allergen> getAllergenList() {
         return allergenList;
+    }
+
+    public void switchObjDatabase(ObjDatabase db) {
+        try {
+            this.herstellerList = db.getHerstellerList();
+            this.objList = db.getObjList();
+            this.allergenList = db.getAllergenList();
+            this.capacityMax = db.getCapacityMax();
+            setChanged();
+            notifyObservers();
+        } finally {
+
+        }
     }
 }

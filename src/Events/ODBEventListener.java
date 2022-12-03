@@ -52,6 +52,14 @@ public class ODBEventListener implements EventListener{ // TODO -> Refactor to 1
                 List<String> showlist2 = this.oDB.showKuchen(((ShowKuchenTypEvent)event).getTyp());
                 showlist2.forEach(System.out::println);
                 break;
+            case "show Allergene i":
+                List<String> showlist3 = this.oDB.showAllergene(true);
+                showlist3.forEach(System.out::println);
+                break;
+            case "show Allergene e":
+                List<String> showlist4 = this.oDB.showAllergene(false);
+                showlist4.forEach(System.out::println);
+                break;
             case "update Inspektionsdatum":
                 this.oDB.updateInsp(((UpdateInspEvent)event).getFachnummer());
                 break;

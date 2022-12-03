@@ -37,6 +37,9 @@ public class console {
                             this.mode = 'u';        // update mode
                             write("entered update mode");
                             break;
+                        case ":p":
+                            this.mode = 'p';
+                            write("entered persistenz mode");
                         default:
                             write(help);
                             break;
@@ -67,6 +70,8 @@ public class console {
                 case ":u":
                     this.mode = 'u';
                     break;
+                case ":p":
+                    this.mode = 'p';
                 default:
                     break;
             }
@@ -92,6 +97,20 @@ public class console {
                 return showEO(input);
             case 'u':
                 return updateEO(input);
+            case 'p':
+                return persistenzEO(input);
+            default:
+                return null;
+        }
+    }
+
+    private EventObject persistenzEO(String input) {
+        String[] inputList = input.split(" ");
+        switch (input) {
+            case "saveJOS":
+                return new SaveFileEvent(this, "jos");
+            case "loadJOS":
+                return new LoadFileEvent(this, "jos");
             default:
                 return null;
         }
@@ -145,6 +164,13 @@ public class console {
                     return new ShowKuchenTypEvent(inputList[0],inputList[0],inputList[1]);
                 }else {
                     return new ShowKuchenEvent(input,input);
+                }
+            case "allergene":       // TODO NEED TEST
+                switch (inputList[1]){
+                    case "i":
+                        return new ShowAllergeneEventInclusive(inputList[0],inputList[0]);
+                    case "e":
+                        return new ShowAllergeneEventExclusive(inputList[0],inputList[0]);
                 }
             default:
                 write("Invalid Command");

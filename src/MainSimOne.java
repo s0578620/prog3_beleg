@@ -11,7 +11,7 @@ public class MainSimOne {
     public static void main(String[] args) {
 
         ObjDatabase o = new ObjDatabase(10);
-        o.attachObserver(new ObjDatabaseObserverSimOne(o));
+        o.addObserver(new ObjDatabaseObserverSimOne(o));
         Lock lock = new ReentrantLock();
 
 

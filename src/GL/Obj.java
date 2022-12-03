@@ -1,12 +1,14 @@
 package GL;
 import vertrag.*;
 import vertrag.Hersteller;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Date;
 
-public class Obj implements Kuchen,Verkaufsobjekt {
+public class Obj implements Kuchen,Verkaufsobjekt, Serializable {
 
     private final String kuchentyp;
     private final Hersteller hersteller;
