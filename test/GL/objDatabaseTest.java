@@ -7,6 +7,8 @@ import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class objDatabaseTest {
@@ -127,7 +129,6 @@ class objDatabaseTest {
 
     @Test
     void removeObjSizeTest() {
-
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.removeObj(0);
@@ -175,9 +176,16 @@ class objDatabaseTest {
     }
 
     @Test
-    void showAllergene(){
+    void showAllergeneInclusive(){
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
-        assertEquals(2,o.showAllergene(false).size());
+        assertEquals(2,o.showAllergene(true).size());
+    }
+    @Test
+    void showAllergeneExclusive(){
+        o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
+
+        List<String> showlist = o.showAllergene(false);
+        showlist.forEach(System.out::println);
     }
 }

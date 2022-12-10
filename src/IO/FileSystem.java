@@ -1,54 +1,56 @@
 package IO;
 
+
 import GL.ObjDatabase;
+import Gui.Beans.ContentBeanFinal;
 
 import java.beans.XMLDecoder;
+
 import java.beans.XMLEncoder;
 import java.io.*;
+
 
 public class FileSystem {
 
     private ObjDatabase oDB;
     private String jos = "oDB.jos";
-    private String jbp = "oDB.jbp";
+    private String jbp = "oDB.xml";
 
     public FileSystem(ObjDatabase oDB){
         this.oDB = oDB;
     }
 
-    public FileOutputStream getWriteStream(String path) throws IOException {
-        File file = new File(path);
+    public FileOutputStream getWriteStream(String filename) throws IOException {
+        File file = new File(filename);
         if (!file.exists()) {
             file.createNewFile();
         }
-        return new FileOutputStream(path);
+        return new FileOutputStream(filename);
     }
 
-    public FileInputStream getReadStream(String path) throws FileNotFoundException, IOException {
-        File file = new File(path);
+    public FileInputStream getReadStream(String filename) throws FileNotFoundException, IOException {
+        File file = new File(filename);
         if (!file.exists()) {
-            throw new FileNotFoundException("can't read file");
+            throw new FileNotFoundException();
         }
-        return new FileInputStream(path);
+        return new FileInputStream(filename);
     }
 
     private void saveJOS() throws Exception {
-        FileOutputStream out = getWriteStream( this.jos );
-        ObjectOutputStream stream = new ObjectOutputStream( out );
+        ObjectOutputStream stream = new ObjectOutputStream(getWriteStream(this.jos));
         stream.writeObject(oDB);
         stream.close();
     }
     private ObjDatabase loadJOS() throws Exception {
-        FileInputStream in = getReadStream( this.jos );
-        ObjectInputStream stream = new ObjectInputStream( in );
+        ObjectInputStream stream = new ObjectInputStream(getReadStream(this.jos));
         ObjDatabase oDB = (ObjDatabase) stream.readObject();
         stream.close();
         return oDB;
     }
 
-    public String saveDB(String protocol) {
+    public String saveDB(String filename) {
         try {
-            switch (protocol) {
+            switch (filename) {
                 case "jos" -> {
                     saveJOS();
                 }
@@ -56,21 +58,19 @@ public class FileSystem {
                     saveJBP();
                 }
                 default -> {
-                    return "invalid protocol for writing db: " + protocol;
+                    return "invalid choice";
                 }
             }
             return "db saved";
         } catch (Exception e) {
-            System.err.println("io error");
-            e.printStackTrace();
-            return "io error";
+            return "save jos/jbp error";
         }
     }
 
-    public String loadDB(String protocol) {
+    public String loadDB(String filename) {
         try {
             ObjDatabase db;
-            switch (protocol) {
+            switch (filename) {
                 case "jos" -> {
                     db = loadJOS();
                 }
@@ -78,16 +78,15 @@ public class FileSystem {
                     db = loadJBP();
                 }
                 default -> {
-                    return "invalid protocol for writing db: " + protocol;
+                    return "invalid choice";
                 }
             }
             this.oDB.switchObjDatabase(db);
             this.oDB.notifyObservers();
             return "db loaded";
         } catch ( Exception e ) {
-            System.err.println("io error");
-            e.printStackTrace();
-            return "io error";
+
+            return "load jos/jbp error";
         }
     }
 
@@ -100,9 +99,11 @@ public class FileSystem {
     private void saveJBP() throws Exception {
         FileOutputStream out = getWriteStream( this.jbp );
         XMLEncoder encoder = new XMLEncoder( new BufferedOutputStream( out ) );
-        // TODO JBP ????
-        encoder.writeObject(oDB);
+
+        ContentBeanFinal content = new ContentBeanFinal(oDB.getHerstellerList(), oDB.getObjList(), oDB.getAllergenList());
+        encoder.writeObject(content);
     }
+
 
 
 

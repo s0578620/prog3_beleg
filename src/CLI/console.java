@@ -106,11 +106,11 @@ public class console {
 
     private EventObject persistenzEO(String input) {
         String[] inputList = input.split(" ");
-        switch (input) {
-            case "saveJOS":
-                return new SaveFileEvent(this, "jos");
-            case "loadJOS":
-                return new LoadFileEvent(this, "jos");
+        switch (inputList[0]) {
+            case "save":
+                return new SaveFileEvent(this, inputList[1]);
+            case "load":
+                return new LoadFileEvent(this, inputList[1]);
             default:
                 return null;
         }

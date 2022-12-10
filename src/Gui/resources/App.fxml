@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
@@ -41,7 +40,6 @@
    <bottom>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="13.0" prefWidth="600.0" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mode:" wrappingWidth="41.52277755737305" />

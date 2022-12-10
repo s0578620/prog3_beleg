@@ -17,6 +17,9 @@ public class ObjDatabase extends Observable implements Serializable {
         this.capacityMax = capacity;
     }
 
+    public ObjDatabase(){
+    }
+
     public int getCapacityMax() {
         return capacityMax;
     }
@@ -228,5 +231,10 @@ public class ObjDatabase extends Observable implements Serializable {
         } finally {
 
         }
+    }
+
+
+    public ObjDatabase getObjDatabase() {
+        return this;
     }
 }

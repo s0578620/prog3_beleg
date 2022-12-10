@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import util.ObjDatabaseObserverGui;
 
-
 public class Gui extends Application {
 
     public void run(){
