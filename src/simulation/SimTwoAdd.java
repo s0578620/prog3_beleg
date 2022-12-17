@@ -2,12 +2,13 @@ package simulation;
 
 import GL.ObjDatabase;
 import vertrag.Allergen;
+
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-public class SimAdd implements Runnable{
+public class SimTwoAdd implements Runnable{
 
     private final Lock lock;
     private final ObjDatabase oDB;
@@ -20,7 +21,7 @@ public class SimAdd implements Runnable{
     private final String Topping = "Sahne";
 
 
-    public SimAdd(ObjDatabase oDB, Lock lock){
+    public SimTwoAdd(ObjDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
         oDB.addHersteller(Hersteller);
@@ -29,12 +30,12 @@ public class SimAdd implements Runnable{
     @Override
     public void run() {
         Random rnd = new Random();
-            do {
-              synchronized (lock) {
-                  try {
-                      oDB.addObj(typ[rnd.nextInt(typ.length)], Hersteller, Preis, naehrwert[rnd.nextInt(naehrwert.length)], Haltbarkeit, list, Topping);
-                  } catch (Exception e) {}
-              }
-            } while (true);
-      }
+        do {
+            synchronized (lock) {
+                try {
+                    oDB.addObj(typ[rnd.nextInt(typ.length)], Hersteller, Preis, naehrwert[rnd.nextInt(naehrwert.length)], Haltbarkeit, list, Topping);
+                } catch (Exception e) {}
+            }
+        } while (true);
+    }
 }

@@ -30,13 +30,13 @@ public class ObjDatabaseAllergeneObserverTest {
         allergeneTestList = new LinkedList<>();
         allergeneTestList.add(Allergen.valueOf("Erdnuss"));
         oDB.readInAllergens(allergeneTestList);
-        // Create a new ObjDatabaseAllergeneObserver object and pass the ObjDatabase object to it
+
         oDBAO = new ObjDatabaseAllergeneObserver(oDB);
     }
 
     @Test
     public void testUpdate() {      // Todo ask
-        // Add a new allergen to the ObjDatabase object and call the update method on the observer
+
         oDB.readInAllergens(allergeneTestList);
         allergeneTestList.add(Allergen.valueOf("Gluten"));
         oDB.readInAllergens(allergeneTestList);

@@ -100,7 +100,10 @@ public class FileSystem {
         FileOutputStream out = getWriteStream( this.jbp );
         XMLEncoder encoder = new XMLEncoder( new BufferedOutputStream( out ) );
 
-        ContentBeanFinal content = new ContentBeanFinal(oDB.getHerstellerList(), oDB.getObjList(), oDB.getAllergenList());
+        ContentBeanFinal content = new ContentBeanFinal();
+        content.herstellerList = oDB.getHerstellerList();
+        content.objList = oDB.getObjList();
+        content.allergenList = oDB.getAllergenList();
         encoder.writeObject(content);
     }
 

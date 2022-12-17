@@ -5,14 +5,14 @@ import GL.ObjDatabase;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
-public class SimRemove implements Runnable{
+public class SimOneRemove implements Runnable{
 
     private Random rnd;
     private final Lock lock;
     private final ObjDatabase oDB;
 
 
-    public SimRemove(ObjDatabase oDB, Lock lock){
+    public SimOneRemove(ObjDatabase oDB, Lock lock){
         this.oDB = oDB;
         this.lock = lock;
         this.rnd = new Random();

@@ -1,6 +1,6 @@
 import GL.ObjDatabase;
-import simulation.SimAdd;
-import simulation.SimRemove;
+import simulation.SimOneAdd;
+import simulation.SimOneRemove;
 import util.ObjDatabaseObserverSimOne;
 
 import java.util.concurrent.locks.Lock;
@@ -15,11 +15,12 @@ public class MainSimOne {
         Lock lock = new ReentrantLock();
 
 
-        SimAdd s = new SimAdd(o,lock);
-        SimRemove sr = new SimRemove(o, lock);
+        SimOneAdd s = new SimOneAdd(o,lock);
+        SimOneRemove sr = new SimOneRemove(o, lock);
         Thread thread = new Thread(s);
         Thread threadR = new Thread(sr);
         thread.start();
         threadR.start();
     }
 }
+

@@ -22,7 +22,7 @@ Zulässige Quellen sind suchmaschinen-indizierte Internetseiten. Werden mehr als
 - [x] Trennung zwischen Test- und Produktiv-Code
 - [x] main-Methoden nur im default package
 - [x] ausführbar
-- [x] Speichern und Laden der Geschäftslogik
+  - [x] Speichern und Laden der Geschäftslogik *HOW TO: im :p mode über "save jos / load jos" oder die Menuitems in unter File nutzen*
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
 - [ ] Speichern und Laden der Geschäftslogik mit JOS und JBP
