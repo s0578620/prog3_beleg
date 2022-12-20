@@ -171,6 +171,7 @@ public class ObjDatabase extends Observable implements Serializable {
                     showList.add(a.name());
                 }
             }
+
             return showList;
         }
     }
