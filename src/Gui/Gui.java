@@ -2,11 +2,13 @@ package Gui;
 
 import CLI.console;
 import Routing.Events.*;
+import Routing.EventsReverse.ReverseShowAllergeneIncEvent;
 import Routing.EventsReverse.ReverseShowHerstellerEvent;
 import Routing.EventsReverse.ReverseShowKuchenEvent;
 import Routing.EventsReverse.ReverseShowKuchenTypEvent;
-import Routing.Handler.AddHerstellerHandler;
+import Routing.Handler.Handler;
 import Routing.Listener.Listener.*;
+import Routing.Listener.ListenerReverse.ReverseShowAllergeneIncListener;
 import Routing.Listener.ListenerReverse.ReverseShowHerstellerListener;
 import Routing.Listener.ListenerReverse.ReverseShowKuchenListener;
 import GL.ObjDatabase;
@@ -33,14 +35,15 @@ public class Gui extends Application {
         ObjDatabase oDB = new ObjDatabase(10);  // TODO Capacity still hardcoded :/
 
 
-        AddHerstellerHandler handlerReverse = new AddHerstellerHandler();
+        Handler handlerReverse = new Handler();
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
         ReverseShowKuchenTypListener listenerReverseShowKuchenTyp = new ReverseShowKuchenTypListener();
         ReverseShowHerstellerListener listenerReverseShowHersteller = new ReverseShowHerstellerListener();
+        ReverseShowAllergeneIncListener listenerReverseShowAllergeneInc = new ReverseShowAllergeneIncListener();
         handlerReverse.addListener(ReverseShowKuchenEvent.class,listenerReverseShowKuchen);
         handlerReverse.addListener(ReverseShowKuchenTypEvent.class,listenerReverseShowKuchenTyp);
         handlerReverse.addListener(ReverseShowHerstellerEvent.class,listenerReverseShowHersteller);
-
+        handlerReverse.addListener(ReverseShowAllergeneIncEvent.class,listenerReverseShowAllergeneInc);
 
         AddHerstellerListener listenerHersteller = new AddHerstellerListener(oDB);
         AddKuchenListener listenerKuchen = new AddKuchenListener(oDB);
@@ -53,10 +56,11 @@ public class Gui extends Application {
         ShowKuchenListener listenerShowKuchen = new ShowKuchenListener(oDB,handlerReverse);
         ShowKuchenTypListener listenerShowKuchenTyp = new ShowKuchenTypListener(oDB,handlerReverse);
         ShowHerstellerListener listenerShowHersteller = new ShowHerstellerListener(oDB,handlerReverse);
+        ShowAllergeneIncListener listenerShowAllergeneInc = new ShowAllergeneIncListener(oDB,handlerReverse);
 
         UpdateInspListener listenerUpdateInsp = new UpdateInspListener(oDB);
 
-        AddHerstellerHandler handler = new AddHerstellerHandler();
+        Handler handler = new Handler();
         handler.addListener(AddHerstellerEvent.class,listenerHersteller);
         handler.addListener(AddKuchenEvent.class,listenerKuchen);
         handler.addListener(AddTorteEvent.class,listenerTorte);
@@ -68,6 +72,7 @@ public class Gui extends Application {
         handler.addListener(ShowKuchenEvent.class,listenerShowKuchen);
         handler.addListener(ShowKuchenTypEvent.class,listenerShowKuchenTyp);
         handler.addListener(ShowHerstellerEvent.class,listenerShowHersteller);
+        handler.addListener(ShowAllergeneEventInclusive.class,listenerShowAllergeneInc);
 
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 

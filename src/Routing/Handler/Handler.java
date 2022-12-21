@@ -3,7 +3,7 @@ package Routing.Handler;
 import Routing.Listener.Interfaces.EventListener;
 import java.util.*;
 
-public class AddHerstellerHandler {
+public class Handler {
 
     private Map<Class<? extends EventObject>, List<Routing.Listener.Interfaces.EventListener>> listeners = new HashMap<>();
 

@@ -1,7 +1,7 @@
 package CLI;
 
 import Routing.Events.*;
-import Routing.Handler.AddHerstellerHandler;
+import Routing.Handler.Handler;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.EventObject;
@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class console {
-    private AddHerstellerHandler handler;
+    private Handler handler;
     private char mode;
-    public console(AddHerstellerHandler handler){
+    public console(Handler handler){
         this.handler = handler;
     }
 

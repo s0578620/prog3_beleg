@@ -3,14 +3,14 @@ package Routing.Listener.Listener;
 import GL.ObjDatabase;
 import Routing.Events.ShowHerstellerEvent;
 import Routing.EventsReverse.ReverseShowHerstellerEvent;
-import Routing.Handler.AddHerstellerHandler;
+import Routing.Handler.Handler;
 
 public class ShowHerstellerListener implements Routing.Listener.Interfaces.ShowHerstellerListener {
 
     private ObjDatabase oDB;
-    private AddHerstellerHandler handler;
+    private Handler handler;
 
-    public ShowHerstellerListener(ObjDatabase oDB, AddHerstellerHandler handler){
+    public ShowHerstellerListener(ObjDatabase oDB, Handler handler){
         this.oDB = oDB;
         this.handler = handler;
     }

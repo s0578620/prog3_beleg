@@ -1,4 +1,7 @@
 package Routing.Listener.Interfaces;
 
-public interface ShowAllergeneIncListener {
+import Routing.Events.ShowAllergeneEventInclusive;
+
+public interface ShowAllergeneIncListener extends EventListener<ShowAllergeneEventInclusive>{
+    void onEvent(ShowAllergeneEventInclusive event);
 }

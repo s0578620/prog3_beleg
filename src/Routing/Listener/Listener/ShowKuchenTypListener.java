@@ -2,18 +2,16 @@ package Routing.Listener.Listener;
 
 
 import GL.ObjDatabase;
-import Routing.Events.ShowKuchenEvent;
 import Routing.Events.ShowKuchenTypEvent;
 import Routing.EventsReverse.ReverseShowKuchenEvent;
-import Routing.Handler.AddHerstellerHandler;
-import Routing.Listener.Interfaces.ShowKuchenListener;
+import Routing.Handler.Handler;
 
 public class ShowKuchenTypListener implements Routing.Listener.Interfaces.ShowKuchenTypListener {
 
     private ObjDatabase oDB;
-    private AddHerstellerHandler handler;
+    private Handler handler;
 
-    public ShowKuchenTypListener(ObjDatabase oDB, AddHerstellerHandler handler){
+    public ShowKuchenTypListener(ObjDatabase oDB, Handler handler){
         this.oDB = oDB;
         this.handler = handler;
     }
