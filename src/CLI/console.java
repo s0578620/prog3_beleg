@@ -10,9 +10,12 @@ import java.util.Scanner;
 
 public class console {
     private Handler handler;
-    private char mode;
     public console(Handler handler){
         this.handler = handler;
+    }
+    private Mode mode;
+    public enum Mode {
+        CREATE, DELETE, SHOW, UPDATE, PERSISTENCE;
     }
 
     public void run(){
@@ -24,19 +27,19 @@ public class console {
                 String input = s.nextLine();
                 if(input.startsWith(":") || input.startsWith("?") || input.startsWith("help")){
                     switch (input){
-                        case ":c": this.mode = 'c'; // create mode
+                        case ":c": this.mode = Mode.CREATE;
                             write("*** You are now in: create mode ***\n");
                             break;
-                        case ":d": this.mode = 'd'; // delete mode
+                        case ":d": this.mode = Mode.DELETE;
                             write("*** You are now in: delete mode ***\n");
                             break;
-                        case ":r": this.mode = 'r'; // show mode
+                        case ":r": this.mode = Mode.SHOW;
                             write("*** You are now in: show mode ***\n");
                             break;
-                        case ":u": this.mode = 'u';        // update mode
+                        case ":u": this.mode = Mode.UPDATE;
                             write("*** You are now in: update mode ***\n");
                             break;
-                        case ":p": this.mode = 'p';
+                        case ":p": this.mode = Mode.PERSISTENCE;
                             write("*** You are now in: persistence mode ***\n");
                         default:
                             write(getCorrectHelpMenu());
@@ -65,11 +68,11 @@ public class console {
         final String helpUPDATE = "*** Help Menu *** \n [Fachnummer] - update Inspektionsdatum\n";
         final String helpPERSISTENCE = "*** Help Menu *** \n safe [jos/jbp] - safe via jos/jbp\n load [jos/jbp] - load via jos/jbp\n";
         switch (mode){
-            case 'c': return helpCREATE;
-            case 'd': return helpDELETE;
-            case 'r': return helpSHOW;
-            case 'u': return helpUPDATE;
-            case 'p': return helpPERSISTENCE;
+            case CREATE: return helpCREATE;
+            case DELETE: return helpDELETE;
+            case SHOW: return helpSHOW;
+            case UPDATE: return helpUPDATE;
+            case PERSISTENCE: return helpPERSISTENCE;
             default: return help;
 
         }
@@ -78,16 +81,16 @@ public class console {
         if(input.startsWith(":")) {
             switch (input) {
                 case ":c":
-                    this.mode = 'c';
+                    this.mode = Mode.CREATE;
                     break;
                 case ":d":
-                    this.mode = 'd';
+                    this.mode = Mode.DELETE;
                     break;
                 case ":u":
-                    this.mode = 'u';
+                    this.mode = Mode.UPDATE;
                     break;
                 case ":p":
-                    this.mode = 'p';
+                    this.mode = Mode.PERSISTENCE;
                 default:
                     break;
             }
@@ -105,15 +108,15 @@ public class console {
 
     private EventObject getCorrectEO(String input){
         switch ( this.mode ) {
-            case 'c':
+            case CREATE:
                 return createEO(input);
-            case 'd':
+            case DELETE:
                 return deleteEO(input);
-            case 'r':
+            case SHOW:
                 return showEO(input);
-            case 'u':
+            case UPDATE:
                 return updateEO(input);
-            case 'p':
+            case PERSISTENCE:
                 return persistenzEO(input);
             default:
                 return null;
@@ -153,7 +156,6 @@ public class console {
                 }else {
                     return new AddKuchenEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6]);
                 }
-
             default:
                 write("Invalid Command");
                 return null;
@@ -181,7 +183,7 @@ public class console {
                 }else {
                     return new ShowKuchenEvent(input);
                 }
-            case "allergene":       // TODO NEED TEST
+            case "allergene":
                 switch (inputList[1]){
                     case "i":
                         return new ShowAllergeneEventInclusive(inputList[0],inputList[0]);
