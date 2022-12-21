@@ -1,4 +1,8 @@
 package Routing.Listener.InterfacesReverse;
 
-public interface ReverseShowAllergeneExcListener {
+import Routing.EventsReverse.ReverseShowAllergeneExcEvent;
+import Routing.Listener.Interfaces.EventListener;
+
+public interface ReverseShowAllergeneExcListener extends EventListener<ReverseShowAllergeneExcEvent> {
+    void onEvent(ReverseShowAllergeneExcEvent event);
 }

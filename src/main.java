@@ -1,15 +1,9 @@
 import CLI.cli;
 import Routing.Events.*;
-import Routing.EventsReverse.ReverseShowAllergeneIncEvent;
-import Routing.EventsReverse.ReverseShowHerstellerEvent;
-import Routing.EventsReverse.ReverseShowKuchenEvent;
-import Routing.EventsReverse.ReverseShowKuchenTypEvent;
+import Routing.EventsReverse.*;
 import Routing.Handler.Handler;
 import Routing.Listener.Listener.*;
-import Routing.Listener.ListenerReverse.ReverseShowAllergeneIncListener;
-import Routing.Listener.ListenerReverse.ReverseShowHerstellerListener;
-import Routing.Listener.ListenerReverse.ReverseShowKuchenListener;
-import Routing.Listener.ListenerReverse.ReverseShowKuchenTypListener;
+import Routing.Listener.ListenerReverse.*;
 import util.ObjDatabaseAllergeneObserver;
 import util.ObjDatabaseObserver;
 import GL.ObjDatabase;
@@ -22,15 +16,18 @@ public class main {
         db.addObserver(new ObjDatabaseAllergeneObserver(db));   // TODO NEED TEST
 
 
-        Handler handlerReverse = new Handler();
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
         ReverseShowKuchenTypListener listenerReverseShowKuchenTyp = new ReverseShowKuchenTypListener();
         ReverseShowHerstellerListener listenerReverseShowHersteller = new ReverseShowHerstellerListener();
         ReverseShowAllergeneIncListener listenerReverseShowAllergeneInc = new ReverseShowAllergeneIncListener();
+        ReverseShowAllergeneExcListener listenerReverseShowAllergeneExc = new ReverseShowAllergeneExcListener();
+
+        Handler handlerReverse = new Handler();
         handlerReverse.addListener(ReverseShowKuchenEvent.class,listenerReverseShowKuchen);
         handlerReverse.addListener(ReverseShowKuchenTypEvent.class,listenerReverseShowKuchenTyp);
         handlerReverse.addListener(ReverseShowHerstellerEvent.class,listenerReverseShowHersteller);
         handlerReverse.addListener(ReverseShowAllergeneIncEvent.class,listenerReverseShowAllergeneInc);
+        handlerReverse.addListener(ReverseShowAllergeneExcEvent.class,listenerReverseShowAllergeneExc);
 
         AddHerstellerListener listenerHersteller = new AddHerstellerListener(db);
         AddKuchenListener listenerKuchen = new AddKuchenListener(db);
@@ -39,12 +36,11 @@ public class main {
         IOSafeFileListener listenerSafe = new IOSafeFileListener(db);
         RemoveHerstellerListener listenerRemoveHersteller = new RemoveHerstellerListener(db);
         RemoveKuchenListener listenerRemoveKuchen = new RemoveKuchenListener(db);
-
         ShowKuchenListener listenerShowKuchen = new ShowKuchenListener(db,handlerReverse);
         ShowKuchenTypListener listenerShowKuchenTyp = new ShowKuchenTypListener(db,handlerReverse);
         ShowHerstellerListener listenerShowHersteller = new ShowHerstellerListener(db,handlerReverse);
         ShowAllergeneIncListener listenerShowAllergeneInc = new ShowAllergeneIncListener(db,handlerReverse);
-
+        ShowAllergeneExcListener listenerShowAllergeneExc = new ShowAllergeneExcListener(db,handlerReverse);
         UpdateInspListener listenerUpdateInsp = new UpdateInspListener(db);
 
         Handler handler = new Handler();
@@ -55,12 +51,11 @@ public class main {
         handler.addListener(SaveFileEvent.class,listenerSafe);
         handler.addListener(RemoveHerstellerEvent.class,listenerRemoveHersteller);
         handler.addListener(RemoveKuchenEvent.class,listenerRemoveKuchen);
-
         handler.addListener(ShowKuchenEvent.class,listenerShowKuchen);
         handler.addListener(ShowKuchenTypEvent.class,listenerShowKuchenTyp);
         handler.addListener(ShowHerstellerEvent.class,listenerShowHersteller);
         handler.addListener(ShowAllergeneEventInclusive.class,listenerShowAllergeneInc);
-
+        handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
         cli c = new cli(handler);
