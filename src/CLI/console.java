@@ -18,31 +18,28 @@ public class console {
     public void run(){
         final String topic = "Prog 3 Beleg - Kuchenautomat - Henrik Jeschkowski 578620\n" +
                                 "********************************************************";
-        final String help = "*Help Menu* \n :c - Create mode\n :d - Delete mode\n :r - Show mode";
         try (Scanner s = new Scanner(System.in)){
             do{
                 write(topic);
                 String input = s.nextLine();
-                if(input.startsWith(":")){
+                if(input.startsWith(":") || input.startsWith("?") || input.startsWith("help")){
                     switch (input){
                         case ":c": this.mode = 'c'; // create mode
-                            write("entered create mode");
+                            write("*** You are now in: create mode ***\n");
                             break;
                         case ":d": this.mode = 'd'; // delete mode
-                            write("entered delete mode");
+                            write("*** You are now in: delete mode ***\n");
                             break;
                         case ":r": this.mode = 'r'; // show mode
-                            write("entered show mode");
+                            write("*** You are now in: show mode ***\n");
                             break;
-                        case ":u":
-                            this.mode = 'u';        // update mode
-                            write("entered update mode");
+                        case ":u": this.mode = 'u';        // update mode
+                            write("*** You are now in: update mode ***\n");
                             break;
-                        case ":p":
-                            this.mode = 'p';
-                            write("entered persistenz mode");
+                        case ":p": this.mode = 'p';
+                            write("*** You are now in: persistence mode ***\n");
                         default:
-                            write(help);
+                            write(getCorrectHelpMenu());
                             break;
                     }
                 } else {
@@ -58,7 +55,25 @@ public class console {
             } while(true);
         }
     }
+    public String getCorrectHelpMenu(){
+        final String help = "*** Help Menu *** \n :c - Create mode\n :d - Delete mode\n :r - Show mode\n :p - Persistence mode\n";
+        final String helpCREATE = "*** Help Menu *** \n" +
+                " [Herstellername] - add Hersteller\n " +
+                "[Kuchen-Typ] [Herstellername] [Preis] [Nährwert] [Haltbarkeit] [kommaseparierte Allergene, einzelnes Komma für keine] [[Obstsorte]] [[Kremsorte]] - add Kuchen\n";
+        final String helpDELETE = "*** Help Menu *** \n [Herstellername] - delete Hersteller\n [Fachnummer] - delete cake\n";
+        final String helpSHOW = "*** Help Menu *** \n hersteller - show Hersteller (with Cake count)\n kuchen [[Typ]] - show Kuchen (-typ)\n allergene [i/e] - show Allergene (i = Inclusive / e = Exclusive)\n";
+        final String helpUPDATE = "*** Help Menu *** \n [Fachnummer] - update Inspektionsdatum\n";
+        final String helpPERSISTENCE = "*** Help Menu *** \n safe [jos/jbp] - safe via jos/jbp\n load [jos/jbp] - load via jos/jbp\n";
+        switch (mode){
+            case 'c': return helpCREATE;
+            case 'd': return helpDELETE;
+            case 'r': return helpSHOW;
+            case 'u': return helpUPDATE;
+            case 'p': return helpPERSISTENCE;
+            default: return help;
 
+        }
+    }
     public void execController(String input){
         if(input.startsWith(":")) {
             switch (input) {
