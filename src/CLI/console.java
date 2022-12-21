@@ -74,9 +74,9 @@ public class console {
             case UPDATE: return helpUPDATE;
             case PERSISTENCE: return helpPERSISTENCE;
             default: return help;
-
         }
     }
+
     public void execController(String input){
         if(input.startsWith(":")) {
             switch (input) {

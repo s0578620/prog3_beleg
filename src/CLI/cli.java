@@ -16,5 +16,4 @@ public class cli {
             new console(handler).run();
         }
     }
-
 }

@@ -13,7 +13,7 @@ public class main {
 
         ObjDatabase db = new ObjDatabase(10);
         db.addObserver(new ObjDatabaseObserver(db));
-        db.addObserver(new ObjDatabaseAllergeneObserver(db));   // TODO NEED TEST
+        db.addObserver(new ObjDatabaseAllergeneObserver(db));
 
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
