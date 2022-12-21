@@ -2,6 +2,7 @@ package CLI;
 
 import Routing.Events.*;
 import Routing.Handler.Handler;
+import net.Client;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.EventObject;
@@ -14,6 +15,12 @@ public class console {
         this.handler = handler;
     }
     private Mode mode;
+    private Client client;
+
+    public console(Client client) {
+        this.client = client;
+    }
+
     public enum Mode {
         CREATE, DELETE, SHOW, UPDATE, PERSISTENCE;
     }

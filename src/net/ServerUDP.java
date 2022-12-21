@@ -1,7 +1,6 @@
 package net;
 
-import Events.EventHandler;
-
+import Routing.Handler.Handler;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,10 +10,10 @@ import java.util.EventObject;
 
 public class ServerUDP implements Server{
 
-    private EventHandler handler;
+    private Handler handler;
     private DatagramSocket socket;
 
-    public ServerUDP(EventHandler handler){
+    public ServerUDP(Handler handler){
         this.handler = handler;
     }
 
@@ -30,7 +29,7 @@ public class ServerUDP implements Server{
                 ByteArrayInputStream byteInputStream = new ByteArrayInputStream(packetIn.getData());
                 ObjectInputStream objectInputStream = new ObjectInputStream(byteInputStream);
 
-                String responseString = null;
+                String responseString = "done";
                 try {
                     EventObject event = (EventObject) objectInputStream.readObject();
                     this.handleEvent(event);
