@@ -1,6 +1,7 @@
 package CLI;
 
-import Events.*;
+import Routing.Events.*;
+import Routing.Handler.AddHerstellerHandler;
 import vertrag.Allergen;
 import java.math.BigDecimal;
 import java.util.EventObject;
@@ -8,9 +9,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class console {
-    private EventHandler handler;
+    private AddHerstellerHandler handler;
     private char mode;
-    public console(EventHandler handler){
+    public console(AddHerstellerHandler handler){
         this.handler = handler;
     }
 
@@ -163,7 +164,7 @@ public class console {
                 if(inputList.length > 1){
                     return new ShowKuchenTypEvent(inputList[0],inputList[0],inputList[1]);
                 }else {
-                    return new ShowKuchenEvent(input,input);
+                    return new ShowKuchenEvent(input);
                 }
             case "allergene":       // TODO NEED TEST
                 switch (inputList[1]){

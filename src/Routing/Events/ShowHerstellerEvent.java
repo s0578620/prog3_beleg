@@ -1,12 +1,12 @@
-package Events;
+package Routing.Events;
 
 import java.util.EventObject;
 
-public class ShowAllergeneEventInclusive extends EventObject {
+public class ShowHerstellerEvent extends EventObject {
 
     private String txt;
 
-    public ShowAllergeneEventInclusive(Object source, String txt) {
+    public ShowHerstellerEvent(Object source, String txt) {
         super(source);
         this.txt = txt;
     }
@@ -15,8 +15,7 @@ public class ShowAllergeneEventInclusive extends EventObject {
         return txt;
     }
 
-
     public String toString() {
-        return "show Allergene i";
+        return "show Hersteller";
     }
 }

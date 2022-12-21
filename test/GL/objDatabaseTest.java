@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class objDatabaseTest {
+public class objDatabaseTest {
     private ObjDatabase o;
     private String Kuchentyp;
     private String Kuchentyp1;
@@ -28,7 +28,7 @@ class objDatabaseTest {
     private String Obsttorte;
 
     @BeforeEach
-    void setup(){
+    public void setup(){
         this.o = new ObjDatabase(10);
         this.Kuchentyp = "Kremkuchen";
         this.Kuchentyp1 = "Obstkuchen";
@@ -49,14 +49,14 @@ class objDatabaseTest {
     }
 
     @Test
-    void addHersteller() {
+    public void addHersteller() {
         o.addHersteller(Hersteller1);
 
         assertEquals(2,o.getHerstellerList().size());
     }
 
     @Test
-    void removeHersteller(){
+    public void removeHersteller(){
         o.removeHersteller(Hersteller);
         assertEquals(0,o.getHerstellerList().size());
     }

@@ -1,9 +1,10 @@
 package Gui;
 
 import CLI.console;
-import Events.EventHandler;
-import Events.LoadFileEvent;
-import Events.SaveFileEvent;
+//import Events.EventHandler;
+import Routing.Handler.AddHerstellerHandler;
+import Routing.Events.LoadFileEvent;
+import Routing.Events.SaveFileEvent;
 import GL.Hersteller;
 import GL.Obj;
 import Gui.Beans.AllergenBean;
@@ -40,7 +41,7 @@ public class Controller implements Initializable {
 
     private CLI.console console;
     private String input;
-    private EventHandler handler;
+    private AddHerstellerHandler handler;
 
     private ObservableList<AllergenBean> allergenObservableList = FXCollections.observableArrayList(AllergenBean.extractor());
     private ObservableList<ObjBean> objObservableList = FXCollections.observableArrayList(ObjBean.extractor());
@@ -122,7 +123,7 @@ public class Controller implements Initializable {
         this.console = console;
     }
 
-    public void setHandler(EventHandler handler) {
+    public void setHandler(AddHerstellerHandler handler) {
         this.handler = handler;
     }
 }

@@ -1,12 +1,13 @@
 package CLI;
 
-import Events.EventHandler;
+//import Events.EventHandler;
+import Routing.Handler.AddHerstellerHandler;
 
 public class cli {
 
-    private EventHandler handler;
+    private AddHerstellerHandler handler;
 
-    public cli(EventHandler handler){
+    public cli(AddHerstellerHandler handler){
         this.handler = handler;
     }
 

@@ -1,4 +1,4 @@
-package Events;
+package Routing.Events;
 
 import vertrag.Allergen;
 

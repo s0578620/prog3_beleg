@@ -1,4 +1,4 @@
-package Events;
+package Routing.Events;
 
 import java.util.EventObject;
 
@@ -14,7 +14,6 @@ public class AddHerstellerEvent extends EventObject {
     public String getHersteller() {
         return hersteller;
     }
-
 
     public String toString() {
         return "add Hersteller";

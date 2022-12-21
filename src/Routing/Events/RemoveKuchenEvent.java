@@ -1,18 +1,18 @@
-package Events;
+package Routing.Events;
 
 import java.util.EventObject;
 
-public class UpdateInspEvent extends EventObject {
+public class RemoveKuchenEvent extends EventObject {
 
     private int fachnummer;
 
-    public UpdateInspEvent(Object source, int fachnummer) {
+    public RemoveKuchenEvent(Object source, int fachnummer) {
         super(source);
         this.fachnummer = fachnummer;
     }
 
-    public String toString(){
-        return "update Inspektionsdatum";
+    public String toString() {
+        return "remove Kuchen";
     }
 
     public int getFachnummer() {
