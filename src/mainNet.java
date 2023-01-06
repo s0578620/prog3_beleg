@@ -45,7 +45,7 @@ public class mainNet {
         ShowHerstellerListener listenerShowHersteller = new ShowHerstellerListener(db,handlerReverse);
         ShowAllergeneIncListener listenerShowAllergeneInc = new ShowAllergeneIncListener(db,handlerReverse);
         ShowAllergeneExcListener listenerShowAllergeneExc = new ShowAllergeneExcListener(db,handlerReverse);
-        UpdateInspListener listenerUpdateInsp = new UpdateInspListener(db);
+        UpdateInspListener listenerUpdateInsp  = new UpdateInspListener(db);
 
         Handler handler = new Handler();
         handler.addListener(AddHerstellerEvent.class,listenerHersteller);

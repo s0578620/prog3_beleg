@@ -107,6 +107,8 @@ public class Controller implements Initializable {
         }
     }
 
+
+    // TODO MAYBE DELETE BUTTONS TO BE SAFE
     @FXML
     void handleLoadJOS(javafx.event.ActionEvent actionEvent) {
         LoadFileEvent event = new LoadFileEvent( "", "jos" );

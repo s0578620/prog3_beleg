@@ -24,8 +24,7 @@ public class Handler {
     }
 
     public <T extends EventObject> void handle(T event) {
-        //Class<T> eventType = (Class<T>) event.getClass();
-        Class<? extends EventObject> eventType = event.getClass();   // TODO ASK
+        Class<? extends EventObject> eventType = event.getClass();
         List<Routing.Listener.Interfaces.EventListener> eventListeners = listeners.get(eventType);
         if (eventListeners != null) {
             for (EventListener<T> listener : eventListeners) {

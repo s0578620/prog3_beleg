@@ -26,7 +26,7 @@ public class Gui extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/App.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
-        ObjDatabase oDB = new ObjDatabase(10);  // TODO Capacity still hardcoded :/
+        ObjDatabase oDB = new ObjDatabase(10);  // TODO CAPACITY FROM INPUT ARGS?
 
 
 

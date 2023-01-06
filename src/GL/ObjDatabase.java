@@ -39,7 +39,7 @@ public class ObjDatabase extends Observable implements Serializable {
     public void removeHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);
         for(Hersteller h : herstellerList){
-            if(h.getName().equals(a.getName())){    // TODO Wie Kuchen löschen
+            if(h.getName().equals(a.getName())){    // TODO WACTH FOR ERRORS (DELETE PROCESS IS WORKING)
 //                for(Obj o : objList){
 //                    if(o.getHersteller().getName().equals(h.getName())){
 //                        removeObj(o.getFachnummer());
@@ -191,7 +191,7 @@ public class ObjDatabase extends Observable implements Serializable {
         return o;
     }
 
-    public void readInAllergens(Collection<Allergen> Allergens){
+    public void readInAllergens(Collection<Allergen> Allergens){    // TODO SHOULD BE OKAY, INVALID ALLERGENE WONT BE ADDED
         for (Allergen a : Allergens) {
             if (allergenList.contains(a)) {
                 continue;
@@ -221,7 +221,7 @@ public class ObjDatabase extends Observable implements Serializable {
         return allergenList;
     }
 
-    public void switchObjDatabase(ObjDatabase db) {
+    public void switchObjDatabase(ObjDatabase db) {     // TODO WRITE TEST
         try {
             this.herstellerList = db.getHerstellerList();
             this.objList = db.getObjList();

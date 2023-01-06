@@ -10,8 +10,8 @@ public class ClientUDP implements Client{
     int serverPort;
 
     DatagramSocket socket;
-    public ClientUDP( int port ) {
-        this.serverPort = port;
+    public ClientUDP() {
+        this.serverPort = 5000;
         try {
             this.socket = new DatagramSocket();
         } catch ( SocketException e ) {
@@ -23,7 +23,7 @@ public class ClientUDP implements Client{
     public String sendEvent(EventObject event) {
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            ObjectOutputStream os = new ObjectOutputStream( out );
+            ObjectOutputStream os = new ObjectOutputStream(out);
             os.writeObject( event );
             os.flush();
             byte[] data = out.toByteArray();
@@ -37,6 +37,8 @@ public class ClientUDP implements Client{
             try {
                 this.socket.receive( incomingPacket );
                 String response = new String( incomingPacket.getData() ).trim();
+                System.out.println(response);
+
                 return response;
             } catch ( SocketTimeoutException e ) {} // no response, move on
         } catch ( Exception e ) { e.printStackTrace(); }

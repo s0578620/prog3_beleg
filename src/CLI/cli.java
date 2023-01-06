@@ -17,7 +17,7 @@ public class cli {
     }
 
     public void start(){
-        if(client == null){
+        if(client != null){
             new console(client).run();
         }else {
             new console(handler).run();

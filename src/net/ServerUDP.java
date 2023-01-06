@@ -28,7 +28,7 @@ public class ServerUDP implements Server{
 
                 ByteArrayInputStream byteInputStream = new ByteArrayInputStream(packetIn.getData());
                 ObjectInputStream objectInputStream = new ObjectInputStream(byteInputStream);
-
+                System.out.println("Packet angekommen");
                 String responseString = "done";
                 try {
                     EventObject event = (EventObject) objectInputStream.readObject();
@@ -36,7 +36,6 @@ public class ServerUDP implements Server{
                 }catch (Exception e){
                     responseString = "Invalid Command";
                 }
-
                 byte[] response = responseString.getBytes();
                 DatagramPacket packetOut = new DatagramPacket(response, response.length,packetIn.getAddress(),packetIn.getPort());
                 socket.send(packetOut);
@@ -54,7 +53,7 @@ public class ServerUDP implements Server{
     @Override
     public int init() {
         try {
-            socket = new DatagramSocket();
+            socket = new DatagramSocket(5000);
             return socket.getLocalPort();
         } catch (Exception e){
             e.printStackTrace();

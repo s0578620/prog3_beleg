@@ -48,6 +48,7 @@ public class console {
                             break;
                         case ":p": this.mode = Mode.PERSISTENCE;
                             write("*** You are now in: persistence mode ***\n");
+                            break;
                         default:
                             write(getCorrectHelpMenu());
                             break;
@@ -56,7 +57,11 @@ public class console {
                     try {
                         EventObject event = this.getCorrectEO(input);
                         if (event != null){
-                            this.handler.handle(event);
+                            if(handler != null){
+                                this.handler.handle(event);
+                            }else {
+                                this.client.sendEvent(event);
+                            } // TODO implement client choice
                         }
                     } catch (IllegalArgumentException e) {
                         write(e.toString());
@@ -65,7 +70,7 @@ public class console {
             } while(true);
         }
     }
-    public String getCorrectHelpMenu(){
+    public String getCorrectHelpMenu(){ // TODO ASK
         final String help = "*** Help Menu *** \n :c - Create mode\n :d - Delete mode\n :r - Show mode\n :p - Persistence mode\n";
         final String helpCREATE = "*** Help Menu *** \n" +
                 " [Herstellername] - add Hersteller\n " +
@@ -149,11 +154,13 @@ public class console {
                 return new AddHerstellerEvent(input,input);
             case 7,8:
                 LinkedList<Allergen> list = new LinkedList<>();
-                String[] allergenList = inputList[5].split(",");
-                for(String s : allergenList){
-                    for(Allergen a : Allergen.values()){
-                        if(a.name().equals(s)){
-                            list.add(a);
+                if(inputList[5].length() != 1) {
+                    String[] allergenList = inputList[5].split(",");
+                    for (String s : allergenList) {
+                        for (Allergen a : Allergen.values()) {
+                            if (a.name().equals(s)) {
+                                list.add(a);
+                            }
                         }
                     }
                 }
@@ -164,7 +171,7 @@ public class console {
                     return new AddKuchenEvent(inputList[0],inputList[0],inputList[1],preis,Integer.parseInt(inputList[3]),Integer.parseInt(inputList[4]),list, inputList[6]);
                 }
             default:
-                write("Invalid Command");
+                write(getCorrectHelpMenu());
                 return null;
         }
     }
@@ -185,20 +192,22 @@ public class console {
             case "hersteller":
                 return new ShowHerstellerEvent(input,input);
             case "kuchen":
-                if(inputList.length > 1){
+                if(inputList.length > 1){       // TODO NEED INFO FOR INVALID CAKE (Vertrag)?
                     return new ShowKuchenTypEvent(inputList[0],inputList[0],inputList[1]);
                 }else {
                     return new ShowKuchenEvent(input);
                 }
             case "allergene":
-                switch (inputList[1]){
+                if(inputList.length > 1){
+                    switch (inputList[1]){
                     case "i":
                         return new ShowAllergeneEventInclusive(inputList[0],inputList[0]);
                     case "e":
                         return new ShowAllergeneEventExclusive(inputList[0],inputList[0]);
+                    }
                 }
             default:
-                write("Invalid Command");
+                write(getCorrectHelpMenu());
                 return null;
         }
     }

@@ -1,5 +1,6 @@
 package GL;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -181,11 +182,13 @@ public class objDatabaseTest {
 
         assertEquals(2,o.showAllergene(true).size());
     }
+
     @Test
     void showAllergeneExclusive(){
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         List<String> showlist = o.showAllergene(false);
-        showlist.forEach(System.out::println);
+        //showlist.forEach(System.out::println);
+        assertEquals(true, showlist.contains("Haselnuss") && showlist.contains("Sesamsamen"));
     }
 }

@@ -6,6 +6,6 @@ import java.net.Socket;
 public class client {
     public static void main(String[] args) {
 
-        new cli( new ClientUDP(new Socket().getLocalPort())).start();
+        new cli(new ClientUDP()).start();
     }
 }
