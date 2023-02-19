@@ -20,4 +20,12 @@ public class ShowHerstellerListener implements Routing.Listener.Interfaces.ShowH
             handler.handle(new ReverseShowHerstellerEvent(this, oDB.showAllCakesSortedByHersteller()));
         }
     }
+
+    @Override
+    public String onEventReturn(ShowHerstellerEvent event) {
+        if(null!=this.handler){
+            return handler.handleReturn(new ReverseShowHerstellerEvent(this, oDB.showAllCakesSortedByHersteller()));
+        }
+        return null;
+    }
 }

@@ -32,4 +32,17 @@ public class Handler {
             }
         }
     }
+
+    public <T extends EventObject> String handleReturn(T event) {
+        String txt = new String();
+        Class<? extends EventObject> eventType = event.getClass();
+        List<Routing.Listener.Interfaces.EventListener> eventListeners = listeners.get(eventType);
+        if (eventListeners != null) {
+            for (EventListener<T> listener : eventListeners) {
+                txt = listener.onEventReturn(event);
+            }
+        }
+        return txt;
+    }
+
 }

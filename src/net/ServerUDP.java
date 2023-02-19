@@ -25,14 +25,18 @@ public class ServerUDP implements Server{
             while (true){
                 DatagramPacket packetIn = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packetIn);
-
                 ByteArrayInputStream byteInputStream = new ByteArrayInputStream(packetIn.getData());
                 ObjectInputStream objectInputStream = new ObjectInputStream(byteInputStream);
                 System.out.println("Packet angekommen");
                 String responseString = "done";
                 try {
                     EventObject event = (EventObject) objectInputStream.readObject();
-                    this.handleEvent(event);
+                    if(event.toString().contains("show")){
+                        responseString = this.handler.handleReturn(event);
+                    }else {
+                        this.handleEvent(event);
+                    }
+
                 }catch (Exception e){
                     responseString = "Invalid Command";
                 }

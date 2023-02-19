@@ -15,7 +15,7 @@ public class ClientUDP implements Client{
         try {
             this.socket = new DatagramSocket();
         } catch ( SocketException e ) {
-            System.err.println( "couldn't start udp socket" );
+            System.err.println("Error setting up UDP socket");
             System.exit( 1 );
         }
     }
@@ -32,7 +32,7 @@ public class ClientUDP implements Client{
 
             byte[] buffer = new byte[1024];
             DatagramPacket incomingPacket = new DatagramPacket( buffer, buffer.length );
-            this.socket.setSoTimeout( 4000 ); // wait 4 sec for response
+            this.socket.setSoTimeout(4000);
 
             try {
                 this.socket.receive( incomingPacket );
@@ -40,7 +40,7 @@ public class ClientUDP implements Client{
                 System.out.println(response);
 
                 return response;
-            } catch ( SocketTimeoutException e ) {} // no response, move on
+            } catch ( SocketTimeoutException e ) {}
         } catch ( Exception e ) { e.printStackTrace(); }
         return "";
     }

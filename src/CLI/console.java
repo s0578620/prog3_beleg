@@ -61,7 +61,7 @@ public class console {
                                 this.handler.handle(event);
                             }else {
                                 this.client.sendEvent(event);
-                            } // TODO implement client choice
+                            }
                         }
                     } catch (IllegalArgumentException e) {
                         write(e.toString());

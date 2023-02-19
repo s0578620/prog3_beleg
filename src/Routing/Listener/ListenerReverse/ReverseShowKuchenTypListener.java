@@ -10,4 +10,9 @@ public class ReverseShowKuchenTypListener implements Routing.Listener.Interfaces
     public void onEvent(ReverseShowKuchenTypEvent event) {
         event.getList().forEach(System.out::println);
     }
+
+    @Override
+    public String onEventReturn(ReverseShowKuchenTypEvent event) {
+        return event.getList().toString();
+    }
 }

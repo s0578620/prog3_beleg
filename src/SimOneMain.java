@@ -6,7 +6,7 @@ import util.ObjDatabaseObserverSimOne;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class MainSimOne {
+public class SimOneMain {
 
     public static void main(String[] args) {
 

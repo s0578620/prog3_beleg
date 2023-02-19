@@ -23,4 +23,9 @@ public class IOLoadFileListener implements Routing.Listener.Interfaces.IOLoadFil
         }
         oDB.notifyObservers();
     }
+
+    @Override
+    public String onEventReturn(LoadFileEvent event) {
+        return null;
+    }
 }

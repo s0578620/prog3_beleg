@@ -14,4 +14,9 @@ public class RemoveKuchenListener implements Routing.Listener.Interfaces.RemoveK
     public void onEvent(RemoveKuchenEvent event) {
         this.oDB.removeObj(event.getFachnummer());
     }
+
+    @Override
+    public String onEventReturn(RemoveKuchenEvent event) {
+        return null;
+    }
 }

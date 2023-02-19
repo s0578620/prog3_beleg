@@ -20,4 +20,12 @@ public class ShowAllergeneIncListener implements Routing.Listener.Interfaces.Sho
             handler.handle(new ReverseShowAllergeneIncEvent(this, oDB.showAllergene(true)));
         }
     }
+
+    @Override
+    public String onEventReturn(ShowAllergeneEventInclusive event) {
+        if(null!=this.handler){
+            return handler.handleReturn(new ReverseShowAllergeneIncEvent(this, oDB.showAllergene(true)));
+        }
+        return null;
+    }
 }

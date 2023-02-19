@@ -1,5 +1,6 @@
 package Routing.Listener.Listener;
 
+import Routing.EventsReverse.ReverseShowHerstellerEvent;
 import Routing.Handler.Handler;
 import Routing.EventsReverse.ReverseShowKuchenEvent;
 import Routing.Events.ShowKuchenEvent;
@@ -21,5 +22,13 @@ public class ShowKuchenListener implements Routing.Listener.Interfaces.ShowKuche
         if(null!=this.handler){
             handler.handle(new ReverseShowKuchenEvent(this, oDB.showKuchenAll()));
         }
+    }
+
+    @Override
+    public String onEventReturn(ShowKuchenEvent event) {
+        if(null!=this.handler){
+            return handler.handleReturn(new ReverseShowKuchenEvent(this, oDB.showKuchenAll()));
+        }
+        return null;
     }
 }

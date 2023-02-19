@@ -15,4 +15,9 @@ public class UpdateInspListener implements Routing.Listener.Interfaces.UpdateIns
     public void onEvent(UpdateInspEvent event) {
         this.oDB.updateInsp(event.getFachnummer());
     }
+
+    @Override
+    public String onEventReturn(UpdateInspEvent event) {
+        return null;
+    }
 }

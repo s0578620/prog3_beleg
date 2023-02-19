@@ -3,7 +3,6 @@ package Routing.Listener.Listener;
 import GL.ObjDatabase;
 import Routing.Events.ShowAllergeneEventExclusive;
 import Routing.EventsReverse.ReverseShowAllergeneExcEvent;
-import Routing.EventsReverse.ReverseShowAllergeneIncEvent;
 import Routing.Handler.Handler;
 
 public class ShowAllergeneExcListener implements Routing.Listener.Interfaces.ShowAllergeneExcListener {
@@ -20,5 +19,13 @@ public class ShowAllergeneExcListener implements Routing.Listener.Interfaces.Sho
         if(null!=this.handler){
             handler.handle(new ReverseShowAllergeneExcEvent(this, oDB.showAllergene(false)));
         }
+    }
+
+    @Override
+    public String onEventReturn(ShowAllergeneEventExclusive event) {
+        if(null!=this.handler){
+            return handler.handleReturn(new ReverseShowAllergeneExcEvent(this, oDB.showAllergene(false)));
+        }
+        return null;
     }
 }

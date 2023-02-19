@@ -1,4 +1,5 @@
 import CLI.cli;
+import GL.ObjDatabase;
 import Routing.Events.*;
 import Routing.EventsReverse.*;
 import Routing.Handler.Handler;
@@ -6,9 +7,10 @@ import Routing.Listener.Listener.*;
 import Routing.Listener.ListenerReverse.*;
 import util.ObjDatabaseAllergeneObserver;
 import util.ObjDatabaseObserver;
-import GL.ObjDatabase;
 
-public class main {
+public class CliMain {
+
+
     public static void main(String[] args) {
 
         ObjDatabase db = new ObjDatabase(10);

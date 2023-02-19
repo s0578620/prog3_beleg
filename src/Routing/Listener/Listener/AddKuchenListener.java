@@ -15,4 +15,9 @@ public class AddKuchenListener implements Routing.Listener.Interfaces.AddKuchenL
         this.oDB.addObj(event.getKuchentyp(),event.getHersteller(),event.getPreis(),event.getNaehrwert(),event.getHaltbarkeit(),event.getAllergene(),event.getTopping());
 
     }
+
+    @Override
+    public String onEventReturn(AddKuchenEvent event) {
+        return null;
+    }
 }

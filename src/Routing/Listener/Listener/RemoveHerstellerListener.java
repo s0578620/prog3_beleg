@@ -14,4 +14,9 @@ public class RemoveHerstellerListener implements Routing.Listener.Interfaces.Rem
     public void onEvent(RemoveHerstellerEvent event) {
         this.oDB.removeHersteller(event.getHersteller());
     }
+
+    @Override
+    public String onEventReturn(RemoveHerstellerEvent event) {
+        return null;
+    }
 }

@@ -1,6 +1,5 @@
 package Routing.Listener.ListenerReverse;
 
-import Routing.Events.ShowHerstellerEvent;
 import Routing.EventsReverse.ReverseShowHerstellerEvent;
 
 public class ReverseShowHerstellerListener implements Routing.Listener.InterfacesReverse.ReverseShowHerstellerListener {
@@ -9,5 +8,10 @@ public class ReverseShowHerstellerListener implements Routing.Listener.Interface
     @Override
     public void onEvent(ReverseShowHerstellerEvent event) {
         event.getList().forEach(System.out::println);
+    }
+
+    @Override
+    public String onEventReturn(ReverseShowHerstellerEvent event) {
+       return event.getList().toString();
     }
 }

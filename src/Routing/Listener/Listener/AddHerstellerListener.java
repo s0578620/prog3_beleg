@@ -17,5 +17,10 @@ public class AddHerstellerListener implements Routing.Listener.Interfaces.AddHer
         this.oDB.addHersteller(event.getHersteller());
     }
 
+    @Override
+    public String onEventReturn(AddHerstellerEvent event) {
+        return null;
+    }
+
 
 }

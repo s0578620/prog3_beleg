@@ -23,4 +23,12 @@ public class ShowKuchenTypListener implements Routing.Listener.Interfaces.ShowKu
             handler.handle(new ReverseShowKuchenEvent(this, oDB.showKuchen(event.getTyp())));
         }
     }
+
+    @Override
+    public String onEventReturn(ShowKuchenTypEvent event) {
+        if(null!=this.handler){
+            return handler.handleReturn(new ReverseShowKuchenEvent(this, oDB.showKuchen(event.getTyp())));
+        }
+        return null;
+    }
 }

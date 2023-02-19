@@ -26,8 +26,8 @@ Zulässige Quellen sind suchmaschinen-indizierte Internetseiten. Werden mehr als
 - [x] Trennung zwischen Test- und Produktiv-Code
 - [x] main-Methoden nur im default package
 - [x] ausführbar
-- [ ] CRUD für einen Kuchentyp via TCP oder UDP
-- [ ] saubere Trennung zwischen Oberfläche (Client) und Geschäftslogik (Server)
+- [x] CRUD für einen Kuchentyp via TCP oder UDP
+- [x] saubere Trennung zwischen Oberfläche (Client) und Geschäftslogik (Server)
 ### empfohlene Realisierungen als Vorbereitung auf den Beleg
 werden überprüft (aber nicht bewertet), wenn hier in der vorgegebenen Reihenfolge als bearbeitet angegeben
 - [ ] je ein Stellvertreter-Test für Einfügen und Anzeigen pro Server

@@ -22,4 +22,9 @@ public class IOSafeFileListener implements Routing.Listener.Interfaces.IOSafeFil
         oDB.notifyObservers();
     }
 
+    @Override
+    public String onEventReturn(SaveFileEvent event) {
+        return null;
+    }
+
 }

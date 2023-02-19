@@ -1,4 +1,3 @@
-import CLI.cli;
 import GL.ObjDatabase;
 import Routing.Events.*;
 import Routing.EventsReverse.*;
@@ -7,18 +6,26 @@ import Routing.Listener.Listener.*;
 import Routing.Listener.ListenerReverse.*;
 
 import net.Server;
+import net.ServerTCP;
 import net.ServerUDP;
 import util.ObjDatabaseAllergeneObserver;
 import util.ObjDatabaseObserver;
 
-public class mainNet {
-
+public class NetMain {
+    private static String protocol;
+    private static int capacity;
     public static void main(String[] args) {
 
-        ObjDatabase db = new ObjDatabase(10);
+        if (args.length < 2) {
+            System.err.println("Usage: java Server <protocol> <capacity>");
+            System.exit(1);
+        }
+        protocol = args[0];
+        capacity = Integer.parseInt(args[1]);
+
+        ObjDatabase db = new ObjDatabase(capacity);
         db.addObserver(new ObjDatabaseObserver(db));
         db.addObserver(new ObjDatabaseAllergeneObserver(db));
-
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
         ReverseShowKuchenTypListener listenerReverseShowKuchenTyp = new ReverseShowKuchenTypListener();
@@ -62,10 +69,17 @@ public class mainNet {
         handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
-        Server udpServer = new ServerUDP(handler);
-        udpServer.init();
-        udpServer.run();
+        if (protocol.equals("udp")) {
+            Server udpServer = new ServerUDP(handler);
+            udpServer.init();
+            udpServer.run();
+        } else if (protocol.equals("tcp")) {
+            Server tcpServer = new ServerTCP(handler);
+            tcpServer.init();
+            tcpServer.run();
+        } else {
+            System.err.println("Invalid protocol: " + protocol);
+            System.exit(1);
+        }
     }
-
-
 }

@@ -9,4 +9,9 @@ public class ReverseShowAllergeneExcListener implements Routing.Listener.Interfa
     public void onEvent(ReverseShowAllergeneExcEvent event) {
         event.getList().forEach(System.out::println);
     }
+
+    @Override
+    public String onEventReturn(ReverseShowAllergeneExcEvent event) {
+        return event.getList().toString();
+    }
 }
