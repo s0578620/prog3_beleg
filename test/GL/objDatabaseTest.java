@@ -189,6 +189,6 @@ public class objDatabaseTest {
 
         List<String> showlist = o.showAllergene(false);
         //showlist.forEach(System.out::println);
-        assertEquals(true, showlist.contains("Haselnuss") && showlist.contains("Sesamsamen"));
+        assertTrue(showlist.contains("Haselnuss") && showlist.contains("Sesamsamen"));
     }
 }
