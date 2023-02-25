@@ -208,7 +208,7 @@ public class console {
             case "hersteller":
                 return new ShowHerstellerEvent(input,input);
             case "kuchen":
-                if(inputList.length > 1){       // TODO NEED INFO FOR INVALID CAKE (Vertrag)?
+                if(inputList.length > 1){
                     return new ShowKuchenTypEvent(inputList[0],inputList[0],inputList[1]);
                 }else {
                     return new ShowKuchenEvent(input);

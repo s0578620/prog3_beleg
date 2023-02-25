@@ -2,7 +2,6 @@ import GL.ObjDatabase;
 import simulation.SimOneAdd;
 import simulation.SimOneRemove;
 import util.ObjDatabaseObserverSimOne;
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
