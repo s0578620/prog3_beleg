@@ -32,6 +32,7 @@ public class console {
             do{
                 write(topic);
                 String input = s.nextLine();
+
                 if(input.startsWith(":") || input.startsWith("?") || input.startsWith("help")){
                     switch (input){
                         case ":c": this.mode = Mode.CREATE;
@@ -54,23 +55,25 @@ public class console {
                             break;
                     }
                 } else {
-                    try {
-                        EventObject event = this.getCorrectEO(input);
-                        if (event != null){
-                            if(handler != null){
-                                this.handler.handle(event);
-                            }else {
-                                this.client.sendEvent(event);
+                    if (this.mode != null) {
+                        try {
+                            EventObject event = this.getCorrectEO(input);
+                            if (event != null) {
+                                if (handler != null) {
+                                    this.handler.handle(event);
+                                } else {
+                                    this.client.sendEvent(event);
+                                }
                             }
+                        } catch (IllegalArgumentException e) {
+                            write(e.toString());
                         }
-                    } catch (IllegalArgumentException e) {
-                        write(e.toString());
                     }
                 }
             } while(true);
         }
     }
-    public String getCorrectHelpMenu(){ // TODO ASK
+    public String getCorrectHelpMenu(){
         final String help = "*** Help Menu *** \n :c - Create mode\n :d - Delete mode\n :r - Show mode\n :p - Persistence mode\n";
         final String helpCREATE = "*** Help Menu *** \n" +
                 " [Herstellername] - add Hersteller\n " +
@@ -79,17 +82,28 @@ public class console {
         final String helpSHOW = "*** Help Menu *** \n hersteller - show Hersteller (with Cake count)\n kuchen [[Typ]] - show Kuchen (-typ)\n allergene [i/e] - show Allergene (i = Inclusive / e = Exclusive)\n";
         final String helpUPDATE = "*** Help Menu *** \n [Fachnummer] - update Inspektionsdatum\n";
         final String helpPERSISTENCE = "*** Help Menu *** \n safe [jos/jbp] - safe via jos/jbp\n load [jos/jbp] - load via jos/jbp\n";
-        switch (mode){
-            case CREATE: return helpCREATE;
-            case DELETE: return helpDELETE;
-            case SHOW: return helpSHOW;
-            case UPDATE: return helpUPDATE;
-            case PERSISTENCE: return helpPERSISTENCE;
-            default: return help;
+        if (this.mode != null) {
+            switch (mode) {
+                case CREATE:
+                    return helpCREATE;
+                case DELETE:
+                    return helpDELETE;
+                case SHOW:
+                    return helpSHOW;
+                case UPDATE:
+                    return helpUPDATE;
+                case PERSISTENCE:
+                    return helpPERSISTENCE;
+                default:
+                    return help;
+            }
+        }else {
+            return help;
         }
     }
 
     public void execController(String input){
+
         if(input.startsWith(":")) {
             switch (input) {
                 case ":c":
@@ -107,13 +121,15 @@ public class console {
                     break;
             }
         }else {
-            try {
-                EventObject event = this.getCorrectEO(input);
-                if (event != null){
-                    this.handler.handle(event);
+            if (this.mode != null) {
+                try {
+                    EventObject event = this.getCorrectEO(input);
+                    if (event != null) {
+                        this.handler.handle(event);
+                    }
+                } catch (IllegalArgumentException e) {
+                    write(e.toString());
                 }
-            } catch (IllegalArgumentException e) {
-                write(e.toString());
             }
         }
     }

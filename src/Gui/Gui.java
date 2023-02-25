@@ -26,8 +26,7 @@ public class Gui extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/App.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
-        ObjDatabase oDB = new ObjDatabase(10);  // TODO CAPACITY FROM INPUT ARGS?
-
+        ObjDatabase oDB = new ObjDatabase(10);
 
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
@@ -71,15 +70,6 @@ public class Gui extends Application {
         handler.addListener(ShowAllergeneEventInclusive.class,listenerShowAllergeneInc);
         handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
-
-
-
-
-
-
-
-
-
 
 
         Controller controller = loader.getController();

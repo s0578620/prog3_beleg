@@ -22,6 +22,10 @@ public class ObjDatabase extends Observable implements Serializable {
         return capacityMax;
     }
 
+    public int getCapacityAct() {
+        return capacityAct;
+    }
+
     public boolean addHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);
         if(herstellerList.stream().anyMatch(h -> h.getName().equals(hersteller))){
@@ -225,6 +229,8 @@ public class ObjDatabase extends Observable implements Serializable {
             this.objList = db.getObjList();
             this.allergenList = db.getAllergenList();
             this.capacityMax = db.getCapacityMax();
+            this.capacityAct = db.getCapacityAct();
+
             setChanged();
             notifyObservers();
         } finally {

@@ -85,7 +85,6 @@ public class Controller implements Initializable {
         commandField.clear();
     }
 
-
     public void handleCommandField(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER){
             this.input = commandField.getText();
