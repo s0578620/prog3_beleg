@@ -9,15 +9,20 @@ import java.util.EventObject;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class console {
+public class Console {
     private Handler handler;
-    public console(Handler handler){
+    public Console(Handler handler){
         this.handler = handler;
     }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
     private Mode mode;
     private Client client;
 
-    public console(Client client) {
+    public Console(Client client) {
         this.client = client;
     }
 
@@ -115,6 +120,9 @@ public class console {
                 case ":u":
                     this.mode = Mode.UPDATE;
                     break;
+                case ":r":
+                    this.mode = Mode.SHOW;
+                    break;
                 case ":p":
                     this.mode = Mode.PERSISTENCE;
                 default:
@@ -134,7 +142,7 @@ public class console {
         }
     }
 
-    private EventObject getCorrectEO(String input){
+    EventObject getCorrectEO(String input){
         switch ( this.mode ) {
             case CREATE:
                 return createEO(input);

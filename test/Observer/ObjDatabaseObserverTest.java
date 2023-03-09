@@ -1,53 +1,33 @@
 package Observer;
 
+
 import GL.ObjDatabase;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import util.ObjDatabaseObserver;
-
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 public class ObjDatabaseObserverTest {
 
+
+
     @Test
-    public void testUpdate() {
-//        // Create a mock ObjDatabase
-//
-//        ObjDatabase mockDB = new ObjDatabase() {
-//            private int capacityMax = 10;
-//            private List<Object> objList = new ArrayList<>();
-//
-//            @Override
-//            public int getCapacityMax() {
-//                return capacityMax;d
-//            }
-//
-//            @Override
-//            public List<Object> getObjList() {
-//                return objList;
-//            }
-//        };
-//
-//        // Create an ObjDatabaseObserver with the mock ObjDatabase
-//        ObjDatabaseObserver observer = new ObjDatabaseObserver(mockDB);
-//
-//        // Set up a test PrintStream to capture the output of the observer
-//        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//        System.setOut(new PrintStream(outContent));
-//
-//        // Add 9 objects to the mock database to trigger the "90% capacity reached" message
-//        for (int i = 0; i < 9; i++) {
-//            mockDB.getObjList().add(new Object());
-//        }
-//        // Notify the observer of the update
-//        mockDB.notifyObservers();
-//
-//        // Assert that the output of the observer is as expected
-//        assertTrue(outContent.toString().contains("90% capacity reached"));
+    void testCapacityReached(){
+        PrintStream output = System.out;
+        try {
+            PrintStream out = mock(PrintStream.class);
+            System.setOut(out);
+            ObjDatabase oDB = mock(ObjDatabase.class);
+            when(oDB.getCapacityAct()).thenReturn(8).thenReturn(9);
+            ObjDatabaseObserver obs = new ObjDatabaseObserver(oDB);
+
+            obs.update(oDB,"");
+
+            verify(out).println("90% capacity reached");
+        }finally {
+            System.setOut(output);
+        }
     }
+
 }

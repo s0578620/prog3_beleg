@@ -17,15 +17,6 @@ public class ObjDatabase extends Observable implements Serializable {
         this.capacityMax = capacity;
     }
 
-
-    public int getCapacityMax() {
-        return capacityMax;
-    }
-
-    public int getCapacityAct() {
-        return capacityAct;
-    }
-
     public boolean addHersteller(String hersteller){
         Hersteller a = new Hersteller(hersteller);
         if(herstellerList.stream().anyMatch(h -> h.getName().equals(hersteller))){
@@ -178,7 +169,6 @@ public class ObjDatabase extends Observable implements Serializable {
         }
     }
 
-    // Hilfsmethoden //
     public String format(Collection<?> c) {
         String s = c.stream().map(Object::toString).collect(Collectors.joining(" "));
         return String.format("["+s+"]");
@@ -211,18 +201,6 @@ public class ObjDatabase extends Observable implements Serializable {
                 + "| Haltbarkeit: " + o.getHaltbarkeit().toMinutes();
     }
 
-    public LinkedList<Hersteller> getHerstellerList() {
-        return herstellerList;
-    }
-
-    public LinkedList<Obj> getObjList() {
-        return objList;
-    }
-
-    public LinkedList<Allergen> getAllergenList() {
-        return allergenList;
-    }
-
     public void switchObjDatabase(ObjDatabase db) {
         try {
             this.herstellerList = db.getHerstellerList();
@@ -238,7 +216,21 @@ public class ObjDatabase extends Observable implements Serializable {
         }
     }
 
-
+    public int getCapacityMax() {
+        return capacityMax;
+    }
+    public int getCapacityAct() {
+        return capacityAct;
+    }
+    public LinkedList<Hersteller> getHerstellerList() {
+        return herstellerList;
+    }
+    public LinkedList<Obj> getObjList() {
+        return objList;
+    }
+    public LinkedList<Allergen> getAllergenList() {
+        return allergenList;
+    }
     public ObjDatabase getObjDatabase() {
         return this;
     }

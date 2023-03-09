@@ -1,4 +1,4 @@
-import CLI.cli;
+import CLI.Cli;
 import net.ClientTCP;
 import net.ClientUDP;
 
@@ -12,9 +12,9 @@ public class NetClient {
         String protocol = args[0];
 
         if (protocol.equals("tcp")) {
-            new cli(new ClientTCP()).start();
+            new Cli(new ClientTCP()).start();
         } else if (protocol.equalsIgnoreCase("udp")) {
-            new cli(new ClientUDP()).start();
+            new Cli(new ClientUDP()).start();
         } else {
             System.err.println("Invalid protocol: " + protocol);
             System.exit(1);

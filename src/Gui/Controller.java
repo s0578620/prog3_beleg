@@ -1,6 +1,6 @@
 package Gui;
 
-import CLI.console;
+import CLI.Console;
 //import Events.EventHandler;
 import Routing.Handler.Handler;
 import Routing.Events.LoadFileEvent;
@@ -39,7 +39,7 @@ public class Controller implements Initializable {
     @FXML private TableView<AllergenBean> tableAllergene;
     @FXML private TableColumn<AllergenBean, String> allergeneList;
 
-    private CLI.console console;
+    private Console console;
     private String input;
     private Handler handler;
 
@@ -119,7 +119,7 @@ public class Controller implements Initializable {
         this.handler.handle(event);
     }
 
-    public void setConsole(console console) {
+    public void setConsole(Console console) {
         this.console = console;
     }
 

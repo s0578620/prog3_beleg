@@ -3,24 +3,24 @@ package CLI;
 import Routing.Handler.Handler;
 import net.Client;
 
-public class cli {
+public class Cli {
 
     private  Client client;
     private Handler handler;
 
-    public cli(Handler handler){
+    public Cli(Handler handler){
         this.handler = handler;
     }
 
-    public cli(Client client){
+    public Cli(Client client){
         this.client = client;
     }
 
     public void start(){
         if(client != null){
-            new console(client).run();
+            new Console(client).run();
         }else {
-            new console(handler).run();
+            new Console(handler).run();
         }
     }
 }

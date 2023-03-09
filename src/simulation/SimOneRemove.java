@@ -22,7 +22,7 @@ public class SimOneRemove implements Runnable{
     public void run() {
             do {
                 synchronized (lock) {
-                    oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1));
+//                    oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1));
                     try {
                         oDB.removeObj(rnd.nextInt(oDB.getObjList().size()));
                     } catch (Exception e) {}

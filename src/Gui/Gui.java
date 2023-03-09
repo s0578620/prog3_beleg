@@ -1,6 +1,6 @@
 package Gui;
 
-import CLI.console;
+import CLI.Console;
 import Routing.Events.*;
 import Routing.EventsReverse.*;
 import Routing.Handler.Handler;
@@ -74,7 +74,7 @@ public class Gui extends Application {
 
         Controller controller = loader.getController();
         controller.setHandler(handler);
-        controller.setConsole(new console(handler));
+        controller.setConsole(new Console(handler));
 
         oDB.addObserver(new ObjDatabaseObserverGui(oDB,controller));
 

@@ -6,9 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import vertrag.Allergen;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.Instant;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,8 +20,6 @@ public class objDatabaseTest {
     private String Hersteller1;
     private BigDecimal Preis;
     private int Naehrwert;
-    private Instant start;
-    private Instant end;
     private int Haltbarkeit;
     private LinkedList<Allergen> list;
     private String Topping;
@@ -37,23 +35,20 @@ public class objDatabaseTest {
         this.Hersteller1 = "UNILEVER";
         this.Preis = new BigDecimal("19.99");
         this.Naehrwert = 150;
-        this.start = Instant.parse("2017-10-03T10:10:30.00Z");
-        this.end = Instant.parse("2017-10-03T10:16:30.00Z");
-        this.Haltbarkeit = 36; //Duration.between(start,end)
+        this.Haltbarkeit = 36;
         this.list = new LinkedList<>();
         this.Topping = "Apfel";
         this.Toppin2 = "Nusscreme";
         this.Obsttorte = "Obsttorte";
         list.add(Allergen.Erdnuss);
         list.add(Allergen.Gluten);
-        o.addHersteller(Hersteller);
     }
 
     @Test
     public void addHersteller() {
         o.addHersteller(Hersteller1);
 
-        assertEquals(2,o.getHerstellerList().size());
+        assertEquals(1,o.getHerstellerList().size());
     }
 
     @Test
@@ -67,7 +62,7 @@ public class objDatabaseTest {
     void addHerstellerDuplicat() {
         o.addHersteller(Hersteller);
 
-        // Size == 1 da Hersteller bereits im @BeforeEach hinzugefügt wurde // Size == 2 wenn doppelte Hersteller möglich
+        // Size == 1 da Hersteller bereits im @BeforeEach hinzugefügt wurde
         assertEquals(1, o.getHerstellerList().size());
     }
 
@@ -77,7 +72,7 @@ public class objDatabaseTest {
             "Haribo,UNILEVER,240,Erdbeeren,0",  //testet das hinzufügen von ungültigen Artikeln
             "Obstkuchen,UNI,240,Erdbeeren,0"})      //testet auf hinzufügen eines Kuchens mit unbekanntem Hersteller
     void addObj(String iKuchentyp,String iHersteller,int iNaehrwert, String iTopping,int size) {
-
+        o.addHersteller(Hersteller);
         o.addHersteller(Hersteller1);
         o.addObj(iKuchentyp,iHersteller,Preis,iNaehrwert,Haltbarkeit,list, iTopping);
 
@@ -86,7 +81,7 @@ public class objDatabaseTest {
 
     @Test
     void addObj(){  // testet das hinzufügen von Obsttorte
-
+        o.addHersteller(Hersteller);
         o.addObj(Obsttorte,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping,Toppin2);
 
         assertEquals(1,o.getObjList().size());
@@ -94,7 +89,7 @@ public class objDatabaseTest {
 
     @Test
     void addObjMulti(){  // testet das hinzufügen von mehreren Kuchen
-
+        o.addHersteller(Hersteller);
         o.addObj(Obsttorte,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping,Toppin2);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
@@ -102,7 +97,7 @@ public class objDatabaseTest {
     }
     @Test
     void addObjFachnummer(){  // testet beim hinzufügen von Kuchen die Fachnummervergabe
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
@@ -110,16 +105,16 @@ public class objDatabaseTest {
     }
     @Test
     void addObjDate(){  // testet beim hinzufügen von Kuchen die Vergabe des Einfügedatums
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
-        // Da Inspektionsdatum und insertDate gleichzeitig vergeben wird hier auf Existenz und Gleichheit geprüft
+        // Da Inspektionsdatum und insertDate gleichzeitig vergeben wird hier auf Existenz bzw Gleichheit geprüft
         assertEquals(o.getObjList().getFirst().getInspektionsdatum(), o.getObjList().getFirst().getInsertDate());
     }
 
     @Test
     void removeObj() {  // Überprüfung der Fachnummerkorrektion durch 0
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.removeObj(0);
@@ -130,6 +125,7 @@ public class objDatabaseTest {
 
     @Test
     void removeObjSizeTest() {
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.removeObj(0);
@@ -139,27 +135,33 @@ public class objDatabaseTest {
 
     @Test
     void updateInsp(){
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         assertTrue(o.updateInsp(0));
     }
 
     @Test
-    void showAllCakesSortedByHerrsteller() {
-
+    public void testShowAllCakesSortedByHersteller() {
+        o.addHersteller(Hersteller);
         o.addHersteller(Hersteller1);
-        o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
-        o.addObj(Kuchentyp1,Hersteller1,Preis,Naehrwert,Haltbarkeit,list, Topping);
-        o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
+        o.addObj(Kuchentyp, Hersteller, Preis, Naehrwert, Haltbarkeit, list, Topping);
+        o.addObj(Kuchentyp1, Hersteller, Preis, Naehrwert, Haltbarkeit, list, Topping);
+        o.addObj(Kuchentyp, Hersteller1, Preis, Naehrwert, Haltbarkeit, list, Topping);
 
-        // Expected:5 weil +1 pro Hersteller an Listeneinträgen (Hersteller Gesamtaus)
-        assertEquals(5, (long) o.showAllCakesSortedByHersteller().size());
+        List<String> expectedList = new LinkedList<>();
+        expectedList.add("Result -- NESTLE Kremkuchen");
+        expectedList.add("Result -- NESTLE Obstkuchen");
+        expectedList.add("Result -- UNILEVER Kremkuchen");
+        expectedList.add("Hersteller: NESTLE besitzt Kuchen: 2");
+        expectedList.add("Hersteller: UNILEVER besitzt Kuchen: 1");
+
+        assertEquals(expectedList, o.showAllCakesSortedByHersteller());
     }
 
     @Test
     void showKuchenAll(){
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Obsttorte,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping,Toppin2);
@@ -169,7 +171,7 @@ public class objDatabaseTest {
 
     @Test
     void showKuchen(){
-
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
         o.addObj(Kuchentyp1,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
@@ -178,6 +180,7 @@ public class objDatabaseTest {
 
     @Test
     void showAllergeneInclusive(){
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         assertEquals(2,o.showAllergene(true).size());
@@ -185,10 +188,134 @@ public class objDatabaseTest {
 
     @Test
     void showAllergeneExclusive(){
+        o.addHersteller(Hersteller);
         o.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         List<String> showlist = o.showAllergene(false);
         //showlist.forEach(System.out::println);
         assertTrue(showlist.contains("Haselnuss") && showlist.contains("Sesamsamen"));
     }
+
+    @Test
+    void formatTestEmptyCollection() {
+        Collection<Integer> c = new ArrayList<>();
+        String expected = "[]";
+        String actual = o.format(c);
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    void testSingleItemCollection() {
+        Collection<Integer> c = Arrays.asList(1);
+        String expected = "[1]";
+        String actual = o.format(c);
+
+        assertEquals(expected, actual);
+    }
+    @Test
+    void testMultiItemCollection() {
+        Collection<Integer> c = Arrays.asList(1, 2, 3);
+        String expected = "[1 2 3]";
+        String actual = o.format(c);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testSetFachnummer() {
+        o.addHersteller(Hersteller);
+        Obj obj1 = new Obj(Kuchentyp,new Hersteller(Hersteller),Preis,Naehrwert,Haltbarkeit,new Date(),list,new Date());
+        Obj obj1WithFachnummer = o.setFachnummer(obj1);
+
+        assertEquals(0, obj1WithFachnummer.getFachnummer());
+    }
+
+    @Test
+    void testReadInAllergens() {
+        Collection<Allergen> allergens = Arrays.asList(
+                Allergen.Erdnuss,
+                Allergen.Gluten,
+                Allergen.Erdnuss
+        );
+        LinkedList<Allergen> expected = new LinkedList<>(Arrays.asList(
+                Allergen.Erdnuss,
+                Allergen.Gluten
+        ));
+
+        o.readInAllergens(allergens);
+
+        assertEquals(expected, o.getAllergenList());
+    }
+
+    @Test
+    void testSwitchObjDatabaseCapacityMax() {
+        ObjDatabase db1 = new ObjDatabase(5);
+        ObjDatabase db2 = new ObjDatabase(10);
+
+        db2.switchObjDatabase(db1);
+
+        assertEquals(5, db2.getCapacityMax());
+    }
+    @Test
+    void testSwitchObjDatabaseCapacityAct() {
+        ObjDatabase db1 = new ObjDatabase(5);
+        ObjDatabase db2 = new ObjDatabase(10);
+        db1.addHersteller(Hersteller);
+        db1.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
+
+        db2.switchObjDatabase(db1);
+        assertEquals(db1.getCapacityAct(), db2.getCapacityAct());
+    }
+    @Test
+    void testSwitchObjDatabaseHersteller() {
+        ObjDatabase db1 = new ObjDatabase(5);
+        ObjDatabase db2 = new ObjDatabase(10);
+        db1.addHersteller(Hersteller);
+
+        db2.switchObjDatabase(db1);
+
+        assertEquals(db1.getHerstellerList(), db2.getHerstellerList());
+    }
+    @Test
+    void testSwitchObjDatabaseObj() {
+        ObjDatabase db1 = new ObjDatabase(5);
+        ObjDatabase db2 = new ObjDatabase(10);
+        db1.addHersteller(Hersteller);
+        db1.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
+
+        db2.switchObjDatabase(db1);
+
+        assertEquals(db1.getObjList(), db2.getObjList());
+        assertEquals(db1.getAllergenList(), db2.getAllergenList());
+    }
+    @Test
+    void testSwitchObjDatabaseAllergene() {
+        ObjDatabase db1 = new ObjDatabase(5);
+        ObjDatabase db2 = new ObjDatabase(10);
+        db1.addHersteller(Hersteller);
+        db1.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
+
+        db2.switchObjDatabase(db1);
+        assertEquals(db1.getCapacityAct(), db2.getCapacityAct());
+        assertEquals(db1.getAllergenList(), db2.getAllergenList());
+    }
+
+    @Test
+    void testStringForShowKuchen() {
+        Obj obj1 = new Obj(Kuchentyp,new Hersteller(Hersteller),Preis,Naehrwert,Haltbarkeit,new Date(),list,new Date());
+
+        String result = o.stringForShowKuchen(obj1);
+        assertEquals("Typ: Kremkuchen| Hersteller: NESTLE| Allergene: [Erdnuss Gluten]| Nährwert: 150| Haltbarkeit: 36", result);
+    }
+
+    @Test
+    void testRefreshAllergeneList() {
+        o.addHersteller(Hersteller);
+        o.addObj(Kuchentyp, Hersteller, Preis, Naehrwert, Haltbarkeit, list, Topping);
+        o.refreshAllergeneList();
+
+        assertEquals(2, o.getAllergenList().size());
+    }
+
+
 }

@@ -1,4 +1,4 @@
-import CLI.cli;
+import CLI.Cli;
 import GL.ObjDatabase;
 import Routing.Events.*;
 import Routing.EventsReverse.*;
@@ -60,7 +60,7 @@ public class CliMain {
         handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
-        cli c = new cli(handler);
+        Cli c = new Cli(handler);
         c.start();
     }
 }

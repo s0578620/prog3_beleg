@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SimTwoMain {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {    // TODO CMD KAPAZITÄT
         int n = 2; // default value
         if (args.length > 0) {
             try {
