@@ -1,7 +1,7 @@
 import GL.ObjDatabase;
 
-import simulation.SimTwoAdd;
-import simulation.SimTwoRemove;
+import Simulation.SimTwoAdd;
+import Simulation.SimTwoRemove;
 import util.ObjDatabaseObserverSimOne;
 
 

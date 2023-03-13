@@ -61,8 +61,8 @@ public class objDatabaseTest {
     @Test
     void addHerstellerDuplicat() {
         o.addHersteller(Hersteller);
+        o.addHersteller(Hersteller);
 
-        // Size == 1 da Hersteller bereits im @BeforeEach hinzugefügt wurde
         assertEquals(1, o.getHerstellerList().size());
     }
 
@@ -277,7 +277,7 @@ public class objDatabaseTest {
         assertEquals(db1.getHerstellerList(), db2.getHerstellerList());
     }
     @Test
-    void testSwitchObjDatabaseObj() {
+    void testSwitchObjDatabaseObj() {   // TODO auseinanderziehen
         ObjDatabase db1 = new ObjDatabase(5);
         ObjDatabase db2 = new ObjDatabase(10);
         db1.addHersteller(Hersteller);
@@ -289,7 +289,7 @@ public class objDatabaseTest {
         assertEquals(db1.getAllergenList(), db2.getAllergenList());
     }
     @Test
-    void testSwitchObjDatabaseAllergene() {
+    void testSwitchObjDatabaseAllergene() { // TODO auseinanderziehen
         ObjDatabase db1 = new ObjDatabase(5);
         ObjDatabase db2 = new ObjDatabase(10);
         db1.addHersteller(Hersteller);
