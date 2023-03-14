@@ -1,7 +1,6 @@
 package Gui;
 
 import CLI.Console;
-//import Events.EventHandler;
 import Routing.Handler.Handler;
 import Routing.Events.LoadFileEvent;
 import Routing.Events.SaveFileEvent;
@@ -19,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import vertrag.Allergen;
-
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
@@ -109,13 +107,13 @@ public class Controller implements Initializable {
 
     @FXML
     void handleLoadJOS(javafx.event.ActionEvent actionEvent) {
-        LoadFileEvent event = new LoadFileEvent( "", "jos" );
+        LoadFileEvent event = new LoadFileEvent( "", "JOS" );
         this.handler.handle(event);
     }
 
     @FXML
     void handleSaveJOS(javafx.event.ActionEvent actionEvent) {
-        SaveFileEvent event = new SaveFileEvent( "", "jos" );
+        SaveFileEvent event = new SaveFileEvent( "", "JOS" );
         this.handler.handle(event);
     }
 

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import util.ObjDatabaseObserverGui;
 
 public class Gui extends Application {
+    public static int capacity;
 
     public void run(){
         launch();
@@ -26,7 +27,7 @@ public class Gui extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/App.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
-        ObjDatabase oDB = new ObjDatabase(10);
+        ObjDatabase oDB = new ObjDatabase(this.capacity);
 
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();

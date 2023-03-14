@@ -80,8 +80,8 @@ public class CliMain {
             handler.addListener(ShowAllergeneEventInclusive.class,listenerShowAllergeneInc);
             handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
             handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
-
             new Cli(handler).start();
+
         }
     }
 }

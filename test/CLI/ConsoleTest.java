@@ -64,7 +64,7 @@ public class ConsoleTest {
     }
 
     @Test
-    void testGetCorrectHelpMenuShow() { // TODO CARE (Forgot to show event?)?
+    void testGetCorrectHelpMenuShow() {
         Handler handler = new Handler();
         Console console = new Console(handler);
 
