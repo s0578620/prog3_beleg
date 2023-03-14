@@ -8,10 +8,20 @@ import Routing.Listener.ListenerReverse.*;
 import util.ObjDatabaseObserver;
 
 public class CliAlternativ {
-
+    // TODO TEST
     public static void main(String[] args) {
 
-        ObjDatabase db = new ObjDatabase(10);
+        int capacity = 0;
+
+        if (args.length > 0) {
+            for (String arg : args) {
+                if (arg.matches("\\d+")) {
+                    capacity = Integer.parseInt(arg);
+                }
+            }
+        }
+
+        ObjDatabase db = new ObjDatabase(capacity);
         db.addObserver(new ObjDatabaseObserver(db));
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
@@ -45,7 +55,6 @@ public class CliAlternativ {
         handler.addListener(ShowKuchenEvent.class,listenerShowKuchen);
         handler.addListener(ShowKuchenTypEvent.class,listenerShowKuchenTyp);
         handler.addListener(ShowHerstellerEvent.class,listenerShowHersteller);
-
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
         Cli c = new Cli(handler);
