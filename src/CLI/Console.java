@@ -160,7 +160,7 @@ public class Console {
     }
 
     private EventObject persistenzEO(String input) {
-        String[] inputList = input.split(" ");
+        String[] inputList = input.split("(?<=\\b(save|load))");
         switch (inputList[0]) {
             case "save":
                 return new SaveFileEvent(this, inputList[1]);

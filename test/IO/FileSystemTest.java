@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 public class FileSystemTest {
 
 
-    private static final String TEST_FILE = "jos";
+    private static final String TEST_FILE = "JOS";
 
     private FileSystem fileSystem;
     private ObjDatabase objDatabase;

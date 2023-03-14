@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.EventObject;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,6 +71,8 @@ public class ConsoleTest {
         console.execController(":r");
         assertEquals("*** Help Menu *** \n hersteller - show Hersteller (with Cake count)\n kuchen [[Typ]] - show Kuchen (-typ)\n allergene [i/e] - show Allergene (i = Inclusive / e = Exclusive)\n", console.getCorrectHelpMenu());
     }
+
+
 
     @Test
     void testGetCorrectHelpMenuUpdate() {

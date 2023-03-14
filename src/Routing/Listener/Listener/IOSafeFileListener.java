@@ -16,7 +16,7 @@ public class IOSafeFileListener implements Routing.Listener.Interfaces.IOSafeFil
     @Override
     public void onEvent(SaveFileEvent event) {
         String protoAddress = event.getProtocol();
-        if (protoAddress.equals("jos") || protoAddress.equals("jbp")) {
+        if (protoAddress.equals("JOS") || protoAddress.equals("JBP")) {
             filesystem.saveDB(protoAddress);
         }
         oDB.notifyObservers();

@@ -18,7 +18,7 @@ public class IOLoadFileListener implements Routing.Listener.Interfaces.IOLoadFil
     @Override
     public void onEvent(LoadFileEvent event) {
         String protoAddress = event.getProtocol();
-        if ( protoAddress.equals("jos") || protoAddress.equals("jbp")) {
+        if ( protoAddress.equals("JOS") || protoAddress.equals("JBP")) {
             filesystem.loadDB(protoAddress);
         }
         oDB.notifyObservers();

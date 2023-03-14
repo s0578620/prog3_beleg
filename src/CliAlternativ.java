@@ -57,7 +57,6 @@ public class CliAlternativ {
         handler.addListener(ShowHerstellerEvent.class,listenerShowHersteller);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
-        Cli c = new Cli(handler);
-        c.start();
+        new Cli(handler).start();
     }
 }

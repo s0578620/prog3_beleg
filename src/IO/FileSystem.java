@@ -51,10 +51,10 @@ public class FileSystem {
     public String saveDB(String filename) {
         try {
             switch (filename) {
-                case "jos" -> {
+                case "JOS" -> {
                     saveJOS();
                 }
-                case "jbp" -> {
+                case "JBP" -> {
                     saveJBP();
                 }
                 default -> {
@@ -71,10 +71,10 @@ public class FileSystem {
         try {
             ObjDatabase db;
             switch (filename) {
-                case "jos" -> {
+                case "JOS" -> {
                     db = loadJOS();
                 }
-                case "jbp" -> {
+                case "JBP" -> {
                     db = loadJBP();
                 }
                 default -> {
