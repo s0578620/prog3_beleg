@@ -12,7 +12,10 @@ public class AddTorteListener implements Routing.Listener.Interfaces.AddTorteLis
     }
     @Override
     public void onEvent(AddTorteEvent event) {
-        this.oDB.addObj(event.getKuchentyp(), event.getHersteller(),event.getPreis(),event.getNaehrwert(),event.getHaltbarkeit(),event.getAllergene(),event.getKremsorte(),event.getObstsorte());
+        Thread thread = new Thread(() -> {
+            this.oDB.addObj(event.getKuchentyp(), event.getHersteller(),event.getPreis(),event.getNaehrwert(),event.getHaltbarkeit(),event.getAllergene(),event.getKremsorte(),event.getObstsorte());
+        });
+        thread.start();
     }
 
     @Override

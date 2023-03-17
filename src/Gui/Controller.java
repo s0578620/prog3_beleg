@@ -75,6 +75,53 @@ public class Controller implements Initializable {
         tableAllergene.setItems(allergenObservableList);
         this.allergeneList.setCellValueFactory(new PropertyValueFactory<>("allergenString"));
 
+        tableObj.setRowFactory(tv -> {
+            TableRow<ObjBean> row = new TableRow<>();
+
+            row.setOnDragDetected(event -> {
+                if (!row.isEmpty()) {
+                    Integer index = row.getIndex();
+                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                    db.setDragView(row.snapshot(null, null));
+                    ClipboardContent cc = new ClipboardContent();
+                    cc.putString(index.toString());
+                    db.setContent(cc);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragOver(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasString()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    int sourceFach = Integer.parseInt(db.getString());
+                    int targetFach = row.getIndex();
+                    if (sourceFach != targetFach) {
+                        ObjBean sourceObjBean = objObservableList.get(sourceFach);
+                        ObjBean targetObjBean = objObservableList.get(targetFach);
+                        sourceObjBean.setFach(targetFach);
+                        targetObjBean.setFach(sourceFach);
+                        objObservableList.set(sourceFach, targetObjBean);
+                        objObservableList.set(targetFach, sourceObjBean);
+                        success = true;
+                    }
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            });
+
+            return row;
+        });
+
+
     }
 
     public void onSubmit(javafx.event.ActionEvent actionEvent) {
@@ -86,7 +133,6 @@ public class Controller implements Initializable {
     public void handleCommandField(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER){
             this.input = commandField.getText();
-            console.execController(input);
             commandField.clear();
             if(input.startsWith(":")) {
                 switch (input) {
@@ -97,9 +143,13 @@ public class Controller implements Initializable {
                     case ":u": mode.setText("Update");
                         break;
                     case ":p": mode.setText("Persi");
+                        break;
+                    case ":r": input = "";
+                        break;
                     default:
                         break;
                 }
+                console.execController(input);
             }
         }
     }
@@ -125,18 +175,5 @@ public class Controller implements Initializable {
         this.handler = handler;
     }
 
-    public void handleObjDragDropped(DragEvent dragEvent) {
-        Dragboard dragboard = dragEvent.getDragboard();
-        boolean success = false;
-        if (dragboard.hasString()) {
-            String[] dragData = dragboard.getString().split(",");
-            int oldFach = Integer.parseInt(dragData[0]);
-            int newFach = Integer.parseInt(dragData[1]);
-            objObservableList.stream().filter(objBean -> objBean.fachProperty().get() == oldFach)
-                    .findFirst().ifPresent(objBean -> objBean.fachProperty().set(newFach));
-            success = true;
-        }
-        dragEvent.setDropCompleted(success);
-        dragEvent.consume();
-    }
+
 }

@@ -22,7 +22,7 @@ public class SimTwoRemove implements Runnable{
         do {
             synchronized (lock) {
                 System.out.println(threadName + ": Removing object from database.");
-                oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1)); // TODO +1 abfangen -> Liste 0?
+                oDB.removeObj(rnd.nextInt(oDB.getObjList().size()+1));
             }
         } while (true);
     }

@@ -12,8 +12,10 @@ public class AddKuchenListener implements Routing.Listener.Interfaces.AddKuchenL
     }
     @Override
     public void onEvent(AddKuchenEvent event) {
+        Thread thread = new Thread(() -> {
         this.oDB.addObj(event.getKuchentyp(),event.getHersteller(),event.getPreis(),event.getNaehrwert(),event.getHaltbarkeit(),event.getAllergene(),event.getTopping());
-
+        });
+        thread.start();
     }
 
     @Override

@@ -57,4 +57,7 @@ public class ObjBean {
         return haltbarkeit;
     }
 
+    public void setFach(int fach) {
+        this.fach.set(fach);
+    }
 }

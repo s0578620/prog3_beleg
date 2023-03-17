@@ -8,7 +8,6 @@ import Routing.Listener.ListenerReverse.*;
 import util.ObjDatabaseObserver;
 
 public class CliAlternativ {
-    // TODO TEST
     public static void main(String[] args) {
 
         int capacity = 0;
