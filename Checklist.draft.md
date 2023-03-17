@@ -16,21 +16,21 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 
 ## Tests (28)
 - [x] **Testqualität** (7)
-- [x] **Testabdeckung GL** (7) _Abdeckung in Prozent angeben_
+- [x] **Testabdeckung GL** (7) _95%_
 - [x] **Testabdeckung Rest** (6)
-  - [x] Einfügen von Herstellern über das CLI _getestete Klassen angeben_
-  - [x] Anzeigen von Herstellern über das CLI _getestete Klassen angeben_
-  - [x] ein Beobachter bzw. dessen alternative Implementierung _getestete Klassen angeben_
+  - [x] Einfügen von Herstellern über das CLI _Cli.Console_
+  - [x] Anzeigen von Herstellern über das CLI _Cli.Console_
+  - [x] ein Beobachter bzw. dessen alternative Implementierung _util.ObjDatabaseObserver_
   - [ ] deterministische Funktionalität der Simulationen _getestete Klassen angeben_
-  - [x] Speichern via JOS oder JBP _getestete Klassen angeben_
-  - [x] Laden via JOS oder JBP _getestete Klassen angeben_
+  - [x] Speichern via JOS oder JBP _IO.FileSystem_
+  - [x] Laden via JOS oder JBP _IO.FileSystem_
 - [x] **Mockito richtig verwendet** (4)
 - [x] Spy- / Verhaltens-Tests (3)
 - [x] keine unbeabsichtigt fehlschlagenden Test (1)
 
 ## Fehlerfreiheit (10)
-- [ ] **Kapselung** (5)
-- [ ] **keine Ablauffehler** (5)
+- [x] **Kapselung** (5)
+- [x] **keine Ablauffehler** (5)
 
 ## Basisfunktionalität (12)
 - [x] **CRUD** (2)
@@ -55,15 +55,15 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] observer ^ property change propagation (2)
 - [x] angemessene Aufzählungstypen (2)
 - [x] Simulation 2 (1)
-- [ ] Simulation 3 (1)
+- [x] Simulation 3 (1)
 - [x] data binding verwendet (1)
 - [ ] Änderung der Fachnummer mittels drag&drop (1)
 - [ ] Einfügen von Kuchen via GUI sperrt nicht (1)
 - [ ] JBP und JOS (2)
 - [x] TCP und UDP (1)
-- [ ] Server unterstützt konkurierende Clients für TCP oder UDP (2)
+- [x] Server unterstützt konkurierende Clients für TCP oder UDP (2)
 
 ## zusätzliche Anforderungen (10)
 
 ## Architekturdiagramm
-![Architekturdiagramm](architecture.png)
+![Architekturdiagramm](architecture_old.png)

@@ -1,22 +1,25 @@
 package CLI;
 
+import GL.Hersteller;
+import GL.ObjDatabase;
 import Routing.Events.*;
 import Routing.Handler.Handler;
+import Routing.Listener.Listener.AddHerstellerListener;
 import net.Client;
 import net.ClientUDP;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.SequenceInputStream;
 import java.util.Arrays;
 import java.util.EventObject;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ConsoleTest {
-
-
 
     // CONSTRUCTOR
     @Test
@@ -285,16 +288,70 @@ public class ConsoleTest {
     }
 
     // ADDITIONAL TESTING
-    @Disabled
     @Test
-    public void testWrite() {   // TODO RICHTIGER OUTPUT ABER FALSCH...
+    void testAddValidHersteller() {
+        ObjDatabase o = new ObjDatabase(10);
+        AddHerstellerListener listenerHersteller = new AddHerstellerListener(o);
+        Handler handler = new Handler();
+        handler.addListener(AddHerstellerEvent.class,listenerHersteller);
+        Console consoleObject = new Console(handler);
+        ByteArrayInputStream inputStream1 = new ByteArrayInputStream(":c\nHerstellerTest\n".getBytes());
+        System.setIn(inputStream1);
+        try {
+            consoleObject.run();
+
+        } catch (Exception e) {
+        }
+        Hersteller hersteller = o.getHerstellerList().get(0);
+
+        assertEquals("HerstellerTest", hersteller.getName());
+    }
+
+    @Test
+    void testAddValidHerstellerWitchSpecialCharacter() {
+        ObjDatabase o = new ObjDatabase(10);
+        AddHerstellerListener listenerHersteller = new AddHerstellerListener(o);
+        Handler handler = new Handler();
+        handler.addListener(AddHerstellerEvent.class,listenerHersteller);
+        Console consoleObject = new Console(handler);
+        ByteArrayInputStream inputStream1 = new ByteArrayInputStream(":c\nHersteller!§$%&/()=Test\n".getBytes());
+        System.setIn(inputStream1);
+        try {
+            consoleObject.run();
+
+        } catch (Exception e) {
+        }
+        Hersteller hersteller = o.getHerstellerList().get(0);
+        assertEquals("Hersteller!§$%&/()=Test", hersteller.getName());
+    }
+
+    @Test
+    void testAddInvalidHerstellerWithSpace() {
+        ObjDatabase o = new ObjDatabase(10);
+        AddHerstellerListener listenerHersteller = new AddHerstellerListener(o);
+        Handler handler = new Handler();
+        handler.addListener(AddHerstellerEvent.class,listenerHersteller);
+        Console consoleObject = new Console(handler);
+        ByteArrayInputStream inputStream1 = new ByteArrayInputStream(":c\nHersteller Test\n".getBytes());
+        System.setIn(inputStream1);
+        try {
+            consoleObject.run();
+
+        } catch (Exception e) {
+        }
+
+        assertEquals( 0, o.getHerstellerList().size());
+    }
+
+    @Test
+    public void testWrite() {
         Handler handler = new Handler();
         Console console = new Console(handler);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         console.write("Test Output");
         System.setOut(System.out);
-        assertEquals("Test Output\n", outContent.toString());
+        assertEquals("Test Output\n", outContent.toString().replaceAll("\r\n", "\n"));
     }
 
 }

@@ -17,7 +17,7 @@ public class SimThreeShow implements Runnable{
     @Override
     public void run() {
         do {
-            System.out.println(threadName + ": Current state of database:");
+            System.out.print(threadName + ": Current state of database:");
             //System.out.println(oDB.showKuchenAll());
             System.out.println(oDB.getCapacityAct());
             try {

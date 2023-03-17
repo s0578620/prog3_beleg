@@ -13,7 +13,7 @@ import java.util.Date;
 public class Obsttorte extends Obj implements Obstkuchen, Kremkuchen {
 
     private final String obstsorte;
-    private final String kremsorte;
+    private String kremsorte;
 
 
     public Obsttorte(String Kuchentyp, Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, String obstsorte, String kremsorte, Date insertDate) {
@@ -26,6 +26,7 @@ public class Obsttorte extends Obj implements Obstkuchen, Kremkuchen {
     public String getKremsorte() {
         return kremsorte;
     }
+
 
     @Override
     public String getObstsorte() {

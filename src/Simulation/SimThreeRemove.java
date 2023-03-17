@@ -63,9 +63,7 @@ private final Lock lock;
                     notEmpty.await();
                 }
                 System.out.println(threadName + ": Removing object from database.");
-                // sort list by inspection date
                 Collections.sort(oDB.getObjList(), Comparator.comparing(Obj::getInspektionsdatum));
-                // remove oldest object
                 oDB.removeObj(0);
                 notFull.signalAll();
             } catch (InterruptedException e) {

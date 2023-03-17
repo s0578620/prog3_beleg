@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 public class ObjDatabase extends Observable implements Serializable {
 
-    private int capacityMax;
+    private int capacity;
     private int capacityAct;
     private LinkedList<Hersteller> herstellerList = new LinkedList<>();
     private LinkedList<Obj> objList = new LinkedList<>();
@@ -14,7 +14,12 @@ public class ObjDatabase extends Observable implements Serializable {
 
 
     public ObjDatabase(int capacity){
-        this.capacityMax = capacity;
+        this.capacity = capacity;
+    }
+    public ObjDatabase(int capacity,LinkedList<Hersteller> herstellerList,LinkedList<Obj> objList){
+        this.capacity = capacity;
+        this.herstellerList = herstellerList;
+        this.objList = objList;
     }
 
     public boolean addHersteller(String hersteller){
@@ -46,7 +51,7 @@ public class ObjDatabase extends Observable implements Serializable {
     }
 
     public boolean addObj(String Kuchentyp, String hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Collection<Allergen> Allergene, String Topping) {
-        if(capacityAct < capacityMax) {
+        if(capacityAct < capacity) {
             for (Hersteller value : herstellerList) {
                 if (value.getName().equals(hersteller)) {
                     Hersteller her = new Hersteller(hersteller);
@@ -76,7 +81,7 @@ public class ObjDatabase extends Observable implements Serializable {
     }
 
     public boolean addObj(String Kuchentyp, String hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Collection<Allergen> Allergene, String Kremsorte,String Obstsorte){
-        if(capacityAct < capacityMax) {
+        if(capacityAct < capacity) {
             for (Hersteller value : herstellerList) {
                 if (value.getName().equals(hersteller)) {
                     if (Kuchentyp.equals("Obsttorte")) {
@@ -206,7 +211,7 @@ public class ObjDatabase extends Observable implements Serializable {
             this.herstellerList = db.getHerstellerList();
             this.objList = db.getObjList();
             this.allergenList = db.getAllergenList();
-            this.capacityMax = db.getCapacityMax();
+            this.capacity = db.getCapacity();
             this.capacityAct = db.getCapacityAct();
 
             setChanged();
@@ -216,22 +221,19 @@ public class ObjDatabase extends Observable implements Serializable {
         }
     }
 
-    public int getCapacityMax() {
-        return capacityMax;
+    public int getCapacity() {
+        return capacity;
     }
     public int getCapacityAct() {
         return capacityAct;
     }
     public LinkedList<Hersteller> getHerstellerList() {
-        return herstellerList;
+        return new LinkedList<Hersteller>(herstellerList);
     }
     public LinkedList<Obj> getObjList() {
-        return objList;
+        return new LinkedList<Obj>(objList);
     }
     public LinkedList<Allergen> getAllergenList() {
-        return allergenList;
-    }
-    public ObjDatabase getObjDatabase() {
-        return this;
+        return new LinkedList<Allergen>(allergenList);
     }
 }

@@ -15,8 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import vertrag.Allergen;
 import java.net.URL;
 import java.time.Duration;
@@ -75,6 +74,7 @@ public class Controller implements Initializable {
 
         tableAllergene.setItems(allergenObservableList);
         this.allergeneList.setCellValueFactory(new PropertyValueFactory<>("allergenString"));
+
     }
 
     public void onSubmit(javafx.event.ActionEvent actionEvent) {
@@ -123,5 +123,20 @@ public class Controller implements Initializable {
 
     public void setHandler(Handler handler) {
         this.handler = handler;
+    }
+
+    public void handleObjDragDropped(DragEvent dragEvent) {
+        Dragboard dragboard = dragEvent.getDragboard();
+        boolean success = false;
+        if (dragboard.hasString()) {
+            String[] dragData = dragboard.getString().split(",");
+            int oldFach = Integer.parseInt(dragData[0]);
+            int newFach = Integer.parseInt(dragData[1]);
+            objObservableList.stream().filter(objBean -> objBean.fachProperty().get() == oldFach)
+                    .findFirst().ifPresent(objBean -> objBean.fachProperty().set(newFach));
+            success = true;
+        }
+        dragEvent.setDropCompleted(success);
+        dragEvent.consume();
     }
 }

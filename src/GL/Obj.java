@@ -103,9 +103,3 @@ public class Obj implements Kuchen,Verkaufsobjekt, Serializable {
         return herstellerString;
     }
 }
-
-
-
-
-
-

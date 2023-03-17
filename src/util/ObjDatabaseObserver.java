@@ -8,6 +8,13 @@ import java.util.Observer;
 public class ObjDatabaseObserver implements Observer {
 
 
+    public ObjDatabase getoDB() {
+        return oDB;
+    }
+
+    public void setoDB(ObjDatabase oDB) {
+        this.oDB = oDB;
+    }
 
     private ObjDatabase oDB;
 
@@ -18,7 +25,7 @@ public class ObjDatabaseObserver implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if((oDB.getCapacityMax()*0.9) <= oDB.getObjList().size()){
+        if((oDB.getCapacity()*0.9) <= oDB.getObjList().size()){
             System.out.println("90% capacity reached");
         }
     }

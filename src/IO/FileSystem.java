@@ -1,12 +1,12 @@
 package IO;
 
 
+import GL.Hersteller;
+import GL.Obj;
 import GL.ObjDatabase;
-import Gui.Beans.ContentBeanFinal;
-
-import java.beans.XMLDecoder;
-
-import java.beans.XMLEncoder;
+import GL.Obstkuchen;
+import vertrag.Kremkuchen;
+import java.beans.*;
 import java.io.*;
 
 
@@ -92,19 +92,30 @@ public class FileSystem {
 
     private ObjDatabase loadJBP() throws Exception {
         FileInputStream in = getReadStream( this.jbp );
-        XMLDecoder decoder = new XMLDecoder( new BufferedInputStream( in ) );
-        return (ObjDatabase) decoder.readObject();
+        //XMLDecoder decoder = new XMLDecoder( new BufferedInputStream( in ) );
+        try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.jbp)))) {
+           // decoder.setPersistenceDelegate(Obj.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "insertDate"}));
+            return (ObjDatabase) decoder.readObject();
+        }
     }
 
     private void saveJBP() throws Exception {
-        FileOutputStream out = getWriteStream( this.jbp );
-        XMLEncoder encoder = new XMLEncoder( new BufferedOutputStream( out ) );
+        try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(this.jbp)))) {
 
-        ContentBeanFinal content = new ContentBeanFinal();
-        content.herstellerList = oDB.getHerstellerList();
-        content.objList = oDB.getObjList();
-        content.allergenList = oDB.getAllergenList();
-        encoder.writeObject(content);
+
+
+            //encoder.setPersistenceDelegate(Obstkuchen.class, new DefaultPersistenceDelegate(new String[] { "kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "insertDate" }));
+            encoder.setPersistenceDelegate(Hersteller.class, new DefaultPersistenceDelegate(new String[]{"name"}));
+            encoder.setPersistenceDelegate(ObjDatabase.class, new DefaultPersistenceDelegate(new String[]{"capacity", "herstellerList","objList"}));
+            encoder.setPersistenceDelegate(Kremkuchen.class, new DefaultPersistenceDelegate(new String[]{"Kuchentyp", "Hersteller", "Preis", "Naehrwert", "Haltbarkeit", "Inspektionsdatum", "Allergene", "Kremsorte", "insertDate"}));
+            encoder.setPersistenceDelegate(Obj.class, new DefaultPersistenceDelegate(new String[]{"Kuchentyp", "Hersteller", "Preis", "Naehrwert", "Haltbarkeit", "Inspektionsdatum", "Allergens", "insertDate"}));
+            encoder.setPersistenceDelegate(Obstkuchen.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "fruchtsorte", "insertDate"}));
+//            ContentBeanFinal content = new ContentBeanFinal();
+//            content.herstellerList = oDB.getHerstellerList();
+//        content.objList = oDB.getObjList();
+//        content.allergenList = oDB.getAllergenList();
+            encoder.writeObject(oDB);
+        }
     }
 
 

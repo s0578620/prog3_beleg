@@ -1,13 +1,10 @@
 package GL;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import vertrag.Allergen;
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -254,7 +251,7 @@ public class objDatabaseTest {
 
         db2.switchObjDatabase(db1);
 
-        assertEquals(5, db2.getCapacityMax());
+        assertEquals(5, db2.getCapacity());
     }
     @Test
     void testSwitchObjDatabaseCapacityAct() {

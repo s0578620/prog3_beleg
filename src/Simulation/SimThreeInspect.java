@@ -20,15 +20,6 @@ public class SimThreeInspect implements Runnable{
 
     @Override
     public void run() {
-//        do {
-//            synchronized (lock) {
-//                System.out.println(threadName + ": Inspecting object in database.");
-//                int index = rnd.nextInt(oDB.getObjList().size());
-//                Obj obj = oDB.getObjList().get(index);
-//                oDB.updateInsp(obj.getFachnummer());
-//                System.out.println(threadName + ": Object with Fachnummer " + obj.getFachnummer() + " has been inspected.");
-//            }
-//        } while (true);
         do {
             synchronized (lock) {
                 System.out.println(threadName + ": Inspecting object in database.");
@@ -40,6 +31,11 @@ public class SimThreeInspect implements Runnable{
                     System.out.println(threadName + ": Object with Fachnummer " + obj.getFachnummer() + " has been inspected.");
                 } else {
                     System.out.println(threadName + ": No objects in database to inspect.");
+                }
+                try {
+                    Thread.sleep(0);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } while (true);
