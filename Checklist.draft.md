@@ -48,7 +48,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] threadsichere GL (1)
 - [x] vollständiges CLI (1)
 - [x] alternatives CLI (1)
-  * _angeben welche Funktionalität im alternativen CLI deaktiviert_
+  * _Löschen von Herstellern und Auflisten der Allergene und ObjDatabaseAllergeneObserver ist deaktiviert_
 - [x] skalierbare GUI (1)
 - [x] vollständige GUI (1)
 - [x] ausdifferenziertes event-System mit mindestens 3 events (2)
@@ -59,7 +59,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] data binding verwendet (1)
 - [ ] Änderung der Fachnummer mittels drag&drop (1)
 - [ ] Einfügen von Kuchen via GUI sperrt nicht (1)
-- [ ] JBP und JOS (2)
+- [x] JBP und JOS (2)
 - [x] TCP und UDP (1)
 - [x] Server unterstützt konkurierende Clients für TCP oder UDP (2)
 
