@@ -21,14 +21,14 @@ public class Obj implements Kuchen,Verkaufsobjekt, Serializable {
     private Date insertDate;
     private int fachnummer;
 
-    public Obj(String Kuchentyp, Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, Date insertDate){
-        this.kuchentyp = Kuchentyp;
+    public Obj(String kuchentyp, Hersteller Hersteller, BigDecimal preis, int naehrwert, int haltbarkeit, Date inspektionsdatum, Collection<Allergen> allergene, Date insertDate){
+        this.kuchentyp = kuchentyp;
         this.hersteller = Hersteller;
-        this.allergene = Allergens;
-        this.naehrwert = Naehrwert;
-        this.haltbarkeit = Haltbarkeit;
-        this.preis = Preis;
-        this.inspektionsdatum = Inspektionsdatum;
+        this.allergene = allergene;
+        this.naehrwert = naehrwert;
+        this.haltbarkeit = haltbarkeit;
+        this.preis = preis;
+        this.inspektionsdatum = inspektionsdatum;
         this.insertDate = insertDate;
         this.herstellerString = Hersteller.getName();
     }
@@ -54,14 +54,17 @@ public class Obj implements Kuchen,Verkaufsobjekt, Serializable {
     }
 
     @Override
-    public Duration getHaltbarkeit() {
+    public int getHaltbarkeit() {
+        return haltbarkeit;
+    }
+    public Duration getHaltbarkeitDuration() {
         Date actualDate = new Date();
 
         Duration tmp = Duration.ofMinutes(Duration.between(insertDate.toInstant(),actualDate.toInstant()).toMinutes());
         int res = (int) tmp.toMinutes();
         int test = haltbarkeit - res;
         Duration tryhard = Duration.ofMinutes(test);
-       // this.haltbarkeitActual = (int) tryhard.toMinutes();
+        // this.haltbarkeitActual = (int) tryhard.toMinutes();
         return tryhard;
 
         /*

@@ -5,9 +5,11 @@ import GL.Hersteller;
 import GL.Obj;
 import GL.ObjDatabase;
 import GL.Obstkuchen;
+import vertrag.Allergen;
 import vertrag.Kremkuchen;
 import java.beans.*;
 import java.io.*;
+import java.math.BigDecimal;
 
 
 public class FileSystem {
@@ -92,9 +94,7 @@ public class FileSystem {
 
     private ObjDatabase loadJBP() throws Exception {
         FileInputStream in = getReadStream( this.jbp );
-        //XMLDecoder decoder = new XMLDecoder( new BufferedInputStream( in ) );
         try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.jbp)))) {
-           // decoder.setPersistenceDelegate(Obj.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "insertDate"}));
             return (ObjDatabase) decoder.readObject();
         }
     }
@@ -104,16 +104,23 @@ public class FileSystem {
 
 
 
-            //encoder.setPersistenceDelegate(Obstkuchen.class, new DefaultPersistenceDelegate(new String[] { "kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "insertDate" }));
             encoder.setPersistenceDelegate(Hersteller.class, new DefaultPersistenceDelegate(new String[]{"name"}));
-            encoder.setPersistenceDelegate(ObjDatabase.class, new DefaultPersistenceDelegate(new String[]{"capacity", "herstellerList","objList"}));
-            encoder.setPersistenceDelegate(Kremkuchen.class, new DefaultPersistenceDelegate(new String[]{"Kuchentyp", "Hersteller", "Preis", "Naehrwert", "Haltbarkeit", "Inspektionsdatum", "Allergene", "Kremsorte", "insertDate"}));
-            encoder.setPersistenceDelegate(Obj.class, new DefaultPersistenceDelegate(new String[]{"Kuchentyp", "Hersteller", "Preis", "Naehrwert", "Haltbarkeit", "Inspektionsdatum", "Allergens", "insertDate"}));
-            encoder.setPersistenceDelegate(Obstkuchen.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "fruchtsorte", "insertDate"}));
-//            ContentBeanFinal content = new ContentBeanFinal();
-//            content.herstellerList = oDB.getHerstellerList();
-//        content.objList = oDB.getObjList();
-//        content.allergenList = oDB.getAllergenList();
+            encoder.setPersistenceDelegate(ObjDatabase.class, new DefaultPersistenceDelegate(new String[]{"capacity", "herstellerList","objList","allergenList"}));
+            encoder.setPersistenceDelegate(GL.Kremkuchen.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "kremsorte", "insertDate"}));
+            encoder.setPersistenceDelegate(GL.Obstkuchen.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "obstsorte", "insertDate"}));
+            encoder.setPersistenceDelegate(GL.Obsttorte.class, new DefaultPersistenceDelegate(new String[]{"kuchentyp", "hersteller", "preis", "naehrwert", "haltbarkeit", "inspektionsdatum", "allergene", "obstsorte", "kremsorte", "insertDate"}));
+            encoder.setPersistenceDelegate(BigDecimal.class, new DefaultPersistenceDelegate() {
+                        protected Expression instantiate(Object oldInstance, Encoder out) {
+                            BigDecimal bd = (BigDecimal) oldInstance;
+                            return new Expression(oldInstance, oldInstance.getClass(), "new", new Object[]{
+                                    bd.toString()
+                            });
+                        }
+                        protected boolean mutatesTo(Object oldInstance, Object newInstance) {
+                            return oldInstance.equals(newInstance);
+                        }
+                    }
+            );
             encoder.writeObject(oDB);
         }
     }

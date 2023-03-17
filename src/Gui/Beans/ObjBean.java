@@ -24,7 +24,7 @@ public class ObjBean {
         this.fach = new SimpleIntegerProperty(obj.getFachnummer());
         this.hersteller = new SimpleStringProperty(obj.getHersteller().getName());
         this.inspDate = new SimpleStringProperty(obj.getInspektionsdatum().toString());
-        this.haltbarkeit = new SimpleStringProperty(obj.getHaltbarkeit().toString());
+        this.haltbarkeit = new SimpleStringProperty(obj.getHaltbarkeitDuration().toString());
     }
 
     public static Callback<ObjBean, Observable[]> extractor() {

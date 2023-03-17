@@ -10,9 +10,9 @@ import java.util.Date;
 public class Obstkuchen extends Obj implements vertrag.Obstkuchen {
     private final String obstsorte;
 
-    public Obstkuchen(String Kuchentyp, vertrag.Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, String Obstsorte, Date insertDate){
-        super(Kuchentyp,Hersteller, Preis, Naehrwert, Haltbarkeit, Inspektionsdatum, Allergens, insertDate);
-        this.obstsorte = Obstsorte;
+    public Obstkuchen(String kuchentyp, Hersteller hersteller, BigDecimal preis, int naehrwert, int haltbarkeit, Date inspektionsdatum, Collection<Allergen> allergene, String obstsorte, Date insertDate){
+        super(kuchentyp,hersteller, preis, naehrwert, haltbarkeit, inspektionsdatum, allergene, insertDate);
+        this.obstsorte = obstsorte;
     }
 
     @Override

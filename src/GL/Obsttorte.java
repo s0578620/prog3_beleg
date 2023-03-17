@@ -16,8 +16,8 @@ public class Obsttorte extends Obj implements Obstkuchen, Kremkuchen {
     private String kremsorte;
 
 
-    public Obsttorte(String Kuchentyp, Hersteller Hersteller, BigDecimal Preis, int Naehrwert, int Haltbarkeit, Date Inspektionsdatum, Collection<Allergen> Allergens, String obstsorte, String kremsorte, Date insertDate) {
-        super(Kuchentyp, Hersteller, Preis, Naehrwert, Haltbarkeit, Inspektionsdatum, Allergens, insertDate);
+    public Obsttorte(String kuchentyp, Hersteller hersteller, BigDecimal preis, int naehrwert, int haltbarkeit, Date inspektionsdatum, Collection<Allergen> allergene, String obstsorte, String kremsorte, Date insertDate) {
+        super(kuchentyp, hersteller, preis, naehrwert, haltbarkeit, inspektionsdatum, allergene, insertDate);
         this.obstsorte = obstsorte;
         this.kremsorte = kremsorte;
     }

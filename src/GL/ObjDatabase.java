@@ -16,10 +16,11 @@ public class ObjDatabase extends Observable implements Serializable {
     public ObjDatabase(int capacity){
         this.capacity = capacity;
     }
-    public ObjDatabase(int capacity,LinkedList<Hersteller> herstellerList,LinkedList<Obj> objList){
+    public ObjDatabase(int capacity,LinkedList<Hersteller> herstellerList,LinkedList<Obj> objList,LinkedList<Allergen> allergenList){
         this.capacity = capacity;
         this.herstellerList = herstellerList;
         this.objList = objList;
+        this.allergenList = allergenList;
     }
 
     public boolean addHersteller(String hersteller){
@@ -203,7 +204,7 @@ public class ObjDatabase extends Observable implements Serializable {
                 + "| Hersteller: " + o.getHersteller().getName()
                 + "| Allergene: " + format(o.getAllergene())
                 + "| Nährwert: " + o.getNaehrwert()
-                + "| Haltbarkeit: " + o.getHaltbarkeit().toMinutes();
+                + "| Haltbarkeit: " + o.getHaltbarkeitDuration().toMinutes();
     }
 
     public void switchObjDatabase(ObjDatabase db) {
