@@ -14,11 +14,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SimThreeMain {
     public static void main(String[] args) {
-        int capacity = 100; // default capacity
+        int capacity = 0; // default capacity
         int numAddThreads = 2; // default num
-        int numRemoveThreads = 2; // default num
+        int numRemoveThreads = 1; // default num
         int numInspectThreads = 1; // default num
-        int showInterval = 1000; // default interval    // TODO INTERVALL EINLESEN
+        int showInterval = 500; // default interval    // TODO INTERVALL EINLESEN
 
         if (args.length >= 4) {
             try {
@@ -42,12 +42,12 @@ public class SimThreeMain {
         ExecutorService executor = Executors.newFixedThreadPool(numAddThreads + numRemoveThreads + numInspectThreads + 1);
 
         for (int i = 0; i < numAddThreads; i++) {
-            SimThreeAdd addThread = new SimThreeAdd(o, lock, notFull, notEmpty, 0);
+            SimThreeAdd addThread = new SimThreeAdd(o, lock, notFull, notEmpty, 2000);
             executor.execute(addThread);
         }
 
         for (int i = 0; i < numRemoveThreads; i++) {
-            SimThreeRemove removeThread = new SimThreeRemove(o, lock, notFull, notEmpty, 0);
+            SimThreeRemove removeThread = new SimThreeRemove(o, lock, notFull, notEmpty, 2000);
             executor.execute(removeThread);
         }
 

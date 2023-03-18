@@ -10,6 +10,9 @@ import net.ClientUDP;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,8 +21,10 @@ import java.io.SequenceInputStream;
 import java.util.Arrays;
 import java.util.EventObject;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class ConsoleTest {
+
 
     // CONSTRUCTOR
     @Test

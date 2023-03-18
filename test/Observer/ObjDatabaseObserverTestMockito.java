@@ -1,10 +1,13 @@
 package Observer;
 
+import GL.Obj;
 import GL.ObjDatabase;
 import org.junit.jupiter.api.Test;
 import util.ObjDatabaseObserver;
 
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -26,7 +29,7 @@ public class ObjDatabaseObserverTestMockito {
             PrintStream out = mock(PrintStream.class);
             System.setOut(out);
             ObjDatabase oDB = mock(ObjDatabase.class);
-            when(oDB.getCapacityAct()).thenReturn(8).thenReturn(9);
+            when(oDB.getCapacityAct()).thenReturn(1).thenReturn(2);
             ObjDatabaseObserver obs = new ObjDatabaseObserver(oDB);
 
             obs.update(oDB,"");

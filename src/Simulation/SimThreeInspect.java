@@ -33,7 +33,7 @@ public class SimThreeInspect implements Runnable{
                     System.out.println(threadName + ": No objects in database to inspect.");
                 }
                 try {
-                    Thread.sleep(0);
+                    Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
