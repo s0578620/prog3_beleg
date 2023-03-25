@@ -30,17 +30,4 @@ public class FileSystemTestMockito {
         String result = fs.loadDB("invalid");
         assertEquals("invalid choice", result);
     }
-
-//    @Test
-//    void testLoadDBError() {
-//        // Mock a database that throws an exception when switching the object database
-//        ObjDatabase mockErrorDB = mock(ObjDatabase.class);
-//
-//        doThrow(Exception.class).when(mockErrorDB).switchObjDatabase(any());
-//
-//        FileSystem fs = new FileSystem(mockErrorDB);
-//        String result = fs.loadDB("JOS");
-//        assertEquals("load jos/jbp error", result);
-//    }
-
 }

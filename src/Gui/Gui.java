@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import util.ObjDatabaseObserverGui;
 
 public class Gui extends Application {
-    public static int capacity;
+    public static ObjDatabase oDB;
 
     public void run(){
         launch();
@@ -27,8 +27,6 @@ public class Gui extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/App.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 600, 400);
-        ObjDatabase oDB = new ObjDatabase(this.capacity);
-
 
         ReverseShowKuchenListener listenerReverseShowKuchen = new ReverseShowKuchenListener();
         ReverseShowKuchenTypListener listenerReverseShowKuchenTyp = new ReverseShowKuchenTypListener();
@@ -72,13 +70,11 @@ public class Gui extends Application {
         handler.addListener(ShowAllergeneEventExclusive.class,listenerShowAllergeneExc);
         handler.addListener(UpdateInspEvent.class,listenerUpdateInsp);
 
-
         Controller controller = loader.getController();
         controller.setHandler(handler);
         controller.setConsole(new Console(handler));
 
         oDB.addObserver(new ObjDatabaseObserverGui(oDB,controller));
-
 
         stage.setTitle("Kuchenautomat");
         stage.setScene(scene);

@@ -40,6 +40,53 @@ public class objDatabaseTest {
         list.add(Allergen.Erdnuss);
         list.add(Allergen.Gluten);
     }
+    @Test
+    void testListConstructorHerstellerList() {
+        int capacity = 10;
+        LinkedList<Hersteller> herstellerList = new LinkedList<>();
+        LinkedList<Obj> objList = new LinkedList<>();
+        LinkedList<Allergen> allergenList = new LinkedList<>();
+        ObjDatabase objDatabase = new ObjDatabase(capacity, herstellerList, objList, allergenList);
+
+        assertEquals(herstellerList, objDatabase.getHerstellerList());
+    }
+    @Test
+    void testListConstructorObjList() {
+        int capacity = 10;
+        LinkedList<Hersteller> herstellerList = new LinkedList<>();
+        LinkedList<Obj> objList = new LinkedList<>();
+        LinkedList<Allergen> allergenList = new LinkedList<>();
+        ObjDatabase objDatabase = new ObjDatabase(capacity, herstellerList, objList, allergenList);
+
+        assertEquals(objList, objDatabase.getObjList());
+    }
+    @Test
+    void testListConstructorAllergenList() {
+        int capacity = 10;
+        LinkedList<Hersteller> herstellerList = new LinkedList<>();
+        LinkedList<Obj> objList = new LinkedList<>();
+        LinkedList<Allergen> allergenList = new LinkedList<>();
+        ObjDatabase objDatabase = new ObjDatabase(capacity, herstellerList, objList, allergenList);
+
+        assertEquals(allergenList, objDatabase.getAllergenList());
+    }
+
+    @Test
+    void testListConstructorCapacity() {
+        int capacity = 10;
+        LinkedList<Hersteller> herstellerList = new LinkedList<>();
+        LinkedList<Obj> objList = new LinkedList<>();
+        LinkedList<Allergen> allergenList = new LinkedList<>();
+        ObjDatabase objDatabase = new ObjDatabase(capacity, herstellerList, objList, allergenList);
+
+        assertEquals(capacity, objDatabase.getCapacity());
+    }
+
+    @Test
+    void testConstructorWithCapacity() {
+        assertEquals(10, o.getCapacity());
+    }
+
 
     @Test
     public void addHersteller() {
@@ -274,7 +321,7 @@ public class objDatabaseTest {
         assertEquals(db1.getHerstellerList(), db2.getHerstellerList());
     }
     @Test
-    void testSwitchObjDatabaseObj() {   // TODO auseinanderziehen
+    void testSwitchObjDatabaseObj() {
         ObjDatabase db1 = new ObjDatabase(5);
         ObjDatabase db2 = new ObjDatabase(10);
         db1.addHersteller(Hersteller);
@@ -283,17 +330,15 @@ public class objDatabaseTest {
         db2.switchObjDatabase(db1);
 
         assertEquals(db1.getObjList(), db2.getObjList());
-        assertEquals(db1.getAllergenList(), db2.getAllergenList());
     }
     @Test
-    void testSwitchObjDatabaseAllergene() { // TODO auseinanderziehen
+    void testSwitchObjDatabaseAllergene() {
         ObjDatabase db1 = new ObjDatabase(5);
         ObjDatabase db2 = new ObjDatabase(10);
         db1.addHersteller(Hersteller);
         db1.addObj(Kuchentyp,Hersteller,Preis,Naehrwert,Haltbarkeit,list, Topping);
 
         db2.switchObjDatabase(db1);
-        assertEquals(db1.getCapacityAct(), db2.getCapacityAct());
         assertEquals(db1.getAllergenList(), db2.getAllergenList());
     }
 

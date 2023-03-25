@@ -4,8 +4,6 @@ import Simulation.SimThreeAdd;
 import Simulation.SimThreeInspect;
 import Simulation.SimThreeRemove;
 import Simulation.SimThreeShow;
-import util.ObjDatabaseObserverSimOne;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
@@ -14,18 +12,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SimThreeMain {
     public static void main(String[] args) {
-        int capacity = 0; // default capacity
-        int numAddThreads = 2; // default num
-        int numRemoveThreads = 1; // default num
-        int numInspectThreads = 1; // default num
-        int showInterval = 500; // default interval    // TODO INTERVALL EINLESEN
+        int capacity = 20; // default capacity
+        int numThreads = 2; // default num
+//        int numRemoveThreads = 1; // default num
+//        int numInspectThreads = 1; // default num
+        int showInterval = 500; // default interval
 
-        if (args.length >= 4) {
+        if (args.length >= 3) {
             try {
                 capacity = Integer.parseInt(args[0]);
-                numAddThreads = Integer.parseInt(args[1]);
-                numRemoveThreads = Integer.parseInt(args[2]);
-                numInspectThreads = Integer.parseInt(args[3]);
+                numThreads = Integer.parseInt(args[1]);
+//                numRemoveThreads = Integer.parseInt(args[2]);
+//                numInspectThreads = Integer.parseInt(args[3]);
+                showInterval = Integer.parseInt(args[2]);
             } catch (NumberFormatException e) {
                 System.err.println("Arguments must be integers.");
                 System.exit(1);
@@ -39,19 +38,19 @@ public class SimThreeMain {
         Condition notFull = lock.newCondition();
         Condition notEmpty = lock.newCondition();
 
-        ExecutorService executor = Executors.newFixedThreadPool(numAddThreads + numRemoveThreads + numInspectThreads + 1);
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads + numThreads + numThreads + 1);
 
-        for (int i = 0; i < numAddThreads; i++) {
-            SimThreeAdd addThread = new SimThreeAdd(o, lock, notFull, notEmpty, 2000);
+        for (int i = 0; i < numThreads; i++) {
+            SimThreeAdd addThread = new SimThreeAdd(o, lock, notFull, notEmpty, 0);
             executor.execute(addThread);
         }
 
-        for (int i = 0; i < numRemoveThreads; i++) {
-            SimThreeRemove removeThread = new SimThreeRemove(o, lock, notFull, notEmpty, 2000);
+        for (int i = 0; i < numThreads; i++) {
+            SimThreeRemove removeThread = new SimThreeRemove(o, lock, notFull, notEmpty, 0);
             executor.execute(removeThread);
         }
 
-        for (int i = 0; i < numInspectThreads; i++) {
+        for (int i = 0; i < numThreads; i++) {
             SimThreeInspect inspectThread = new SimThreeInspect(o, lock);
             executor.execute(inspectThread);
         }

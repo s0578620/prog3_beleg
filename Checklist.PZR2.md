@@ -1,4 +1,4 @@
-# Beleg Beispiel (94)
+# Beleg PZR1 (94)
 Checkboxen befüllen und _kursiv_ gesetzten Text durch entsprechende Angaben ersetzten.
 Bei keiner Angabe wird nur Entwurf, Testqualität, Testabdeckung GL, Fehlerfreiheit und Basisfunktionalität bewertet.
 Die Zahl in der Klammer sind die jeweiligen Punkte für die Bewertung.
@@ -16,7 +16,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 
 ## Tests (28)
 - [x] **Testqualität** (7)
-- [x] **Testabdeckung GL** (7) _95%_
+- [ ] **Testabdeckung GL** (7) _100%_
 - [x] **Testabdeckung Rest** (6)
   - [x] Einfügen von Herstellern über das CLI _Cli.Console_
   - [x] Anzeigen von Herstellern über das CLI _Cli.Console_
@@ -48,7 +48,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] threadsichere GL (1)
 - [x] vollständiges CLI (1)
 - [x] alternatives CLI (1)
-  * _Löschen von Herstellern und Auflisten der Allergene und ObjDatabaseAllergeneObserver ist deaktiviert_
+  * _Löschen von Herstellern und Auflisten der Allergene und ObjDatabaseAllergeneObserver sind deaktiviert_
 - [x] skalierbare GUI (1)
 - [x] vollständige GUI (1)
 - [x] ausdifferenziertes event-System mit mindestens 3 events (2)
@@ -64,6 +64,9 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 - [x] Server unterstützt konkurierende Clients für TCP oder UDP (2)
 
 ## zusätzliche Anforderungen (10)
+- [x] parallele Ausführung CLI und GUI (3)
+- [x] Änderungen in der GUI direkt sichtbar (4)
+- [x] CLI und GUI unabhängig (3)
 
 ## Architekturdiagramm
-![Architekturdiagramm](architecture_old.png)
+![Architekturdiagramm](architecture.png)

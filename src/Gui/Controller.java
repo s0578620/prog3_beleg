@@ -149,8 +149,8 @@ public class Controller implements Initializable {
                     default:
                         break;
                 }
-                console.execController(input);
             }
+            console.execController(input);
         }
     }
 

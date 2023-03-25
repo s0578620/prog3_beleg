@@ -1,4 +1,4 @@
-package Kapselung;
+package GL;
 
 import GL.Hersteller;
 import GL.Obj;
@@ -19,7 +19,7 @@ public class KapselungTest {
 
 
     @Test
-    public void KapselungHerstellerListTest() {
+    public void testKapselungHerstellerListTest() {
         this.oDB = new ObjDatabase(10);
         this.list = new LinkedList<>();
         oDB.addHersteller("Hersteller1");
@@ -31,7 +31,7 @@ public class KapselungTest {
     }
 
     @Test
-    public void KapselungObjListTest() {
+    public void testKapselungObjListTest() {
         this.oDB = new ObjDatabase(10);
         this.Preis = new BigDecimal("19.99");
         this.list = new LinkedList<>();
@@ -46,7 +46,7 @@ public class KapselungTest {
     }
 
     @Test
-    public void KapselungAllergeneListTest() {
+    public void testKapselungAllergeneListTest() {
         this.oDB = new ObjDatabase(10);
         this.Preis = new BigDecimal("19.99");
         this.list = new LinkedList<>();
@@ -60,7 +60,7 @@ public class KapselungTest {
     }
 
     @Test
-    public void KapselungRemoveObjAndUpdateAllergeneListTest() {
+    public void testKapselungRemoveObjAndUpdateAllergeneListTest() {
         this.oDB = new ObjDatabase(10);
         this.Preis = new BigDecimal("19.99");
         this.list = new LinkedList<>();
@@ -73,7 +73,7 @@ public class KapselungTest {
     }
 
     @Test
-    public void KapselungRemoveObjAndUpdateOtherFachnummern() {
+    public void testKapselungRemoveObjAndUpdateOtherFachnummern() {
         this.oDB = new ObjDatabase(10);
         this.Preis = new BigDecimal("19.99");
         this.list = new LinkedList<>();
