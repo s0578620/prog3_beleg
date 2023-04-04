@@ -10,17 +10,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SimTwoMain {
 
-    public static void main(String[] args) {    // TODO CMD KAPAZITÄT
+    public static void main(String[] args) {
         int n = 2; // default value
-        if (args.length > 0) {
+        int capacity = 0; // default value
+        if (args.length > 1) {
             try {
-                n = Integer.parseInt(args[0]);
+                capacity = Integer.parseInt(args[0]);
+                n = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
-                System.err.println("Argument must be an integer.");
+                System.err.println("Arguments must be an integer (Capacity / Number Threads) .");
                 System.exit(1);
             }
         }
-        ObjDatabase o = new ObjDatabase(100);
+        ObjDatabase o = new ObjDatabase(capacity);
         o.addObserver(new ObjDatabaseObserverSimOne(o));
         Lock lock = new ReentrantLock();
 
