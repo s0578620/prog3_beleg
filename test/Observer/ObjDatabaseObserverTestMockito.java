@@ -1,14 +1,9 @@
 package Observer;
 
-import GL.Obj;
 import GL.ObjDatabase;
 import org.junit.jupiter.api.Test;
 import util.ObjDatabaseObserver;
-
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.LinkedList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 

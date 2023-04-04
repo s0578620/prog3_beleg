@@ -1,8 +1,6 @@
 package GL;
 
-import GL.Hersteller;
-import GL.Obj;
-import GL.ObjDatabase;
+
 import org.junit.jupiter.api.Test;
 import vertrag.Allergen;
 

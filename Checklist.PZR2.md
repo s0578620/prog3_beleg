@@ -16,7 +16,7 @@ Ergänzende Anmerkungen bitte immer _kursiv_ setzen. Andere Änderungen sind nic
 
 ## Tests (28)
 - [x] **Testqualität** (7)
-- [ ] **Testabdeckung GL** (7) _100%_
+- [x] **Testabdeckung GL** (7) _100%_
 - [x] **Testabdeckung Rest** (6)
   - [x] Einfügen von Herstellern über das CLI _Cli.Console_
   - [x] Anzeigen von Herstellern über das CLI _Cli.Console_

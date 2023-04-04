@@ -86,7 +86,7 @@ public class Console {
         final String helpDELETE = "*** Help Menu *** \n [Herstellername] - delete Hersteller\n [Fachnummer] - delete cake\n";
         final String helpSHOW = "*** Help Menu *** \n hersteller - show Hersteller (with Cake count)\n kuchen [[Typ]] - show Kuchen (-typ)\n allergene [i/e] - show Allergene (i = Inclusive / e = Exclusive)\n";
         final String helpUPDATE = "*** Help Menu *** \n [Fachnummer] - update Inspektionsdatum\n";
-        final String helpPERSISTENCE = "*** Help Menu *** \n safe [jos/jbp] - safe via jos/jbp\n load [jos/jbp] - load via jos/jbp\n";
+        final String helpPERSISTENCE = "*** Help Menu *** \n safe[JOS/JBP] - safe via jos/jbp\n load[JOS/JBP] - load via jos/jbp\n";
         if (this.mode != null) {
             switch (mode) {
                 case CREATE:

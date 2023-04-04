@@ -101,8 +101,4 @@ public class Obj implements Kuchen,Verkaufsobjekt, Serializable {
     public Date getInsertDate() {
         return insertDate;
     }
-
-    public String getHerstellerString() {
-        return herstellerString;
-    }
 }

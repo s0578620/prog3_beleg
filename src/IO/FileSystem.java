@@ -2,11 +2,7 @@ package IO;
 
 
 import GL.Hersteller;
-import GL.Obj;
 import GL.ObjDatabase;
-import GL.Obstkuchen;
-import vertrag.Allergen;
-import vertrag.Kremkuchen;
 import java.beans.*;
 import java.io.*;
 import java.math.BigDecimal;

@@ -1,7 +1,6 @@
 package Routing.Listener.ListenerReverse;
 
 import Routing.EventsReverse.ReverseShowKuchenTypEvent;
-import Routing.Listener.Interfaces.EventListener;
 
 public class ReverseShowKuchenTypListener implements Routing.Listener.InterfacesReverse.ReverseShowKuchenTypListener {
 

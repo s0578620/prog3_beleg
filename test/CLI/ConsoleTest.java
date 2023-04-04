@@ -8,20 +8,12 @@ import Routing.Listener.Listener.AddHerstellerListener;
 import net.Client;
 import net.ClientUDP;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.SequenceInputStream;
-import java.util.Arrays;
 import java.util.EventObject;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class ConsoleTest {
 
@@ -97,7 +89,7 @@ public class ConsoleTest {
         Console console = new Console(handler);
 
         console.execController(":p");
-        assertEquals("*** Help Menu *** \n safe [jos/jbp] - safe via jos/jbp\n load [jos/jbp] - load via jos/jbp\n", console.getCorrectHelpMenu());
+        assertEquals("*** Help Menu *** \n safe[JOS/JBP] - safe via jos/jbp\n load[JOS/JBP] - load via jos/jbp\n", console.getCorrectHelpMenu());
     }
 
     // CORRECT EVENTS
